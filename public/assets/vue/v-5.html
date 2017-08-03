@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson - 5 - 组件</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .active {
+            background-color: #a9dcad;
+            padding: 5px;
+        }
+
+        .text-danger {
+            color: #f20d0d;
+        }
+
+        .show {
+            height: 200px;
+            width: 100px;
+            background-color: #f20d0d;
+        }
+
+        .slide-fade-enter-active {
+            transition: all .3s ease;
+        }
+
+        .slide-fade-leave-active {
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+
+        .slide-fade-enter, .slide-fade-leave-active {
+            transform: translateX(10px);
+            opacity: 0;
+        }
+
+        .bounce-enter-active {
+            animation: bounce-in .5s;
+        }
+
+        .bounce-leave-active {
+            animation: bounce-out .5s;
+        }
+
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes bounce-out {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="message">
+    <input type="button" v-on:click="hide" v-model="btnVal">
+    <my-comp :message="message" v-bind:class="[activeClass, errorClass]">
+    </my-comp>
+    <transition name="bounce">
+        <div :class="mydiv" v-if="show">
+
+
+        </div>
+    </transition>
+</div>
+</body>
+<script>
+    Vue.component('my-comp', {
+        template: '<p>This is a component</p>'
+
+    });
+
+    var child = {
+        template: '<span>{{message}} <i>aaa</i></span>',
+        props: ['message', 'activeClass', 'errorClass']
+    };
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            activeClass: 'active',
+            errorClass: 'text-danger',
+            message: 'hello world',
+            mydiv: 'show',
+            show: true,
+            btnVal: '去死吧DIV'
+        },
+        methods: {
+            message: function () {
+                return 'Good Vue';
+            },
+            hide: function () {
+                this.show = !this.show;
+            }
+
+        },
+        components: {
+            'my-comp': child
+        }
+    });
+</script>
+</html>

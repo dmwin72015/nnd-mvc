@@ -1,0 +1,385 @@
+@charset "utf-8";
+
+/****************common start***********************/
+
+html {
+    /*background-color: #f2f2f2;*/
+    position: relative;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+/****************common end***********************/
+
+
+/****************tool start***********************/
+
+.clearfix:after,
+.half-sc-panel:after {
+    content: " ";
+    display: block;
+    clear: both;
+    height: 0;
+}
+
+.clearfix,
+.half-sc-panel {
+    zoom: 1;
+}
+
+
+/****************tool   end***********************/
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    overflow: hidden;
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+html>body {
+    min-height: 100%;
+    /*font-family: -apple-system-font, "Helvetica Neue", Tahoma, "PingFang SC", "lantinghei sc", "Microsoft Yahei", sans-serif;*/
+    font-family: Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, "Microsoft Yahei";
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.intro-page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+.half-sc-panel {
+    width: 100%;
+    height: 50%;
+}
+
+.intro-page>.half-sc-panel {
+    background: #eaeaea url(http://www.jandk.fr/images/intro/bg_panel_intro.jpg) 0 0 repeat;
+    transition: all 700ms ease-out;
+    position: relative;
+}
+
+.intro-page>.top {
+    border-bottom: solid 1px #d4d3d3;
+}
+
+.intro-page>.bottom {
+    border-top: solid 1px #fcfcfc;
+}
+
+.intro-page.hide .top {
+    transform: translate(0, -100%);
+}
+
+.intro-page.hide .bottom {
+    transform: translate(0, 100%);
+}
+
+.intro-page .top .logoHalf {
+    bottom: -1px;
+    border-bottom: none;
+    border-top-left-radius: 70px;
+    border-top-right-radius: 70px;
+    background: url(marry-logo.png) 0 0 /cover no-repeat;
+}
+
+.intro-page .bottom .logoHalf {
+    top: -1px;
+    border-top: none;
+    border-bottom-left-radius: 70px;
+    border-bottom-right-radius: 70px;
+    background: url(marry-logo.png) 0 -60px /cover no-repeat;
+}
+
+.pos-a-center {
+    top: 50%;
+    left: 50%;
+    /*matrix(1, 0, 0, 1, -60, -60)*/
+}
+
+#logo {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border: 10px solid #cec9c9;
+    border-radius: 50%;
+    background: url(marry-logo2.png) 0 0 no-repeat;
+    background-size: cover;
+    font-size: 0;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    transition: transform 0.7s ease-in;
+}
+
+#logo.rotate {
+    transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+#logo {
+    animation: loading-shadow 1s linear infinite alternate;
+}
+
+#logo.loading:after,
+#logo.loading:before {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: -5px;
+    top: -5px;
+    border-radius: 50%;
+    border: 5px solid #cec9c9;
+}
+
+#logo.loading:after {
+    animation: loading 2s linear 0.5s infinite;
+}
+
+#logo.loading:before {
+    animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes loading-shadow {
+    0% {
+        box-shadow: 0 0 4px 3px rgba(179, 179, 179, 1);
+    }
+    100% {
+        box-shadow: 0 0 4px 0 rgba(179, 179, 179, 0.3);
+    }
+}
+
+.logoHalf {
+    position: absolute;
+    width: 140px;
+    height: 70px;
+    border: 10px solid #cec9c9;
+    left: 50%;
+    margin-left: -70px;
+}
+
+.navigation {
+    position: absolute;
+    width: 100%;
+    top: 400px;
+    padding: 2px 2px 2px 0;
+}
+
+.navigation .left-nav {
+    float: left;
+}
+
+.left-nav .options,
+.left-nav .page-wraper {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.left-nav .options {
+    line-height: 56px;
+    width: 180px;
+}
+
+.left-nav .options>a {
+    display: block;
+    font-size: 34px;
+    color: #f2f2f2;
+    text-align: center;
+    background: #111;
+}
+
+.page-wraper .page {
+    display: inline-block;
+    float: left;
+    width: 64px;
+    line-height: 56px;
+    font-size: 40px;
+    background: #111;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    border-right: 3px solid #fff;
+    cursor: pointer;
+}
+
+.page-wraper .page.current {
+    background: #e52f7c;
+    cursor: default;
+}
+
+#main {
+    width: 100%;
+    height: 100%;
+}
+
+#main .top {
+    height: 400px !important;
+    overflow: hidden;
+    border-top: 2px solid #fff;
+}
+
+#main .bottom {
+    overflow: hidden;
+    background-color: #acd138;
+}
+
+.half-sc-panel {
+    width: 4000px;
+    background: #333;
+}
+
+.nav-placehold {
+    position: relative;
+    height: 60px;
+}
+
+.column {
+    width: 320px;
+    background: transparent url('pixel-pattern.png') 0 0 repeat;
+}
+
+.column {
+    height: 100%;
+    float: left;
+    border-right: 2px solid #fff;
+}
+
+.column.description {
+    width: 420px;
+    padding: 10px;
+    font-weight: 300;
+    background: #21ace3;
+}
+
+.description .title {
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+}
+
+.description .desc-txt {
+    font-size: 16px;
+    color: #f2f2f2;
+    text-align: center;
+    line-height: 2em;
+}
+
+.dmImg .img-box {
+    /*    border: 2px solid #fff;
+    margin: -2px -2px 0 0;*/
+}
+
+.img-box {
+    float: left;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.img-box>img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.img-box .img-desc {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 5px;
+    background-color: #e52f7c;
+    color: #fff;
+    transition: transform 0.2s ease-out;
+    transform: translateY(100%);
+}
+
+.img-box:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: " ";
+    width: 100%;
+    height: 100%;
+    background: transparent url('pixel-pattern.png') 0 0 repeat;
+    opacity: 0.3;
+    transition: all 0.2s;
+}
+
+.img-box:hover:after {
+    opacity: 0;
+}
+
+.img-box:hover .img-desc {
+    transform: translateY(0%);
+}
+
+.g_p_p .img1 {
+    width: 100%;
+    height: 67%;
+}
+
+.g_p_p .img2,
+.g_p_p .img3 {
+    height: 33%;
+    width: 50%;
+}
+
+.p_p_g .img1 {
+    width: 40%;
+    height: 33%;
+}
+
+.p_p_g .img2 {
+    width: 60%;
+    height: 33%;
+}
+
+.p_p_g .img3 {
+    width: 100%;
+    height: 67%;
+}

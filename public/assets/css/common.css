@@ -1,0 +1,218 @@
+/*common css*/
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    -webkit-text-size-adjust: none;
+}
+
+body {
+    font-size: 13px;
+    font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+}
+
+p, h1, h2, h3, h4, h5, h6, ul, ol, dl, dt, dd {
+    margin: 0;
+}
+
+canvas {
+    display: block;
+}
+
+input {
+    outline: none;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+.hide {
+    display: none !important;
+}
+
+.hide-text {
+    text-indent: -999em;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.cf:before, .cf:after {
+    content: " ";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+
+
+/* For IE 6/7 (trigger hasLayout) */
+
+.cf {
+    zoom: 1;
+}
+
+.pull-right {
+    float: right;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-bordered th,
+.table-bordered td{
+    border: 1px solid #eceeef;
+    padding: 5px;
+}
+/**/
+
+a {
+    color: #333;
+}
+
+.main-wrap {
+    /*width: 90%;*/
+    /*padding: 0 15px;*/
+    margin: 0 auto;
+}
+
+@media (min-width:320px) and (max-width: 992px) {
+    .main-wrap {
+        width: 95%;
+    }
+}
+
+@media (min-width: 992px) {
+    .main-wrap {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .main-wrap {
+        width: 1200px;
+    }
+}
+
+.title {
+    text-align: center;
+    line-height: 40px;
+}
+
+.tool-btn {
+    float: right;
+}
+
+.mod-item {
+    border: 1px solid #ddd;
+}
+
+.mod-item .hide-sub-btn {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    border-width: 8px;
+    border-color: #333 transparent transparent transparent;
+    border-style: solid;
+}
+
+.mod-item .hide-sub-btn.show {
+    top: 15px;
+    border-color: transparent transparent #333 transparent;
+}
+
+.mod-item .mod-title {
+    display: block;
+    font-size: 16px;
+    padding: 10px 5px;
+    background-color: #f2f2f2;
+    position: relative;
+    /*border-bottom: 1px solid #ddd;*/
+}
+
+.mod-item .sub-items {
+    border-top: 1px solid #ddd;
+    padding-left: 30px;
+}
+
+.mod-item .sub-items>li {
+    line-height: 35px;
+    border-bottom: 1px solid #f2f2f2;
+    padding-right: 5px;
+}
+
+.sub-item-status {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+.sub-items>li {
+    overflow: hidden;
+}
+/*.sub-items>li.show-err{
+    background: #f2f2f2;
+}*/
+.sub-items>li .sub-err-img {
+    padding-left: 2em;
+    margin-bottom: 1em;
+    display: none;
+}
+.sub-items>li .sub-err-img.show{
+    display: block;
+}
+.sub-items table td:first-child{
+    width: 3em;
+}
+.label {
+    vertical-align: middle;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 3px;
+}
+
+.label.success {
+    background: #1ABB9C;
+    color: #fff;
+}
+
+.label.fail {
+    color: #fff;
+    background: #c34543;
+}
+
+.label.empty {
+    background-color: #c2c2c2;
+    color: #999;
+}

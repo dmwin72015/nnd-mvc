@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson-one</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <span v-once>This will never change: {{ msg }}</span>
+    <div v-bind:id="dynamicId"></div>
+    <button v-bind:disabled="canClick">Button</button>
+    <div v-bind:id="'list-' + id"></div>
+    <p v-if="seen">这是你能看见的</p>
+    <a v-bind:href="url" v-on:click="say">绑定了一个href</a>
+    <a v-bind:href="url" v-on:click.prevent="jump">adddd</a>
+    <div v-bind:id="rawId | formatId" @click="say">
+        过滤其使用
+    </div>
+
+    <div id="no-logic">
+        {{ message.split(';').reverse().join('-') }}<br/>
+        {{ reverseMsg }}
+    </div>
+
+</div>
+</body>
+<script>
+    var data = {
+        name: '你就',
+        msg: 'this is a message!!!',
+        dynamicId: '啊哈哈',
+        canClick: 'false',
+        id: 'myid',
+        rawId:'newmyID',
+        seen: 'true',
+        url: '//node.com/admin',
+        message:"aaa;bbb;ccc",
+        say: function (ev) {
+            alert(this);
+            ev.preventDefault();
+        },
+        jump: function (ev) {
+            console.log(ev.target);
+        }
+    };
+    var app = new Vue({
+        el: '#app',
+        data: data,
+        created: function () {
+            console.log('name is: ' + this.name);
+        },
+        filters: {
+            formatId: function (value) {
+                if (!value) return '';
+                value = value.toString();
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            }
+        },
+        computed:{
+            reverseMsg:function(){
+                return this.message.split(';').reverse().join('-')
+            }
+        }
+    });
+
+    app.$watch('name', function (newVal, oldVal) {
+
+        alert(newVal, oldVal);
+
+    });
+
+</script>
+</html>

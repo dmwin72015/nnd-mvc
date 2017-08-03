@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+  window.name = "我是老夫请"
+  </script>
+  <style>
+  	iframe{
+  		width: 800px;
+  		height: 300px;
+  	}
+  </style>
+  <script type="text/javascript" src="//s4.xinstatic.com/xinwap/js/jquery-1.9.1.min.js?v=17072812"></script>
+</head>
+
+<body>
+  <h3>这是父级</h3>
+  <input type="button" value="改变hash" onclick="changeHash()">
+  <!-- <iframe id="ifm" src="http://7004.www.xin.com/assets/test.html?C=1231" frameborder="0"></iframe> -->
+  <iframe id="ifm" src="index222.html" frameborder="0"></iframe>
+</body>
+<script>
+var oifm = document.getElementById("ifm");
+var obj = oifm.contentWindow;
+
+function changeHash(){
+  alert('a');
+	// oifm.src="http://7004.www.xin.com/assets/test.html#"+ Date.now();
+}
+
+</script>
+
+</html>

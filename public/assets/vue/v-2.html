@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson-two</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .active {
+            color: red;
+            background-color: #dd1144;
+        }
+        .text-danger{
+            color: #a9dcad;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <span>First-Name : {{ firstName }}</span><br/>
+    <span>Last-Name : {{ lastName }}</span><br/>
+    <span>Full-Name : {{ fullName }}</span>
+    <p>
+        <input type="text" v-model="question">
+    </p>
+    <p>
+        {{answer}}
+    </p>
+    <p v-bind:class="{ active: isActive }">
+        红色字体
+    </p>
+    <p v-bind:class="classObject">
+        aaaaa
+    </p>
+    <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </template>
+    <p v-if="ok">halide</p>
+    <p v-else> WRONG</p>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'Foo',
+            lastName: 'Bar',
+            question: 'are you a man??',
+            isActive: true,
+            error:{
+                type:'fatal'
+            },
+            ok:true
+        },
+        computed: {
+            fullName: function () {
+                return this.firstName + ' ' + this.lastName
+            },
+            answer: function () {
+                return this.question;
+            },
+            classObject: function () {
+                return {
+                    active: this.isActive ,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            }
+        }
+    });
+
+</script>
+</html>

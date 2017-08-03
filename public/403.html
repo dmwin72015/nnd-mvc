@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+    <title>优信二手车</title>
+    <link rel="stylesheet" href="https://s2.xinstatic.com/xin/css/base.css?v=1707131905">
+    <link rel="stylesheet" href="https://s2.xinstatic.com/xin/css/common.css?v=1707131905">
+    <style>
+        img {
+            width: 100%;
+        }
+
+        body {
+            background: #f3f3f3;
+        }
+
+        .wrap.pc {
+            /*position: relative;*/
+            /*left: 50%;*/
+            /*float: left;*/
+        }
+
+        .content {
+            margin-top: 30px;
+            position: relative;
+            width: 560px;
+            height: 400px;
+            overflow: hidden;
+            /*border: 1px solid #d2d2d2;*/
+            font-size: 0;
+            background: url('//stest.xinstatic.com/static/car-www/imgs/login-back_61c1e75.png');
+            margin: 30px auto;
+        }
+
+        .content .panel {
+            width: 50%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .qrcode {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .qrcode img {
+            width: 120px;
+            height: 120px;
+        }
+
+        .qrcode .text {
+            display: block;
+            text-align: center;
+            font-size: 16px;
+            color: #fff;
+            line-height: 30px;
+        }
+
+        .m-qrcode {
+            display: none;
+        }
+
+        .panel.left {
+            position: relative;
+            /*filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='//stest.xinstatic.com/static/car-www/imgs/login-back_61c1e75.png', sizingMethod='scale');*/
+        }
+        .panel.right {
+            height: 100%;
+            background: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .panel.right .inner{
+            position: absolute;
+            left:0;
+            bottom: 0;
+            right:0;
+            top:0;
+            border: 1px solid #d2d2d2;
+            border-left: none;
+            padding-top: 30%;
+        }
+        .panel.right  p {
+            margin-bottom: 15px;
+        }
+
+        .vcode > img {
+            width: 70px;
+            height: 30px;
+        }
+
+        .tip-words {
+            line-height: 40px;
+            font-size: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .sub-tip {
+            color: #999;
+            font-weight: normal;
+        }
+
+        .form-ipt {
+            vertical-align: middle;
+            width: 180px;
+            border: 1px solid #d6d6d6;
+            font: normal 14px/34px "Microsoft YaHei";
+            line-height: 18px;
+            padding: 8px 10px;
+        }
+
+        .form-btn {
+            width: 200px;
+            height: 35px;
+            text-align: center;
+            font: normal 16px/35px "Microsoft YaHei";
+            color: #fff;
+            display: inline-block;
+            background: #ff5837;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media screen and (min-width: 800px ) {
+            .content {
+
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fixed-head-wrap">
+    <div class="fixed-head rel">
+        <a href="javascript:;" class="fixed-logo" title="【优】质诚【信】二手车交易平台"></a>
+    </div>
+</div>
+
+<div class="wrap pc">
+    <div class="content">
+        <div class="panel left">
+            <span class="qrcode">
+                <img src="//s6.xinstatic.com/www/img/qrcode/1006.jpg" alt="">
+                <span class="text">下载APP</span>
+                <span class="text">车源动态不错过</span>
+            </span>
+        </div>
+        <div class="panel right">
+            <div class="inner">
+                <p class="m-qrcode">
+                    <img src="//s6.xinstatic.com/www/img/qrcode/1006.jpg" alt="">
+                </p>
+                <p class="tip-words">
+                    客官,您太累了 需要休息休息!</br>
+                <span class="sub-tip">
+                    输个验证码~再试试
+                </span>
+                </p>
+                <p class="vcode">
+                    <img src="http://www.ceshi.xin.com/car/get_vcode/?t=1501058496" alt="">
+                </p>
+                <p>
+                    <input type="text" class="form-ipt" placeholder="请输入验证码" id="vcode">
+                </p>
+                <p>
+                    <input type="button" class="form-btn" value="确定" id="sub-btn">
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrap m" style="display:none;">
+    <p class="m-qrcode">
+        <img src="//s6.xinstatic.com/www/img/qrcode/1006.jpg" alt="">
+    </p>
+    <p class="tip-words">
+        客官,您太累了 需要休息休息!</br>
+        <span class="sub-tip">
+            输个验证码~再试试
+        </span>
+    </p>
+    <p>
+        <input type="text" class="form-ipt" placeholder="请输入验证码">
+    </p>
+    <p class="vcode">
+        <img src="http://www.ceshi.xin.com/car/get_vcode/?t=1501058496" alt="">
+    </p>
+    <p>
+        <input type="button" class="form-btn" value="确定">
+    </p>
+</div>
+</body>
+</div>
+<script>
+    var obtn = document.getElementById('sub-btn');
+    obtn.addEventListener('click', function () {
+        alert('a');
+    });
+</script>
+</html>

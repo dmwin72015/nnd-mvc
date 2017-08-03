@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="https://s1.xinstatic.com/m/css/base.css?v=17071917">
+    <style>
+
+        body{
+            background-color: #f2f2f2;
+        }
+        input{
+            outline: none;
+            border-radius:0;
+        }
+        .content{
+            width: 378px;
+            margin: 20px auto;
+            border:1px solid #e5e5e5;
+            padding-bottom: 20px;
+            background-color: #fff;
+        }
+        .title{
+            text-align: center;
+            font-size: 16px;
+            color: #2b2b2b;
+            font-weight: bold;
+        }
+        .form-control {
+            display: block;
+            width: 300px;
+            margin: 0 auto;
+            line-height: 38px;
+            border:1px solid #e5e5e5;
+            font-size: 16px;
+        }
+        .form-control.btn{
+            border:1px solid #fc5b40;
+        }
+        .form-ipt,.vcode{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .form-ipt{
+            font-size: 16px;
+            padding: 2px 12px;
+            border:none;
+            border-right:1px solid #e5e5e5;
+        }
+        .vcode{
+            width: 83px;
+            height:36px;
+        }
+        .content .form-control{
+            margin-top: 15px;
+        }
+        .sub-btn{
+            display: block;
+            color: #fff;
+            background: #fc5b40;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .logo img{
+            display: block;
+            width: 260px;
+            margin: 0 auto;
+        }
+
+        @media only screen and (max-width: 414px){
+            body{
+                background-color: #fff;
+            }
+            .logo img{
+                width: 5.11rem;
+            }
+            .content{
+                width: 100%;
+                border: none;
+            }
+            .form-control{
+                width: 5.54rem;
+                background-color: #f2f2f2;
+                border: none;
+                line-height: 0.85rem;
+            }
+            .form-control input{
+                background-color: #f2f2f2;
+                border-right-color: #bbb;
+                color: #1b1b1b;
+                width: 3.54rem;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            .vcode{
+                width: 1.11rem;
+                height:0.48rem;
+                margin-left: 0.06rem;
+            }
+            .title{
+                width: 100%;
+                font-size: 0.29rem;
+                font-weight: normal;
+            }
+            .sub-btn{
+                font-size: 0.34rem;
+                line-height: 0.85rem;
+                background-color: #f85d00;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="wrap" class="wrap">
+    <div class="logo">
+        <img src="LOGO-03.png" alt="">
+    </div>
+    <div class="content www">
+        <h3 class="title">提交过于频繁,需要进行人机校验</h3>
+        <p class="form-control">
+            <input type="text" class="form-ipt" maxlength="4" placeholder="请输入验证码">
+            <img class="vcode" src="http://www.ceshi.xin.com/car/get_vcode/?t=1501058496" alt="">
+        </p>
+        <p class="form-control btn">
+            <span class="sub-btn" >提交</span>
+        </p>
+    </div>
+</div>
+<script>
+    document.querySelector(".vcode").addEventListener('click',function () {
+
+    });
+</script>
+</body>
+</html>

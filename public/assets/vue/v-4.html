@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson-one</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<ul id="app" >
+
+    <li v-for="(item,index) in items" :key="item.id">
+       {{parentMsg}} - {{index}}  - {{ item.message }}
+        <div v-if="item.id == '001'" @click.once.prevent="say">Do something</div>
+    </li>
+
+</ul>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            parentMsg:'父级消息',
+            items: [{
+                id:'001',
+                code: '100',
+                message: '正确'
+            }, {
+                id:'002',
+                code: '101',
+                message: '错误'
+            }]
+        },
+        methods:{
+            say:function () {
+                alert('aa');
+            }
+        }
+    });
+</script>
+</html>

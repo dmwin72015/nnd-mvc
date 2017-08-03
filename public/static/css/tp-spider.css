@@ -1,0 +1,75 @@
+@charset "UTF-8";
+.spider-box input[type=text] {
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  display: inline-block;
+  width: 240px;
+  line-height: 28px;
+}
+.spider-box #loginJira,
+.spider-box #getJira {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+.spider-box #password {
+  margin-left: 7px;
+}
+.spider-box .jira-status {
+  display: inline-block;
+  margin-left: 10px;
+}
+.spider-box .jira-status a {
+  color: #999;
+}
+.spider-box .jira-status a:hover {
+  color: #444;
+}
+.spider-box .jira-user {
+  color: red;
+  margin-right: 10px;
+}
+.spider-box .error {
+  margin-left: 10px;
+  color: #d9534f;
+}
+.spider-box .jira-content {
+  margin-top: 15px;
+}
+.txt-input.error {
+  box-shadow: inset 0 1px 1px rgba(187, 19, 19, 0.375);
+  border: 1px solid #ea3d3d;
+}
+.jira.model-box .box-head {
+  background: #fff;
+  border-bottom: 2px solid #aaa;
+}
+.jira.model-box .box-body {
+  padding: 10px;
+}
+.jira.model-box .input-wraper {
+  margin-bottom: 10px;
+}
+.jira.model-box #loginJiraBtn {
+  width: 120px;
+}
+.box.no-shadow {
+  box-shadow: none;
+}
+.box.jira-item .box-head {
+  border-radius: 0;
+}
+.box.jira-item .box-body {
+  padding: 5px;
+}
+.art-url #art_url {
+  width: 75%;
+}
+#get_art {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 15px;
+}
+
+/*# sourceMappingURL=../maps/css/tp-spider.css.map*/

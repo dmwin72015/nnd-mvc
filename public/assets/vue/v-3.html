@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    var str = '';
+
+
+
+    function dec(e){
+        var i, n, o, r, s = [], a = 0, l = 0;
+        for (e = e.replace(/[^0-9A-Za-z$_~]/g, ""); a < e.length; )
+            i = this._tbl[e.charAt(a++)],
+                    n = this._tbl[e.charAt(a++)],
+                    o = this._tbl[e.charAt(a++)],
+                    r = this._tbl[e.charAt(a++)],
+                    s[l++] = i << 2 | n >> 4,
+                    s[l++] = (15 & n) << 4 | o >> 2,
+                    s[l++] = (3 & o) << 6 | r;
+        var h = e.slice(-2);
+        return h.charAt(0) === this._pad ? s.length = s.length - 2 : h.charAt(1) === this._pad && (s.length = s.length - 1),
+                t._1to2(s)
+    }
+
+    function toStr(e){
+        for (var e = "", i = 0; i < t.length; ++i) {
+            var n = t[i];
+            e += String.fromCharCode(256 * n + t[++i])
+        }
+        return e
+    }
+    console.time('time');
+    var str = '0';
+    for(var i = 0;i<110000;++i){
+        str+= i;
+    }
+    console.timeEnd('time');
+</script>
+</html>

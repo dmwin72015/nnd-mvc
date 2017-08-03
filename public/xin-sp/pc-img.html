@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>PC</title>
+        <!--<link rel="stylesheet" href="/assets/css/common.css?a=123">-->
+        <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+        <style>
+        /*common css*/
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            -webkit-text-size-adjust: none;
+        }
+
+        body {
+            font-size: 13px;
+            font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.5;
+            -webkit-font-smoothing: subpixel-antialiased;
+        }
+
+        ul, ol {
+            list-style: none;
+            padding: 0;
+        }
+
+        p, h1, h2, h3, h4, h5, h6, ul, ol, dl, dt, dd {
+            margin: 0;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        input {
+            outline: none;
+        }
+
+        a, a:hover {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .hide {
+            display: none !important;
+        }
+
+        .hide-text {
+            text-indent: -999em;
+        }
+
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            visibility: hidden;
+            clear: both;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .cf:before, .cf:after {
+            content: " ";
+            display: table;
+        }
+
+        .cf:after {
+            clear: both;
+        }
+
+
+        /* For IE 6/7 (trigger hasLayout) */
+
+        .cf {
+            zoom: 1;
+        }
+
+        .pull-right {
+            float: right;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .table-bordered th,
+        .table-bordered td{
+            border: 1px solid #eceeef;
+            padding: 5px;
+        }
+        /**/
+
+        a {
+            color: #333;
+        }
+
+        .main-wrap {
+            /*width: 90%;*/
+            /*padding: 0 15px;*/
+            margin: 0 auto;
+        }
+
+        @media (min-width:320px) and (max-width: 992px) {
+            .main-wrap {
+                width: 95%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .main-wrap {
+                width: 970px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .main-wrap {
+                width: 1200px;
+            }
+        }
+
+        .title {
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .tool-btn {
+            float: right;
+        }
+
+        .mod-item {
+            border: 1px solid #ddd;
+        }
+
+        .mod-item .hide-sub-btn {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            border-width: 8px;
+            border-color: #333 transparent transparent transparent;
+            border-style: solid;
+        }
+
+        .mod-item .hide-sub-btn.show {
+            top: 15px;
+            border-color: transparent transparent #333 transparent;
+        }
+
+        .mod-item .mod-title {
+            display: block;
+            font-size: 16px;
+            padding: 10px 5px;
+            background-color: #f2f2f2;
+            position: relative;
+            /*border-bottom: 1px solid #ddd;*/
+        }
+
+        .mod-item .sub-items {
+            border-top: 1px solid #ddd;
+            padding-left: 30px;
+        }
+
+        .mod-item .sub-items>li {
+            line-height: 35px;
+            border-bottom: 1px solid #f2f2f2;
+            padding-right: 5px;
+        }
+
+        .sub-item-status {
+            display: inline-block;
+            vertical-align: baseline;
+        }
+
+        .sub-items>li {
+            overflow: hidden;
+        }
+        /*.sub-items>li.show-err{
+            background: #f2f2f2;
+        }*/
+        .sub-items>li .sub-err-img {
+            padding-left: 2em;
+            margin-bottom: 1em;
+            display: none;
+        }
+        .sub-items>li .sub-err-img.show{
+            display: block;
+        }
+        .sub-items table td:first-child{
+            width: 3em;
+        }
+        .label {
+            vertical-align: middle;
+            border-radius: 5px;
+            font-size: 12px;
+            padding: 3px;
+        }
+
+        .label.success {
+            background: #1ABB9C;
+            color: #fff;
+        }
+
+        .label.fail {
+            color: #fff;
+            background: #c34543;
+        }
+
+        .label.empty {
+            background-color: #c2c2c2;
+            color: #999;
+        }
+
+
+        </style>
+    </head>
+    <body>
+        <div class="main-wrap">
+            <h3 class="title">报告</h3>
+            <ul class="mod-list">
+                <li class="mod-item">
+                    <span class="mod-title cf">
+                        首页
+                        <a href="javascript:;" class="tool-btn">
+                            <i class="hide-sub-btn"></i>
+                        </a>
+                    </span>
+                    <ul class="sub-items">
+                        <li>
+                            <span class="sub-title">模块1</span>
+                            <div class="sub-item-status pull-right">
+                                <span class="label success">完成</span>
+                                <span class="label fail">失败</span>
+                                <span class="label empty">无</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="sub-title">模块1</span>
+                            <div class="pull-right">
+                                <span class="label success">完成</span>
+                                <span class="label fail">失败</span>
+                                <span class="label empty">无</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="sub-title">模块1</span>
+                            <div class="pull-right">
+                                <span class="label success">完成</span>
+                                <span class="label fail">失败</span>
+                                <span class="label empty">无</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="mod-item">
+                    <span class="mod-title cf">
+                        首页
+                        <a href="javascript:;" class="tool-btn">
+                            <i class="hide-sub-btn"></i>
+                        </a>
+                    </span>
+                    <ul class="sub-items">
+                        <li>
+                            <span class="sub-title">模块1</span>
+                            <div class="sub-item-status pull-right">
+                                <span class="label success">完成</span>
+                                <span class="label fail">失败</span>
+                                <span class="label empty">无</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="sub-title">模块1</span>
+                            <div class="pull-right">
+                                <span class="label success">完成</span>
+                                <span class="label fail">失败</span>
+                                <span class="label empty">无</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="sub-title">模块1</span>
+                            <div class="pull-right">
+                                <span class="label success">完成</span>
+                                <span class="label fail">失败</span>
+                                <span class="label empty">无</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="mod-item">
+                    <span class="mod-title cf">
+                        首页
+                        <a href="javascript:;" class="tool-btn">
+                            <i class="hide-sub-btn"></i>
+                        </a>
+                    </span>
+                    <ul class="sub-items show">
+                        <li>
+                            <span class="sub-title">模块1</span>
+                            <div class="sub-item-status pull-right">
+                                <span class="label empty">无</span>
+                            </div>
+                        </li>
+                        <li data-modid="123" class="j-subMod">
+                            <span class="sub-title">模块1</span>
+                            <div class="pull-right">
+                                <span class="label fail">失败(20)</span>
+                            </div>
+                            <div class="sub-err-img">
+                                <table class="table-bordered">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <p>
+                                                当前：www.xin.com/asdsad/asdasda.img
+                                            </p>
+                                            <p>
+                                                正确：www.xin.com/asdsad/asdasda.img
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>
+                                            无图片
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="sub-title">模块1</span>
+                            <div class="pull-right">
+                                <span class="label success">完成</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </body>
+    <script type="text/javascript">
+        $('.mod-item').on('click', '.hide-sub-btn', function () {
+            $(this).toggleClass('show');
+            var $sub = $(this).closest('.mod-title').next();
+            if ($(this).hasClass('show')) {
+                $sub.stop(true, true).slideUp(200);
+            } else {
+                $sub.stop(true, true).slideDown(200);
+            }
+        });
+        $('.mod-item').on('click', '.label', function () {
+            var $this = $(this);
+            var $mod = $this.closest('.j-subMod');
+            // $mod.toggleClass('show-err');
+            if($this.hasClass('fail')){
+                $mod.find('.sub-err-img').toggleClass('show');
+
+            }
+        });
+    </script>
+</html>

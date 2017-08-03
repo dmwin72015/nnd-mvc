@@ -1,0 +1,25 @@
+.userinfo-tool {
+    margin-top: 10px;
+}
+.userinfo-tool>.btn {
+    float: right;
+    margin-left: 15px;
+}
+.userinfo-table input {}
+.info-item .item-val {
+    line-height: 26px;
+    display: inline-block;
+    border: 1px solid;
+}
+.info-item span.item-val {
+    border-color: transparent;
+}
+.info-item input.item-val {
+    border-color: #ccc;
+    padding: 0 5px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    width: 80%;
+}
+.userinfo-box table th:first-child, .userinfo-box table td:first-child {
+    text-align: right;
+}
