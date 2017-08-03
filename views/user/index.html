@@ -1,0 +1,31 @@
+{>"include/layout.html"/}
+{<selfCss}
+<script></script>
+<link rel="stylesheet" href="/static/css/tp-spider.css">
+<link rel="stylesheet" href="/assets/css/user.css">
+{/selfCss}
+{<content}
+<div class="box userinfo-box" id="user">
+    <header class="box-head">
+        <h3 class="title">个人信息</h3>
+        <ul class="tool-panel pull-right">
+            <li>
+                <span class="tool-btn toggle-size"><i class="fa fa-chevron-up"></i></span>
+            </li>
+        </ul>
+    </header>
+    <div class="box-body">
+        <user-view :user-items="{userData}" :status="getStatus" :change-model="changeModel"></user-view>
+    </div>
+</div>
+{/content}
+{<bodyContent}
+{/bodyContent}
+
+{<selfJs}
+
+<script src="/assets/js/vue.js"></script>
+<script src="/static/js/dashboard.bundle.js"></script>
+<!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> -->
+<script type="text/javascript" src="/assets/js/user.js"></script>
+{/selfJs}

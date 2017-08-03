@@ -1,0 +1,43 @@
+<header class="header cf">
+    <div class="toggle-box">
+        <span id="j-hidebar">
+            <i class="fa fa-bars"></i>
+        </span>
+        <span id="j-fullscreen">
+            <i class="fa fa-arrows-alt"></i>
+        </span>
+    </div>
+
+    <div class="user-nav">
+        <a href="javascript:;" class="avator" data-id="">
+            <img src="/assets/img/logo2.png" alt="">
+            <span data-st="{loginInfo.loginDate}" data-id="{loginInfo.uid}" style="padding: 0 5px;">{loginInfo.alias}</span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+        <div class="user-menu-list">
+            <ul>
+                <li>
+                    <a href="/user">个人信息</a>
+                </li>
+                <li>
+                    <a href="/login/logout/" id="logout"> 退出登录 </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="menu-group top-nav">
+        <a href="javascript:;" class="menu email" title="邮件">
+            <i class="fa fa-envelope-o"></i>
+            <span class="badge bg-green">2{email}</span>
+        </a>
+        <a href="javascript:;" class="menu msg" title="信息">
+            <i class="fa fa-comment-o" style="font-size:14px;"></i>
+            {#msgs}<span class="badge bg-green">{msgs}</span>{/msgs}
+        </a>
+        <a href="javascript:;" class="menu friend-online" title="好友">
+            <i class="fa fa-user-o"></i>
+            {#friends}<span class="badge bg-green">{friends}</span>{/friends}
+            <div class="friend-list"></div>
+        </a>
+    </div>
+</header>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <title>blog-{titleName}</title>
+    <link rel="stylesheet" href="/static/css/tp-vote.css">
+    <script src="/static/js/common.js"></script>
+    <link rel="stylesheet" href="/assets/css/login-add.css">
+    <style>
+        .slide-fade-enter-active,
+        .top-slide-fade-enter-active {
+            transition: all .3s ease-out;
+        }
+
+        .slide-fade-leave-active,
+        .top-slide-fade-leave-active {
+            transition: all .2s ease-out;
+        }
+
+        .slide-fade-enter, .slide-fade-leave-to
+            /* .slide-fade-leave-active for <2.1.8 */
+        {
+            transform: translateX(10px);
+            opacity: 0;
+        }
+
+        .top-slide-fade-enter, .top-slide-fade-leave-to
+            /* .slide-fade-leave-active for <2.1.8 */
+        {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id="bg"></div>
+<div id="wraper" class="wraper">
+    <header class="top-nav">
+        <!--<a href="javascript:;" class="reg-btn">注册</a>-->
+    </header>
+    <div class="login-box">
+        <header class="title">
+            <h1 class="logo hide-text">
+                投票
+                <!-- <img src="/static/img/rio.png" alt="" style="width:130px;"> -->
+            </h1>
+            <h2 class="subtitle">公平公正、透明公开、真实有效</h2>
+        </header>
+        <input type="password" hidden>
+        <form id="myform">
+            <div class="group-inputs">
+                <div class="input-wraper loginname">
+                    <input type="text" placeholder="登录名" v-on:focus="rmTip('name')" v-model.trim="uname">
+                    <transition name="slide-fade">
+                        <err-tip v-if="nameErr.status" v-bind:class="errClass"></err-tip>
+                    </transition>
+                </div>
+                <div class="input-wraper password ">
+                    <input type="password" placeholder="密码" v-on:focus="rmTip('pwd')" v-model.trim="upwd">
+                    <transition name="slide-fade">
+                        <err-tip v-if="pwdErr.status" v-bind:class="errClass"></err-tip>
+                    </transition>
+                </div>
+            </div>
+            <div class="group-inputs error hide" id="error">
+                <div class="txt-wraper">
+                    错误信息
+                </div>
+            </div>
+            <div class="group-btns login-btns">
+                <span class="btn sub" v-on:click="login">登录</span>
+                <span class="btn reg" v-on:click="reg">注册</span>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="mask" id="mask" v-bind:class="{show:isShow}">
+    <transition name="top-slide-fade" v-on:after-leave="afterLeave"  v-on:leave="leave">
+        <reg-view v-if="reg"></reg-view>
+    </transition>
+</div>
+<component :is="mask_comp"></component>
+</body>
+<script src="/assets/js/jquery-3.2.1.js"></script>
+<script src="/static/js/lib.js"></script>
+<script src="/static/js/login.bundle.js"></script>
+<script src="/assets/js/vue.js"></script>
+<script type="text/javascript" src="/assets/js/register.js"></script>
+</html>

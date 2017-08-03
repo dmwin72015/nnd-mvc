@@ -1,0 +1,70 @@
+{extends file="include/layout.html"}
+
+{block name="content"}
+<div class="box vote-box">
+	<header class="box-head">
+		<h3 class="title">投票规则</h3>
+		<ul class="tool-panel pull-right">
+			<li>
+				<span class="tool-btn toggle-size"><i class="fa fa-chevron-up"></i></span>
+			</li>
+		</ul>
+	</header>
+	<div class="box-body">
+        <table class="borded voteinfo-table">
+            <tr>
+                <th>序 号</th>
+                <th>态度指标</th>
+                <th>目标值或目标效果</th>
+                <th>纠错态度及行为</th>
+                <th>满分</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>责任心</td>
+                <td>对工作认真负责，敬业敬岗，以身作则，愿意承担更多的责任</td>
+                <td>工作不认真负责，对工作的失误总是逃避责任或辩解</td>
+                <td>35</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>积极性</td>
+                <td>非常积极主动，把工作看作是对能力的挑战，并有很高的工作业绩</td>
+                <td>消极怠慢，常常计较个人得失</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>合作性</td>
+                <td>总是主动承担本部门义务，从不需催办，愿意帮助同事，形成良好工作氛围</td>
+                <td>从来不主动承担义务，总是等待催办，与同事之间不主动合作或意见不和	</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>服从性</td>
+                <td>服从上级安排，认真完成上级安排的任务，不以各种借口推脱，不敷衍了事</td>
+                <td>经常不服从上级安排，有时还以借口推脱，做事敷衍了事</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>纪律性</td>
+                <td>严格遵守公司的规章制度和工作流程，不以任何借口违反公司规定，纪律性强</td>
+                <td>基本不能遵守公司的规章制度和工作流程，经常有违反公司规定的行为</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>印象分</td>
+                <td>——</td>
+                <td>——</td>
+                <td>15</td>
+            </tr>
+		</table>
+	</div>
+</div>
+{/block}
+{block name="selfJs"}
+<script src="/static/js/dashboard.bundle.js"></script>
+{/block}

@@ -1,0 +1,31 @@
+{>"include/layout.html"/}
+{<selfCss}
+    <link rel="stylesheet" href="/static/css/tp-spider.css">
+    <script src="/assets/lib/ckeditor/ckeditor.js"></script>
+{/selfCss}
+
+{<content}
+    <div class="box">
+        <header class="box-head">
+            <h3 class="title">测试CKEditor</h3>
+        </header>
+        <div class="box-body">
+            <textarea name="editor1" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div class="box-foot btn-group" style="overflow: hidden;">
+            <span class="btn btn-green">保存</span> 
+            <span class="btn btn-danger">取消</span>
+        </div>
+        <script type="text/javascript">
+            CKEDITOR.replace('editor1');
+        </script>
+{/content}
+
+{<selfJs}
+<script src="/static/js/dashboard.bundle.js"></script>
+<!-- <script src="/assets/js/jquery-3.2.1.js"></script> -->
+<script src="/assets/js/vue.js"></script>
+<script src="/assets/js/vue-router.js"></script>
+<!-- <script src="/assets/js/sp-art.js"></script> -->
+
+{/selfJs}

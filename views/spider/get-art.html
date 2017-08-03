@@ -1,0 +1,46 @@
+{>"include/layout.html"/}
+{<selfCss}
+<link rel="stylesheet" href="/static/css/tp-spider.css">
+<style>
+	.art-content{
+		margin-top: 15px;
+	}
+	.art-content li{
+		line-height: 30px;
+		border-bottom: 1px solid #f2f2f2;
+	}
+</style>
+{/selfCss}
+{<content}
+<div class="box spider-box">
+	<header class="box-head">
+		<h3 class="title">爬虫</h3>
+		<ul class="tool-panel pull-right">
+			<li>
+				<span class="tool-btn toggle-size"><i class="fa fa-chevron-up"></i></span>
+			</li>
+		</ul>
+	</header>
+	<div class="box-body">
+        <div class="art-url">
+            <input type="text" class="txt-input" id="art_url">
+			<span class="btn btn-green" id="get_art" >获取</span>
+        </div>
+		<div class="art-url" style="margin-top: 10px;">
+			<input type="text" class="txt-input" id="movie_url" style="width: 75%;">
+			<span class="btn btn-green" id="get_movie" >获取Movie信息</span>
+		</div>
+		<div class="art-content">
+
+		</div>
+	</div>
+</div>
+{/content}
+{<bodyContent}
+{/bodyContent}
+
+{<selfJs}
+<script src="/static/js/dashboard.bundle.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/sp-art.js"></script>
+{/selfJs}

@@ -1,0 +1,58 @@
+{
+  "name": "webpackproject",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "start2": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "server": "webpack-dev-server",
+    "wpser": "node ./webpackserver.js"
+  },
+  "bin": {
+    "server": " ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+  },
+  "dependencies": {
+    "async": "^2.5.0",
+    "body-parser": "~1.16.0",
+    "cheerio": "^0.22.0",
+    "co": "^4.6.0",
+    "consolidate": "^0.14.5",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "dustjs-linkedin": "^2.7.5",
+    "express": "^4.14.1",
+    "express-session": "^1.15.3",
+    "file-stream-rotator": "^0.1.0",
+    "glob": "^7.1.1",
+    "iconv-lite": "^0.4.18",
+    "jquery": "^3.2.1",
+    "moment": "^2.18.1",
+    "mongodb": "^2.2.26",
+    "mongoose": "^4.11.3",
+    "mongoskin": "^2.1.0",
+    "morgan": "~1.7.0",
+    "particles.js": "^2.0.0",
+    "pinyin": "^2.8.3",
+    "request": "^2.81.0",
+    "serve-favicon": "~2.3.2",
+    "svg-captcha": "^1.3.7",
+    "through2": "^2.0.3"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-typescript": "^3.2.1",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.3",
+    "supervisor": "^0.12.0",
+    "typescript": "^2.4.2",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.4"
+  }
+}

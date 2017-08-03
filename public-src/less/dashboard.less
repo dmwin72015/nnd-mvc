@@ -1,0 +1,358 @@
+@bgBaseColor: #EDEDED;
+@headHover: #D9DEE4;
+@fontColor: #333;
+@fontColor-lighter: #666;
+@top-height: 40px;
+@content-top-padding: 25px;
+
+.transiltion {
+    transition: all 0.5s;
+}
+
+.sidebar {
+    position: absolute;
+}
+
+.header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    min-height: 40px;
+    padding: 0 15px;
+    background: @bgBaseColor;
+    box-shadow: 0 1px 0 #bbb;
+
+    a {
+        color: @fontColor;
+    }
+
+    .toggle-box {
+        float: left;
+
+        span {
+            &:extend(.top-nav > a);
+            cursor: pointer;
+        }
+
+        span:hover {
+            &:extend(.head-hover);
+        }
+    }
+
+    .top-nav,
+    .user-nav {
+        float: right;
+    }
+}
+
+.head-hover {
+    background-color: @headHover;
+}
+
+.avator {
+    display: block;
+    font-weight: 700;
+    padding: 5px 15px;
+}
+
+.avator,
+.top-nav > a {
+    &:hover {
+        .head-hover
+    }
+}
+
+.avator img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.avator .fa,
+.avator img {
+    vertical-align: middle;
+}
+
+.avator .fa {
+    font-size: 12px;
+    font-weight: 200;
+}
+
+.top-nav > a {
+    display: inline-block;
+    padding: 5px 12px;
+    line-height: 30px;
+    position: relative;
+}
+
+body {
+    background: #eff0f3;
+
+    &.hide-left {
+        .content {
+            margin-left: 0;
+            padding-top: @content-top-padding;
+        }
+
+        .sidebar.left {
+            left: -@left-bar-width;
+            padding-top: @content-top-padding;
+        }
+    }
+
+    &.full-screen {
+        .sidebar.left {
+            left: -@left-bar-width;
+        }
+
+        .content {
+            margin-left: 0;
+        }
+
+        .content-wraper {
+            padding-top: 0;
+        }
+
+        .header {
+            top: -@top-height - 2;
+        }
+    }
+}
+// @sidebar-bg-color:#2A3F54;
+@sidebar-txtColor: #666;
+@sidebar-txtColor-hover: #333;
+@sidebar-bg-color: #386b9e;
+@left-bar-width: 200px;
+
+.content,
+.content-wraper,
+.header,
+.sidebar {
+    &:extend(.transiltion);
+}
+
+.content-wraper {
+    padding-top: @top-height;
+    height: 100%;
+
+    .content {
+        margin-left: @left-bar-width;
+        padding: @content-top-padding 15px 15px;
+    }
+
+    .sidebar.left {
+        left: 0;
+        top: 0;
+        width: @left-bar-width;
+        // border-right: 1px solid #ccc;
+        height: 100%;
+        padding-top: @content-top-padding;
+        // background:@bgBaseColor;
+    }
+
+    .menu-section {
+        margin-top: @top-height;
+        margin-left: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 3px rgba(0,0,0,0.4);
+        overflow: hidden;
+    }
+}
+
+.menu-list {
+    font-size: 14px;
+    overflow: hidden;
+    &:extend(.transiltion);
+    dd,
+    dt {
+        cursor: pointer;
+    }
+
+    & > dt {
+        padding: 12px 10px;
+        font-weight: bold;
+        font-size: 16px;
+        color: @sidebar-txtColor;
+        background: #e0e0e0;
+        &:hover,
+        &:hover a {
+            color: @sidebar-txtColor-hover;
+        }
+
+        span.fa {
+            float: right;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        i.fa {
+            width: 24px;
+            padding: 0 2px;
+        }
+        a{
+            color: @sidebar-txtColor;
+        }
+    }
+
+    & > dt.active {
+        background: #e0e0e0;
+        color: @sidebar-txtColor-hover;
+        a{
+            color: @sidebar-txtColor-hover;
+        }
+    }
+
+    & > dd {
+        padding: 5px 0 5px 36px;
+        display: none;
+        &:hover {
+            background: #f2f2f2;
+        }
+
+        &:hover > a {
+            color: @sidebar-txtColor-hover;
+        }
+
+        &.active {
+            background: #f2f2f2;
+            > a {
+                color: @sidebar-txtColor-hover;
+            }
+        }
+    }
+
+    &+.menu-list {
+        border-top: 1px solid #afafaf;
+    }
+    &.show-sub{
+        >dd{
+            display: block;
+        }
+    }
+    a{
+        display: block;
+        .fa{
+            margin-left: 20px;
+        }
+    }
+    a,
+    h3 {
+        color: @sidebar-txtColor;
+    }
+}
+
+.vote-box {
+    input[type=number],
+    input[type=text] {
+        border: none;
+        width: 60px;
+        padding: 4px 5px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .box-head {
+        background-color: #08c19e;
+        color:#fff;
+    }
+    .tool-panel{
+        .tool-btn{
+            // background: #fff;
+            color: #fff;
+        }
+        .tool-btn:hover{
+            background-color: #fff;
+            color: #333
+        }
+    }
+}
+
+.vote-table {
+    tbody > tr > th:nth-child(1) {
+        width: 40px;
+    }
+
+    tbody > tr > th:nth-child(2) {
+        // width: 50px;
+    }
+
+    tbody > tr > td {
+        text-align: center;
+    }
+
+    td,
+    th {
+        padding: 5px;
+    }
+
+    input[type=number] {
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        border: 1px solid #ccc;
+    }
+}
+.voteinfo-table ,.userinfo-table{
+    tbody > tr > td {
+        text-align: left;
+    }
+
+    td,
+    th {
+        padding: 5px;
+    }
+}
+.userinfo-table{
+    tbody > tr > th:nth-child(1) {
+        width: 120px;
+    }
+}
+.user-nav{
+    position: relative;
+    &:hover{
+        .user-menu-list{
+            display: block;
+        }
+    }
+}
+
+.user-menu-list{
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    // border:1px solid #bbb;
+    border-top: 1px solid #bbb;
+    box-shadow: 0 2px 3px #999;
+    display: none;
+    a{
+        display: block;
+        padding: 5px;
+        text-align: center;
+    }
+    a:hover{
+        background: #dedede;
+    }
+
+}
+.all-user.box{
+    .user-name{
+        padding: 5px 12px;
+
+    }
+    .user-name.login{
+        color: red;
+        font-weight: bold;
+        cursor: pointer;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
+.last-vote.box{
+    margin-top: 15px;
+
+    .box-foot{
+        padding-bottom: 15px;
+    }
+}

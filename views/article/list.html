@@ -1,0 +1,113 @@
+{>"include/layout.html"/}
+{<selfCss}
+<link rel="stylesheet" href="/static/css/tp-spider.css">
+<style>
+    .art-content li {
+        line-height: 30px;
+        padding-left: 5px;
+        border-bottom: 1px solid #f2f2f2;
+        font-size: 14px;
+    }
+
+    .art-item .author,
+    .art-item .time {
+        float: right;
+        padding: 0 5px;
+    }
+
+    .spider-box {
+        position: relative;
+    }
+
+    .view-wrap {
+        position: fixed;
+        left: 0;
+        top: 40px;
+        right: 0;
+        bottom: 0;
+        overflow-y: auto;
+        background: rgba(255, 255, 255, 0.8);
+        padding-top: 40px;
+    }
+
+    .wrap-close {
+        position: absolute;
+        right: 10px;
+        top:10px;
+        width: 30px;
+        height:30px;
+        border-radius: 50%;
+        border:3px solid transparent;
+        text-align: center;
+        transition: all 0.2s;
+    }
+    .wrap-close .fa{
+        color: #999;
+        cursor: pointer;
+        margin-top:-1px;
+    }
+    .wrap-close:hover{
+        background-color: #d9534f;
+    }
+    .wrap-close:hover .fa {
+        color: #fff;
+    }
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0
+    }
+</style>
+{/selfCss}
+
+{<content}
+<div class="box">
+    <header class="box-head">
+        <h3 class="title">爬取的文章</h3>
+        <ul class="tool-panel pull-right">
+            <li>
+                <span class="tool-btn toggle-size" v-link="/"><i class="fa fa-chevron-up"></i></span>
+            </li>
+        </ul>
+    </header>
+    <div class="box-body art-content" id="app">
+        <ul>
+            {#articles}
+            <li class="art-item" data-id="{_id}">
+                <router-link to="/detail/{_id}">{title}</router-link>
+                <span class="time">{publishDate}</span><span class=" author">{author}</span>
+            </li>
+            {/articles}
+        </ul>
+        <div class="view">
+            <transition name="fade">
+            <router-view :title="title" :html-content="html"></router-view>
+            </transition>
+        </div>
+    </div>
+</div>
+{/content}
+
+{<bodyContent}
+<div>
+<!--<div class="view-wrap article-detail-box">-->
+    <!--<div class="wrap-close">-->
+        <!--<i class="fa fa-close fa-2x"></i>-->
+    <!--</div>-->
+    <!--<div class="main-content">-->
+
+
+    <!--</div>-->
+<!--</div>-->
+</div>
+{/bodyContent}
+
+{<selfJs}
+<script src="/static/js/dashboard.bundle.js"></script>
+<script src="/assets/js/jquery-3.2.1.js"></script>
+<script src="/assets/js/vue.js"></script>
+<script src="/assets/js/vue-router.js"></script>
+<script src="/assets/js/sp-art.js"></script>
+
+{/selfJs}

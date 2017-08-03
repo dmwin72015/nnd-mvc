@@ -1,0 +1,64 @@
+{>"include/layout.html"/}
+{<selfCss}
+<link rel="stylesheet" href="/static/css/tp-spider.css">
+<style>
+    .spider-box .art-url>input{
+        width: 60%;
+    }
+    .art-url>.btn{
+        margin-left:15px;
+    }
+    .img-content{
+        margin-top: 15px;
+    }
+    .img-content .img-list li{
+        line-height: 34px;
+        border-bottom: 1px solid #f2f2f2;
+        font-size: 14px;
+    }
+    .img-content .img-list .fa{
+        padding: 0 5px;
+    }
+    .img-content .img-list a{
+        color: #666;
+        padding: 0 8px;
+    }
+</style>
+{/selfCss}
+{<content}
+<div class="box spider-box">
+    <header class="box-head">
+        <h3 class="title">图片</h3>
+        <ul class="tool-panel pull-right">
+            <li>
+                <span class="tool-btn toggle-size"><i class="fa fa-chevron-up"></i></span>
+            </li>
+        </ul>
+    </header>
+    <div class="box-body">
+        <div class="art-url">
+            <input type="text" class="txt-input" id="get_url">
+            <span class="btn btn-green" id="get_btn" >获取</span>
+        </div>
+        <!--https://img.500px.me/500px215762815.jpg!p1-->
+        <div class="img-content">
+            <div class="img-list">
+                <ul>
+                    <li>
+                        <i></i><span></span>
+                        <a href=""></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{/content}
+{<bodyContent}
+{/bodyContent}
+
+{<selfJs}
+<script src="/static/js/dashboard.bundle.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/sp-art.js"></script>
+{/selfJs}

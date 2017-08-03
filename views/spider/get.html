@@ -1,0 +1,71 @@
+{>"include/layout.html"/}
+{<selfCss}
+<link rel="stylesheet" href="/static/css/tp-spider.css">
+{/selfCss}
+
+
+{<content}
+<div class="box spider-box">
+	<header class="box-head">
+		<h3 class="title">爬虫JIRA</h3>
+		<span class="jira-status">
+			{?loginStatus}
+				<span class="jira-user">{loginStatus.name}({loginStatus.loginTime})</span>
+				<a href="javascript:;" class="j-toOut">退出jira</a>
+			{:else}
+				<a href="javascript:;" class="j-toLogin">登录jira</a>
+			{/loginStatus}
+		</span>
+		<ul class="tool-panel pull-right">
+			<li>
+				<span class="tool-btn toggle-size"><i class="fa fa-chevron-up"></i></span>
+			</li>
+		</ul>
+	</header>
+	<div class="box-body">
+        <div class="jira-no">
+            <input type="text" class="txt-input" id="jiraNo">
+			<span class="btn btn-green" id="getJira" data-status="{?loginStatus}1{:else}0{/loginStatus}">获取</span>
+			<span style="padding-left: 15px;">多个jira号可以逗号隔开</span>	
+			<span class="error hide">请先登录</span>
+        </div>
+		
+		<div class="jira-content">
+		</div>
+	</div>
+</div>
+{/content}
+<style>
+.jira-imgCode{
+	width: 100px;
+}
+</style>
+{<bodyContent}
+ 	<div class="model-wraper j-loginJira" style="display: none;">
+<!--		<div class="model_old-box box jira">
+			<a href="javascript:;" class="model_old-close"></a>
+			<div class="box-head">
+				<h3 class="title">登录JIRA</h3>
+			</div>	
+			<div class="box-body">
+				<p class="input-wraper">
+					<input type="text"	name="jiraLoginName" id="jira_name" class="form-control" placeholder="JIRA账号">
+				</p>
+				<p class="input-wraper">
+					<input type="text" name="jiraPassword" id="jira_pwd" class="form-control" placeholder="JIRA密码">
+				</p>
+				<p class="input-wraper">
+					<img src="http://tlc.xin.com/captcha?ts=" alt="" class="jira-imgCode">
+				</p>
+				<p class="input-wraper">
+					<input type="button" class="btn" value="登录" id="loginJira">
+				</p>
+			</div>
+		</div>-->
+	</div> 
+{/bodyContent}
+
+{<selfJs}
+<script src="/static/js/dashboard.bundle.js"></script>
+<script src="/static/js/spider.bundle.js"></script>
+{/selfJs}
