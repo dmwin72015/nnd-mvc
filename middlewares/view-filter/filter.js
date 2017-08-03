@@ -11,7 +11,7 @@ dust.filters.unicorn = function(value) {
 
 dust.config.whitespace = true;
 
-console.log('========================模板设置========================\n');
-console.log(JSON.stringify(dust.config) );
-console.log('\n======================模板设置=========================');
+// console.log('========================模板设置========================\n');
+// console.log(JSON.stringify(dust.config) );
+// console.log('\n======================模板设置=========================');
 module.exports = cons.dust;

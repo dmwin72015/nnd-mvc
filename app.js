@@ -5,6 +5,8 @@ var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var logger = require('./middlewares/log.js');
+var routeLoader = require('./common/routeloader.js');
 var app = express();
 
 console.log('★★★★★★★★★★★★★★★★★★★★★★★★');
@@ -14,10 +16,8 @@ console.log('★★★★★★★★★★★★★★★★★★★★★★�
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-/******logger start **************************************/
-//保存到文件中
-require('./core/config/log-config')(app, path.join(__dirname, 'logs'));
-/******logger end *************************************/
+/*****logger********/
+app.use(logger(path.join(__dirname, 'logs')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 
+// session
 app.use(session({
     secret: 'dongmin-pc',
     resave: false,
@@ -33,19 +34,15 @@ app.use(session({
 }))
 
 
-var tmplEng = require('middlewares/view-filter/filter.js');
+var tmplEng = require('./middlewares/view-filter/filter.js');
 app.engine('html', tmplEng);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-//我自己加的一层，来自动填充路由
-var loadRoute = require('common/routeloader.js');
-
-loadRoute(app, {
-    base: path.join(__dirname, 'routes')
-});
+//auto route
+app.use(routeLoader(path.join(__dirname, 'routes')));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

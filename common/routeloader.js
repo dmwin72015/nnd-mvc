@@ -42,7 +42,6 @@ let routeFactory = function(filePath, reqPath, opt) {
     } else {
         reqPath = reqPath.replace(ext, '');
     }
-
     let mod = require(filePath);
 
     _route(reqPath, mod);
@@ -77,7 +76,7 @@ let routeFactory = function(filePath, reqPath, opt) {
         router[_t['type']](path.replace(routeBasePath,''), method);
     }
 }
-var initRoute = function(app, opt) {
+var initRoute = function(opt) {
     var routeFilesPath = path.join(routeBasePath, '**/*.js');
     var files = loadFile(routeFilesPath, opt);
     files.forEach(function(ele, i, arr) {
@@ -88,16 +87,13 @@ var initRoute = function(app, opt) {
     console.log('+===================路由器======================\n');
     // console.log(routes);
     console.log('\n+===================路由器======================');
-    app.use('/', router);
 };
 
 /*
-    opt
-        base: 路由的基础路径
-        root: 项目根路径
+   routepath 路由的目录
 */
-module.exports = function(app, opt) {
-    routeBasePath = opt.base;
-    initRoute(app, opt);
+module.exports = function(routepath,opt) {
+    routeBasePath = routepath;
+    initRoute(opt);
     return router;
 }
