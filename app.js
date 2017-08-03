@@ -34,8 +34,8 @@ app.use(session({
 }))
 
 
-var tmplEng = require('./middlewares/view-filter/filter.js');
-app.engine('html', tmplEng);
+var tmpl = require('./middlewares/view-templ.js.js');
+app.engine('html', tmpl);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 

@@ -1,13 +1,12 @@
 var dust = require('dustjs-linkedin');
 var cons = require('consolidate');
 
+var filters = require('./view-filter');
+
 // 自定义的filter
-dust.filters.unicorn = function(value) {
-    if (typeof value === 'string') {
-        return value.replace('unicorn', 'horse');
-    }
-    return value;
-};
+for(var name in filters){
+	dust.filters[name] = filters[name];
+}
 
 dust.config.whitespace = true;
 
