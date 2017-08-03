@@ -1,5 +1,3 @@
-const factoryModel = require('./baseMod');
-
 let articleField = {
     cn_name: {          //标题
         type: String,

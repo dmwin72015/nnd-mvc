@@ -1,5 +1,7 @@
 module.exports = {
-  debug: true;
-  loglevel: 'info'
 
-}
+    debug: true,
+
+    loglevel: 'info'
+
+};

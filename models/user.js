@@ -1,4 +1,3 @@
-const factoryModel = require('./baseMod');
 /**
  *  用户字段
  *  uid      登陆账号 (unique max:50)

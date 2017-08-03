@@ -34,7 +34,7 @@ app.use(session({
 }))
 
 
-var tmpl = require('./middlewares/view-templ.js.js');
+var tmpl = require('./middlewares/view-templ.js');
 app.engine('html', tmpl);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
@@ -42,7 +42,7 @@ app.set('views', __dirname + '/views');
 app.use(express.static(path.join(__dirname, 'public')));
 
 //auto route
-app.use(routeLoader(path.join(__dirname, 'routes')));
+// app.use(routeLoader(path.join(__dirname, 'routes')));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
