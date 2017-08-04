@@ -5,3 +5,4 @@ logs
 # gulpfile.js
 public-src
 .editorconfig
+tmp

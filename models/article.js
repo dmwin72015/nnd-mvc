@@ -49,14 +49,12 @@ let articleField = {
 let articleSchema = new Schema(articleField)
 
 
-
 articleSchema.statics.findByTitle = function (name, cb) {
     // console.log(this  === articleModel);
     // 这里的this指向的是model
-    return this.find({title: new RegExp(name, 'i')}, cb)
+    return this.find({ title : new RegExp(name, 'i')},'_id title publishDate source author', cb)
 }
 
 // let articleModel = db.model('article', articleSchema);
 
-
-let articleModel = mongoose.model('Article', articleSchema);
+mongoose.model('Article', articleSchema);
