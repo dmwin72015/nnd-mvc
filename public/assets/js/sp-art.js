@@ -141,7 +141,7 @@
         routes: [
             { path: '/detail/:id', component: detail },
             { path: '/' },
-            { path: '/add', }
+            { path: '/add' }
         ]
     });
 
@@ -177,16 +177,20 @@
                 fetch('/admin/article/detail/' + id, myInit).then((response) => {
                     return response.json();
                 }).then((body) => {
-                    that.$data.title = body.data.title;
-                    that.$data.html = body.data.htmlContent;
+                    if(body.status != '1'){
+                        that.$data.title = '未知错误';
+                        that.$data.html = '';
+                    }else{
+                        that.$data.title = body.data.title;
+                        that.$data.html = body.data.htmlContent;
+                    }
                     document.documentElement.style.overflow = 'hidden';
                 }).catch((err) => {
 
                 })
             }
         }
-
-    }).$mount('#app')
+    }).$mount('#app');
 
     this.app = app;
 }.call(this, window.Vue));

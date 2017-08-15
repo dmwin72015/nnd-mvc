@@ -124,3 +124,9 @@ html>body {
 .pic-code>img {
     width: 100%;
 }
+.field-name{
+    display: inline-block;
+    width: 5em;
+    text-align: right;
+    padding-right: 10px;
+}

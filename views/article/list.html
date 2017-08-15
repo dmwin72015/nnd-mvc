@@ -73,11 +73,14 @@
     </header>
     <div class="box-body art-content" id="app">
         <ul>
+
             {#articles}
             <li class="art-item" data-id="{_id}">
                 <router-link to="/detail/{_id}">{title}</router-link>
-                <span class="time">{publishDate}</span><span class=" author">{author}</span>
+                <span class="time">{publishDate|formatDate}</span><span class=" author">{author}</span>
             </li>
+            {:else}
+                {msg}
             {/articles}
         </ul>
         <div class="view">

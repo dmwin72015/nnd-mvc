@@ -1,3 +1,7 @@
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
+let ObjectId = Schema.ObjectId;
+
 /**
  *  用户字段
  *  uid      登陆账号 (unique max:50)
@@ -37,7 +41,7 @@ let userField = {
         enum: ['1', '0']
     },
     _gid: {
-        type: factoryModel.Schema.Types.ObjectId
+        type: ObjectId
     },
     created: {
         type: Date,
@@ -45,67 +49,10 @@ let userField = {
     }
 };
 
-// let userSchema = new Schema(userField);
+let userSchema = new Schema(userField);
+userSchema.static('findByLoginName', function (name, callback) {
+    return this.findOne({uid: name}, 'uid uname upwd alias sex age', callback);
 
-// let userModel = db.model('users', userSchema);
+});
 
-module.exports = exports = factoryModel('users', userField);
-
-// let ERRMSG_LOST_Login = exports.ERRMSG_LOST_Login = {
-//     code: '-100',
-//     msg: '请输入账号或密码'
-// };
-//
-// let ERRMSG_EXITS_ID = exports.ERRMSG_EXITS_ID = {
-//     code: '-101',
-//     msg: '账号已经被注册'
-// };
-//
-// let ERRMSG_UNVALID = exports.ERRMSG_UNVALID = function (name) {
-//     return {
-//         code: '-102',
-//         msg: name + '格式错误'
-//     }
-// };
-exports.LOGIN_TIP_INFO = {
-    success: {
-        code: '1',
-        msg: '登录成功'
-    },
-    session_404: {
-        code: '-103',
-        msg: '请刷新页面重试'
-    },
-    id_exits: {
-        code: '-102',
-        msg: '用户名已经存在'
-    },
-    name_404: {
-        code: '-101',
-        msg: '账号不存在'
-    },
-    name_pwd_err: {
-        code: '-103',
-        msg: '用户名或者密码错误'
-    },
-    name_typeErr: {
-        code: '-102',
-        msg: '账号格式错误(必须为邮箱)'
-    },
-    pwd_err: {
-        code: '-201',
-        msg: '密码错误'
-    },
-    pwd_len_err: {
-        code: '-202',
-        msg: '密码长度有误'
-    },
-    capt_err: {
-        code: '-300',
-        msg: '验证码错误'
-    },
-    server_err: {
-        code: '-400',
-        msg: '未知错误'
-    }
-};
+mongoose.model('User', userSchema);

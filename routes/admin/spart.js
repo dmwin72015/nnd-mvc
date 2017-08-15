@@ -9,9 +9,6 @@ const fs = require('fs');
 const async = require('async');
 const iconv = require('iconv-lite');
 
-const articleMod = require('../../model/articleMod');
-const movieMod = require('../../model/movieMod');
-
 let haha_conf = {
     hostname: 'www.haha.mx'
 };

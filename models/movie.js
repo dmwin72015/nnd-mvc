@@ -1,4 +1,8 @@
-let articleField = {
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
+let ObjectId = Schema.ObjectId;
+
+let movieField = {
     cn_name: {          //标题
         type: String,
         required: true,
@@ -23,7 +27,7 @@ let articleField = {
         enum: ['']
     },
     language: String,   //语言
-    subtitle: String,   //字幕
+    subtitle: String,   //字幕 new
     release_date: {     //上映日期
         type: String
     },
@@ -45,11 +49,18 @@ let articleField = {
     introduction: String,    //简介
     awards: [String],        //获奖情况
     poster: String,          //海报
-    creenshots: [String],    //其他图片
+    screenshots: [String],    //其他图片
     download_urls: [{        //下载地址
         type: String,
         url: String
-    }]
+    }],
+    addedBy: ObjectId,
+    created: {
+        type: Date,
+        default: Date.now
+    }
 };
 
-module.exports = exports = factoryModel('movie', articleField);
+let movieSchema = new Schema(movieField);
+
+mongoose.model('Movie', movieSchema);

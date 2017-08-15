@@ -61,7 +61,7 @@
                     </transition>
                 </div>
                 <div class="input-wraper password ">
-                    <input type="password" placeholder="密码" v-on:focus="rmTip('pwd')" v-model.trim="upwd">
+                    <input type="password" placeholder="密码" v-on:focus="rmTip('pwd')" v-model.trim="upwd" v-on:keyup.13="login">
                     <transition name="slide-fade">
                         <err-tip v-if="pwdErr.status" v-bind:class="errClass"></err-tip>
                     </transition>
@@ -91,4 +91,9 @@
 <script src="/static/js/login.bundle.js"></script>
 <script src="/assets/js/vue.js"></script>
 <script type="text/javascript" src="/assets/js/register.js"></script>
+<script>
+
+
+
+</script>
 </html>

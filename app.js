@@ -9,6 +9,8 @@ var logger = require('./middlewares/log.js');
 var routeLoader = require('./common/routeloader.js');
 var app = express();
 
+require('./models');
+
 console.log('★★★★★★★★★★★★★★★★★★★★★★★★');
 console.log('★★★★★★★★【APP start】★★★★★★★★★★');
 console.log('★★★★★★★★★★★★★★★★★★★★★★★★\n');
@@ -42,14 +44,19 @@ app.set('views', __dirname + '/views');
 app.use(express.static(path.join(__dirname, 'public')));
 
 //auto route
-// app.use(routeLoader(path.join(__dirname, 'routes')));
+app.use(routeLoader(path.join(__dirname, 'routes')));
+
+/**************测试路由,正式环境舍弃*******************/
+app.use(require('./routes/test'));
+/*********************************/
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
+    console.log('---');
     var err = new Error('Not Found');
     err.status = 404;
-    res.sendStatus(404);
-    res.render('40x', {
+    // res.sendStatus(404);
+    res.status(404).render('40x', {
         title: err.status,
         message: '不好意思啊！！！404'
     });

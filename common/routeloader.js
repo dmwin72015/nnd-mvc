@@ -24,10 +24,8 @@ let routeBasePath = '';
 
 //加载路由文件
 let loadFile = function(filePath, opt) {
-
     return glob.sync(filePath, opt);
-
-}
+};
 
 //把每个文件包装成自定义路由文件
 let routeFactory = function(filePath, reqPath, opt) {

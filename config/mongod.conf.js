@@ -13,13 +13,13 @@ var conf = {
         db: 'spider'
     }
 };
-module.exports = function(env) {
+module.exports = function (env) {
     var host = conf[env].host;
     var port = conf[env].port;
     var db = conf[env].db;
-    var url = 'mongodb://' + host + ':' + port + '/' + db;
-    return {
-        url: url,
-        conf: conf[env]
-    }
+    return 'mongodb://' + host + ':' + port + '/' + db;
+    // return {
+    //     url: url,
+    //     conf: conf[env]
+    // }
 };
