@@ -5,10 +5,6 @@ let User = require('../models').userMod;
 
 
 
-
-
-
-
 /*
 *  新建保存用户
 *  @param {Object} data - user数据
@@ -19,8 +15,5 @@ exports.newAndSave = function (data, callback) {
 
     user.uid = data.uid;
     user.uname = data.uname;
-    user
-
-
 
 };

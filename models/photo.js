@@ -4,15 +4,20 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 let ObjectId = Schema.ObjectId;
+let Mixed = Schema.Types.Mixed;
 
-let movieField = {
-    title: String,
-    description:String,
-    images:{
-        type:[String]
+
+let photoField = {
+    title: String,          //名称
+    description: String,    //描述
+    img_url: {              //图片地址
+        type: [String]
     },
-    comment:{
-        type:[String]
+    comment: {              //留言
+        type: [String]
+    },
+    author: String,          //拍摄作者
+    created: {              //创建时间
+        type: Mixed
     }
-
 };

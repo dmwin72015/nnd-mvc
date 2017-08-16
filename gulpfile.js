@@ -1,9 +1,8 @@
 var gulp = require('gulp');
 var gutil = require("gulp-util");
 var webpack = require('webpack');
-var wpConf = require('./config/wp-config');
-
-var myPlug = require('./config/mygulpPlugin.js');
+var wpConf = require('./public-src/webpackPlugin/webpack.conf');
+var myPlug = require('./public-src/gulpPlugin/xin-ungly.js');
 var uglify = require('gulp-uglify');
 var plumber = require('gulp-plumber');
 var glob = require("glob")
@@ -72,8 +71,8 @@ gulp.task('tw-js', function (cb) {
 //application/views/assets_src/quotation/evaluate.js.html
 // application/views/assets_src/quotation/index.js.html
 // application/views/assets_src/quotation/list.js.html
-var entry_bran = ['/xin/project/www/trunk/application/views/assets_src/_sidebar.js.html'];
-var dest_bran = '/xin/project/www/trunk/application/views/assets/';
+var entry_bran = ['/xin/project/www/trunk/application/views/assets_src/sale/c2b_car.js.html'];
+var dest_bran = '/xin/project/www/trunk/application/views/assets/sale';
 gulp.task('br-js', function (cb) {
     gulp.src(entry_bran)
         .pipe(plumber())
