@@ -1,0 +1,33 @@
+html,body{
+    width:100%;
+    height:100%;
+}
+
+body{
+    font-size: 13px;
+    font-family: "Microsoft YaHei";
+}
+.page-box{
+    display: block;
+    position: relative;
+    width: 100%;
+    height:100%;
+}
+
+@media (min-width: 800px) {
+    .aside-md{
+        width: 200px;
+    }
+}
+.nav-bar{
+    position: relative;
+}
+.nav-header{
+    line-height: 50px;
+    text-align: center;
+    background: #3d4452;
+}
+.nav-header a{
+    color: #FFF;
+}
+
