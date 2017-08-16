@@ -1,33 +1,92 @@
-html,body{
-    width:100%;
-    height:100%;
+* {
+    box-sizing: border-box;
 }
 
-body{
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
     font-size: 13px;
     font-family: "Microsoft YaHei";
 }
-.page-box{
+
+ul, ol {
+    list-style: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.page-box {
     display: block;
     position: relative;
     width: 100%;
-    height:100%;
+    height: 100%;
 }
 
 @media (min-width: 800px) {
-    .aside-md{
-        width: 200px;
+    .aside-md {
+        width: 160px;
     }
 }
-.nav-bar{
+
+.aside-md {
+    float: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 -1px 0 rgba(0, 0, 0, .02);
+}
+
+.nav-bar {
     position: relative;
 }
-.nav-header{
+
+.nav-header {
     line-height: 50px;
     text-align: center;
-    background: #3d4452;
+    /*background: #3d4452;*/
+    background: #2196f3;
 }
-.nav-header a{
+
+.nav-header a {
     color: #FFF;
 }
 
+/*左侧菜单导航*/
+.nav-menu {
+    /*background: #3d4452;*/
+    background: #fff;
+}
+
+.menu-list > li > a {
+    display: block;
+    padding: 12px;
+    color: #666;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    transition: color .3s ease-in-out 0s;
+    font-weight: bold;
+}
+
+.menu-list > li > a .fa {
+    margin-right: 5px;
+}
+
+/*内容区域*/
+.main-container {
+    margin-left: 160px;
+    background: #f0f0f0;
+    min-height: 100%;
+}
+
+.container-header {
+    height: 50px;
+    border-bottom: 1px solid #e0e4e8;
+    padding: 0 15px;
+    line-height: 50px;
+}
+
+.container-body{
+    padding:8px;
+}
