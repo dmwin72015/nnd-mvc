@@ -28,32 +28,44 @@ a:hover {
 }
 
 @media (min-width: 800px) {
-    .aside-md {
+    .aside-md .aside-content {
         width: 160px;
     }
 }
-
+/*左侧菜单导航*/
 .aside-md {
     float: left;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 -1px 0 rgba(0, 0, 0, .02);
 }
-
+.aside-md.single-icon .aside-content{
+   width: 60px;
+}
+.aside-md.single-icon .fa{
+    font-size: 20px;
+}
+.aside-md .aside-content,
+.fa{
+    transition: all 0.5s;
+}
 .nav-bar {
     position: relative;
 }
 
 .nav-header {
     line-height: 50px;
-    text-align: center;
+    /*text-align: center;*/
     /*background: #3d4452;*/
     background: #2196f3;
 }
-
-.nav-header a {
-    color: #FFF;
+.nav-header .fa,
+.nav-header a{
+    color: #fff;
+}
+.nav-tool-btn{
+    padding: 0 15px;
+    cursor: pointer;
 }
 
-/*左侧菜单导航*/
 .nav-menu {
     /*background: #3d4452;*/
     background: #fff;
