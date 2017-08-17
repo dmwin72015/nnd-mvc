@@ -3,5 +3,8 @@
  */
 $('.j-hide-left').click(function () {
 
-    $('.aside-md').toggleClass('single-icon');
+    // $('.page-aside').toggleClass('aside-sm');
+
+    $('.menu-name').hide();
+    // $('.main-container').toggleClass('xl');
 });
