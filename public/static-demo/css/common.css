@@ -4,3 +4,9 @@
 .bg-white{
     background: #fff;
 }
+.row{
+    margin-top: 20px;
+}
+a{
+    color: inherit;
+}

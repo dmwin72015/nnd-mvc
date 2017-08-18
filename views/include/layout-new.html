@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <title>index</title>
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static-demo/css/reset.css">
+    <link rel="stylesheet" href="/static-demo/css/common.css">
+    <link rel="stylesheet/less" type="text/css" href="/static-demo/css/main.less" />
+    <script src="/static-demo/js/less.js"></script>
+    {+selfCss}{/selfCss}
+    <script>
+        less = {
+            env: "development",
+            async: false,
+            fileAsync: false,
+            poll: 1000,
+            functions: {},
+            dumpLineNumbers: "comments",
+            relativeUrls: false,
+            rootpath: ":/a.com/"
+        };
+    </script>
+</head>
+<body>
+<div class="page-box">
+
+    <!-- 左侧菜单 start -->
+    {>"include/leftnav-new.html"/}
+    <!-- 左侧菜单 end -->
+
+    <!-- 内容区域 start -->
+    <section class="main-container">
+        <header class="container-header" >
+            {+contentHead}
+
+            {/contentHead}
+        </header>
+        <section class="container-body">
+            <!--这里是内容区域-->
+            <!--参考来源:https://agileui.com/demo/supina-theme-package/-->
+            {+contentBody}
+
+            {/contentBody}
+        </section>
+    </section>
+    <!-- 内容区域 end -->
+
+    <!-- 底部 start -->
+    {>"include/footer-new.html"/}
+    <!-- 底部 end -->
+
+</div>
+</body>
+<script src="/assets/js/jquery-3.2.1.js"></script>
+<script src="/static-demo/js/common.js"></script>
+
+{+selfJs}
+
+{/selfJs}
+</html>

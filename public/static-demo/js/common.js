@@ -1,10 +1,68 @@
 /**
  * Created by mjj on 2017/8/16.
  */
-$('.j-hide-left').click(function () {
+var $wrapper = $('.page-box');
+$('#hideLeftBar').click(function () {
+    $('.nav-menu span').toggle();
+    $('.user-name').toggle();
 
-    // $('.page-aside').toggleClass('aside-sm');
+    $('.page-box').toggleClass('min-menu');
+    $('.user-avator').toggleClass('pull-right');
 
-    $('.menu-name').hide();
-    // $('.main-container').toggleClass('xl');
+    if ($('.page-box').hasClass('min-menu')) {
+        $('.has-sub-menu').trigger('dm-min');
+    } else {
+        $('.has-sub-menu').trigger('dm-max');
+    }
 });
+
+$('.has-sub-menu').click(function () {
+    if ($wrapper.hasClass('min-menu')) return;
+    var that = $(this),
+        $subMenu = that.find('.sub-menu');
+    that.toggleClass('open');
+
+    if (that.hasClass('open')) {
+        $subMenu.slideDown();
+    } else {
+        $subMenu.slideUp();
+    }
+
+}).on('mouseenter', function () {
+    if (!$('.page-box').hasClass('min-menu')) return;
+    var $subMenu = $(this).find('.sub-menu').show();
+    setTimeout(function(){
+        $subMenu.addClass('show');
+    },100)
+}).on('mouseout', function () {
+    if (!$('.page-box').hasClass('min-menu')) return;
+    var $subMenu = $(this).find('.sub-menu');
+    $subMenu.removeClass('show');
+}).on('dm-min', function () {
+    var menuName = $(this).find('.menu-name').text();
+    $(this).find('.sub-menu').find('.father-menu-name').remove();
+    $(this).find('.sub-menu').prepend('<li class="father-menu-name"><span>' + menuName + '</span></li>')
+}).on('dm-max', function () {
+    $(this).find('.sub-menu').find('.father-menu-name').remove();
+});
+
+$('#hideLeftBar').click();
+
+(function () {
+    var oDom = document.querySelector('#time');
+    oDom.style.letterSpacing = '1px';
+    var dbNum = function (num) {
+        return num > 9 ? num : '0' + num;
+    };
+    var oD = new Date(),
+        oH = oD.getHours(),
+        oM = oD.getMinutes(),
+        oS = oD.getSeconds();
+    document.querySelector('#datetime .apm').innerText = oH > 12 ? 'PM' :'AM';
+    function setTime(){
+        oD = new Date(), oH = oD.getHours(), oM = oD.getMinutes(),oS = oD.getSeconds();
+        oDom.innerText = dbNum(oH-12) + ':' + dbNum(oM) + ':' + dbNum(oS);
+    }
+    setTime();
+    setInterval(setTime, 1000);
+})();

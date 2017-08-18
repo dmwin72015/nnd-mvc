@@ -23,7 +23,7 @@
     </script>
 </head>
 <body>
-<div class="page-box">
+<div class="page-box sk-green">
     <header class="header" style="display: none;">
         <div class="nav-bar navbar-header aside">
 
@@ -42,7 +42,7 @@
                 <span id="time">--:--:--</span>
                 <em class="apm">--</em>
             </span>
-            <span class="nav-tool-btn pull-right j-hide-left">
+            <span class="nav-tool-btn pull-right" id="hideLeftBar">
                 <i class="fa fa-align-justify"></i>
             </span>
         </header>
@@ -107,13 +107,73 @@
     </aside>
     <section class="main-container fix-head">
         <header class="container-header" >
-                头部
+            <ul class="nav menu-nav">
+                <li>
+                    <a href="#add">LIST ADD</a>
+                </li>
+                <li>
+                    <a href="#list">ADD</a>
+                </li>
+                <li>
+                    <a href="#list" class="active">添加</a>
+                </li>
+            </ul>
         </header>
         <section class="container-body">
             这里是内容区域
             参考来源:https://agileui.com/demo/supina-theme-package/
+
+            <div class="row">
+                <section class="data-list article-list" >
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="#" class="thumb">
+                                M
+                            </a>
+                            <a href="#">
+                                <small>08-12 12:43</small>
+                                <strong>Jack Smith</strong>
+                                <span>Morbi nec nunc condimentum...</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="thumb">
+                                M
+                            </a>
+                            <a href="#" class="title">
+                                <small>08-12 12:43</small>
+                                <strong>Jack Smith</strong>
+                                <span>Morbi nec nunc condimentum...</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="thumb">
+                                M
+                            </a>
+                            <a href="#" class="title">
+                                <small>08-12 12:43</small>
+                                <strong>Jack Smith</strong>
+                                <span>Morbi nec nunc condimentum...</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="thumb">
+                                M
+                            </a>
+                            <a href="#" class="title">
+                                <strong class="author">Jack Smith</strong>
+                                <span class="art-name">Morbirbi nec nunc condimentum.rbi nec nunc condimentum. nec nunc sdasdsada</span>
+                            </a>
+                            <small class="date">08-12 12:43</small>
+
+                        </li>
+                    </ul>
+                </section>
+            </div>
         </section>
     </section>
+
+
     <footer class="footer">
 
     </footer>

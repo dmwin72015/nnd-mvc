@@ -8,13 +8,13 @@ router.get('/test', function (req, res, next) {
 
     req.params.test = '哈哈';
 
-    next({a:12});
+    next();
 
 }, function (req, res, next) {
 
     console.log(req.params);
 
-    next();
+    res.render('test',req.params);
     // res.send('OK');
 });
 

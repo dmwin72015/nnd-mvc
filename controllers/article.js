@@ -27,11 +27,11 @@ exports.list = function (req, res, next) {
             return;
         }
         if (doc && doc.length) {
-            res.render('article/list', {
+            res.render('article/list-new', {
                 articles: doc
             });
         } else {
-            res.render('article/list', {
+            res.render('article/list-new', {
                 msg: '暂无文章'
             });
         }
