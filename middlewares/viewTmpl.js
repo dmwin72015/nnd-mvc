@@ -3,6 +3,9 @@ var cons = require('consolidate');
 
 var filters = require('./view-filter');
 
+
+console.log(filters)
+
 // 自定义的filter
 for(var name in filters){
 	dust.filters[name] = filters[name];

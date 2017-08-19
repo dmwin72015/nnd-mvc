@@ -19,7 +19,7 @@ exports.update = function () {
 
 //显示列表
 exports.list = function (req, res, next) {
-    Article.find({}, null, {limit: 5}, function (err, doc) {
+    Article.find({}, null, {limit: 20}, function (err, doc) {
         if (err) {
             res.render('article/list', {
                 msg: '暂无文章'

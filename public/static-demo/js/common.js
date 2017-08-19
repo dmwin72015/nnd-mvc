@@ -34,7 +34,7 @@ $('.has-sub-menu').click(function () {
     setTimeout(function(){
         $subMenu.addClass('show');
     },100)
-}).on('mouseout', function () {
+}).on('mouseleave', function () {
     if (!$('.page-box').hasClass('min-menu')) return;
     var $subMenu = $(this).find('.sub-menu');
     $subMenu.removeClass('show');
@@ -61,7 +61,7 @@ $('#hideLeftBar').click();
     document.querySelector('#datetime .apm').innerText = oH > 12 ? 'PM' :'AM';
     function setTime(){
         oD = new Date(), oH = oD.getHours(), oM = oD.getMinutes(),oS = oD.getSeconds();
-        oDom.innerText = dbNum(oH-12) + ':' + dbNum(oM) + ':' + dbNum(oS);
+        oDom.innerText = dbNum(oH>12 ? oH-12 :oH) + ':' + dbNum(oM) + ':' + dbNum(oS);
     }
     setTime();
     setInterval(setTime, 1000);

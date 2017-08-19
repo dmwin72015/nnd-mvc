@@ -43,15 +43,17 @@ img {
   -moz-osx-font-smoothing: grayscale
 }
 
-.no-break{
+.no-break {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .has-sub-menu {
   &:extend(.fa);
 
 }
+
 /******/
 
 /****页面容器***/
@@ -248,14 +250,14 @@ img {
   }
   .sub-menu span:first-child {
     display: block;
-    padding: 12px 15px;
+    padding: 13px 15px;
     text-align: center;
     font-size: 16px;
     font-weight: bold;
     background: #333;
     color: #fff;
     position: relative;
-
+    line-height:18px;
     &::before {
       content: " ";
       position: absolute;
@@ -457,8 +459,8 @@ img {
 }
 
 .list-group-item {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 14px;
+  padding-bottom: 14px;
   position: relative;
   border: 1px solid #ebeff6;
   margin-bottom: -1px;
@@ -472,14 +474,14 @@ img {
 .list-group-item:nth-child(2n+2) {
   background-color: rgba(0, 0, 0, 0.02);
 }
-.list-group-item>a{
+
+.list-group-item > a {
   display: inline-block;
   vertical-align: middle;
 }
 
-
 //
-.article-list{
+.article-list {
   font-size: 14px;
   .thumb {
     border-radius: 50%;
@@ -487,20 +489,34 @@ img {
     background: #ccc;
     color: #333;
     width: 28px;
-    height: 28px;
     line-height: 28px;
     text-align: center;
-    margin-right: 10px;
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    margin-top: -14px;
   }
-  .title{
+  .title {
+    padding-left: 40px;
+    display: block;
+    position: relative;
+  }
+  .art-name {
     &:extend(.no-break);
-  }
-  .art-name{
+    //display: inline-block;
     max-width: 600px;
   }
-  .date{
-    float: right;
-    display: inline-block;
-    vertical-align: middle;
+  .art-name:hover {
+    text-decoration: underline;
+  }
+  .author {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .date {
+    padding-right: 10px;
+    //font-weight:bold;
+    position: absolute;
+    right: 0;
   }
 }

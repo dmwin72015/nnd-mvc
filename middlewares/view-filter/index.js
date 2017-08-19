@@ -1,8 +1,15 @@
 // 模板过滤器
-module.exports.unicorn =  require('./unicorn.js');
+exports.unicorn =  require('./unicorn.js');
 
 
 //事件转换
 
-module.exports.formatDate = require('./dateFormat.js')
+exports.formatDate = require('./dateFormat.js');
+
+
+//提取一个字母
+
+exports.singleWord = require('./singleWord');
+
+
 
