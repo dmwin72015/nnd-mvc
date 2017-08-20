@@ -102,33 +102,14 @@
 
 (function(Vue) {
     if(!Vue) return;
-    var detail = {
-        template: '<div class="view-wrap article-detail-box">\
-            <div class="wrap-close" >\
-                <router-link to="/">\
-                <i class="fa fa-close fa-2x"></i>\
-                </router-link>\
-            </div>\
-            <div class="main-content">\
-                <p v-html>{{ title }}</p>    \
-                <p v-html="htmlContent"></p>\
-            </div>\
-        </div>',
-        props: ['title', 'htmlContent']
-    };
+    var tmpl = this.Tmpl || {};
+    var articleTmpl = tmpl.article;
 
-    var add = {
-        template:'',
-        methods:{
-            subinfo:function(){
-                
-                
-            }
-        }
-    };
-    var NotFound = {
-        template: '<p>404</p>'
-    };
+    var detail = articleTmpl.detail;
+
+    var add = articleTmpl.add;
+
+    var NotFound = articleTmpl['404'];
 
     //静态路由
     const routes = [
@@ -149,7 +130,8 @@
         router,
         data: {
             title: '',
-            html: ''
+            html: '',
+            status:true
         },
         created() {
             // 组件创建完后获取数据，
@@ -157,7 +139,7 @@
             this.fetchData()
         },
         watch: {
-            '$route': 'fetchData'
+            '$route': 'innnerRoute'
         },
         methods: {
             fetchData() {
@@ -173,7 +155,8 @@
                 if (!id){
                     document.documentElement.style.overflow = 'visible';
                     return;
-                };
+                }
+                alert('a')
                 fetch('/admin/article/detail/' + id, myInit).then((response) => {
                     return response.json();
                 }).then((body) => {
@@ -188,6 +171,11 @@
                 }).catch((err) => {
 
                 })
+            },
+
+            innnerRoute(){
+                console.log(this);
+
             }
         }
     }).$mount('#app');

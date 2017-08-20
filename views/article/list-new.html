@@ -12,17 +12,17 @@
 <header class="container-header" >
     <ul class="nav menu-nav pull-left">
         <li>
-            <a href="#add"  class="btn active">LIST</a>
+            <a href="#add"  class="btn active">文章</a>
         </li>
 
         <li>
-            <a href="#list" class="btn">ADD</a>
+            <a href="#list" class="btn">添加</a>
         </li>
     </ul>
 
     <ul class="nav menu-nav pull-right">
         <li>
-            <a href="#del" class="btn btn-danger">DEL</a>
+            <a href="#del" class="btn btn-danger">删除</a>
         </li>
     </ul>
 </header>
@@ -31,7 +31,7 @@
 
 {<contentBody}
 <div class="row" id="app">
-    <section class="data-list article-list" >
+    <section class="data-list article-list" v-bind:class="{ status }" >
         <ul class="list-group">
             {#articles}
             <li class="list-group-item">
@@ -58,6 +58,12 @@
             {/articles}
         </ul>
     </section>
+
+    <div class="view">
+        <transition name="fade">
+            <router-view :title="title" :html-content="html"></router-view>
+        </transition>
+    </div>
 </div>
 
 {/contentBody}
@@ -66,6 +72,7 @@
 
 <script src="/assets/js/vue.js"></script>
 <script src="/assets/js/vue-router.js"></script>
+<script src="/assets/temple/articleTmpl.js"></script>
 <script src="/assets/js/sp-art.js"></script>
 
 {/selfJs}
