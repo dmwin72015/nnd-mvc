@@ -10,15 +10,19 @@
 {/skin}
 {<contentHead}
 <header class="container-header" >
-    <ul class="nav menu-nav">
+    <ul class="nav menu-nav pull-left">
         <li>
-            <a href="#add"  class="active">LIST</a>
+            <a href="#add"  class="btn active">LIST</a>
         </li>
+
         <li>
-            <a href="#del">DEL</a>
+            <a href="#list" class="btn">ADD</a>
         </li>
+    </ul>
+
+    <ul class="nav menu-nav pull-right">
         <li>
-            <a href="#list">ADD</a>
+            <a href="#del" class="btn btn-danger">DEL</a>
         </li>
     </ul>
 </header>
@@ -26,24 +30,19 @@
 
 
 {<contentBody}
-<div class="row">
+<div class="row" id="app">
     <section class="data-list article-list" >
         <ul class="list-group">
             {#articles}
             <li class="list-group-item">
-                <span>
+                <div class="article-item">
                     <input type="checkbox">
-                </span>
-                <a href="javascript:;" class="thumb">
-                    {author|singleWord}
-                </a>
-                <a href="#/detail/{_id}" class="title" data-id="{_id}">
+                    <span  class="thumb">{author|singleWord}</span>
                     <strong class="author">{author}</strong>
-                    <span class="art-name">{title}</span>
-                    <small class="date">{publishDate|formatDate}</small>
-                </a>
+                    <router-link to="#/detail/{_id}" class="art-name">{title}</router-link>
+                </div>
+                <span class="date"> {publishDate|formatDate}</span>
             </li>
-
             <!--<li class="list-group-item">-->
                 <!--<a href="#" class="thumb">-->
                     <!--M-->
