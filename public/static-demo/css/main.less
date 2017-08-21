@@ -385,7 +385,7 @@ img {
     //height: 900px;
     //border-top:1px solid #e0e4e8;
     background: #f5f5f5;
-
+    min-height:100%;
 }
 
 //头部导航菜单
@@ -432,7 +432,7 @@ img {
 
     .container-body {
         padding-top: 60px;
-        height:100%;
+
     }
 
 }
@@ -553,61 +553,6 @@ img {
 }
 
 
-.article-list {
-
-    &.select-mod{
-        .article-item{
-            transform: translateX(0px);
-        }
-    }
-    .article-item {
-        &:extend(.tran-04);
-        display: block;
-        display: flex;
-        align-items: center;
-        transform: translateX(-30px);
-
-        input[type="checkbox"]{
-            margin: 0 5px;
-        }
-
-    }
-    .thumb{
-        padding: 8px;
-        border-radius: 50%;
-        background: #ccc;
-        color: #333;
-        text-align: center;
-        font-weight: bold;
-        margin:0 10px;
-    }
-    .author{
-        padding: 0 10px;
-    }
-    .art-name{
-        max-width: 70%;
-        padding: 5px;
-        &:extend(.no-break);
-        &:hover{
-            cursor: pointer;
-            text-decoration: underline;
-        }
-    }
-    .date{
-        position: absolute;
-        right: 10px;
-        top:50%;
-        transform: translateY(-50%);
-    }
-    .article-item{
-
-
-    }
-    & > a {
-        display: block;
-    }
-
-}
 
 
 

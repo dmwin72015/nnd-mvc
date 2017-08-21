@@ -5,7 +5,10 @@ var wpConf = require('./public-src/webpackPlugin/webpack.conf');
 var myPlug = require('./public-src/gulpPlugin/xin-ungly.js');
 var uglify = require('gulp-uglify');
 var plumber = require('gulp-plumber');
-var glob = require("glob")
+var debug = require('gulp-debug');
+var glob = require("glob");
+
+
 
 gulp.task('default', function () {
 
@@ -29,6 +32,7 @@ gulp.task('bulid:php', function (cb) {
         cb();
     });
 });
+
 
 
 var base = '/xin/project/www/trunk/application/views';
@@ -71,14 +75,18 @@ gulp.task('tw-js', function (cb) {
 //application/views/assets_src/quotation/evaluate.js.html
 // application/views/assets_src/quotation/index.js.html
 // application/views/assets_src/quotation/list.js.html
-var entry_bran = ['/xin/project/www/trunk/application/views/assets_src/sale/c2b_car.js.html'];
-var dest_bran = '/xin/project/www/trunk/application/views/assets/sale';
+
+var files = require('./public-src/gulpPlugin/files');
+var entry_bran = files;
+var dest_bran = '/xin/project/www/trunk/application/views/assets/cardetail';
+
 gulp.task('br-js', function (cb) {
-    gulp.src(entry_bran)
+    gulp.src(files)
         .pipe(plumber())
         .pipe(myPlug.remove())
         .pipe(uglify())
         .pipe(myPlug.add())
+        .pipe(debug({title:'XIN:'}))
         .pipe(gulp.dest(dest_bran));
 });
 

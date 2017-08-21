@@ -1,20 +1,94 @@
 @charset "UTF-8";
+
+//列表页
+
+.article-list {
+
+    &.select-mod{
+        .article-item{
+            transform: translateX(0px);
+        }
+    }
+    .article-item {
+        &:extend(.tran-04);
+        display: block;
+        display: flex;
+        align-items: center;
+        transform: translateX(-30px);
+
+        input[type="checkbox"]{
+            margin: 0 5px;
+        }
+
+    }
+    .thumb{
+        padding: 8px;
+        border-radius: 50%;
+        background: #ccc;
+        color: #333;
+        text-align: center;
+        font-weight: bold;
+        margin:0 10px;
+    }
+    .author{
+        padding: 0 10px;
+    }
+    .art-name{
+        max-width: 70%;
+        padding: 5px;
+        &:extend(.no-break);
+        &:hover{
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+    .date{
+        position: absolute;
+        right: 10px;
+        top:50%;
+        transform: translateY(-50%);
+    }
+    .article-item{
+
+
+    }
+    & > a {
+        display: block;
+    }
+
+}
+
+.container-body{
+    height:100%;
+    overflow: hidden;
+}
+//文章详情页
 .article{
     position: relative;
-    max-height: 100%;
-    overflow: hidden;
-    min-width: 800px;
+    //overflow: hidden;
+    margin:-8px;
+
+    height:100%;
+    margin-top: 5px;
 }
+
 .art-content{
     line-height: 24px;
     padding: 0 20px;
     float: left;
     width: 800px;
+    
+    h1{
+        text-align: center;
+        padding: 10px 0;
+    }
+    p{
+        text-indent: 2em;
+    }
 }
 
 .art-info{
     float: right;
-    position: absolute;
     top:10px;
     left:850px;
     width: 300px;
@@ -23,6 +97,7 @@
     padding: 15px;
     .title{
         font-size: 20px;
+        text-align: center;
         //font-weight: bold;
     }
     p{
@@ -33,5 +108,50 @@
         width: 50%;
         text-align: right;
         padding-right: 10px;
+    }
+}
+//添加
+.article-editor-wrap{
+    width: 80%;
+    //padding: 0 15px;
+    position: relative;
+    height:100%;
+    border-right: 2px solid #ccc;
+    min-width: 700px;
+
+    .title-wrap{
+        //margin-bottom: 20px;
+        //border-bottom: 2px solid #cccccc;
+    }
+
+    textarea{
+        border:none;
+        padding:10px;
+        max-width: 1;
+    }
+    #art_title{
+        width: 100%;
+        font-size: 16px;
+        padding: 10px;
+        border:none;
+        outline: none;
+        background: transparent;
+        word-break: break-all;
+        max-width: 100%;
+        border:none;
+
+    }
+    #editor{
+        min-height:500px;
+    }
+
+    .ql-toolbar.ql-snow {
+        border:none;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+    }
+    .ql-container.ql-snow,
+    .ql-editor.ql-blank{
+        border:none;
     }
 }
