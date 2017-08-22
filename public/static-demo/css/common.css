@@ -24,17 +24,34 @@ a:hover{
     background-color: #f2dede;
     color: #a94442;
 }
+/*left-side*/
 
+.min-menu .has-sub-menu:hover .sub-menu{
+    display: block !important;
+}
 /*form*/
+input{
+    outline: none;
+}
 .form-control{
+    font-size: 13px;
     display: block;
+    float: none;
     width: 100%;
+    height: 34px;
     padding: 6px 12px;
-    line-height: 1.5em;
-    border:1px solid #ccc
+    color: #777;
+    border: 1px solid #ddd;
+    -webkit-box-shadow: inset 1px 1px 3px #f6f6f6;
+    -moz-box-shadow: inset 1px 1px 3px #f6f6f6;
+    box-shadow: inset 1px 1px 3px #f6f6f6;
+
+
+}
+.form-control:focus{
+    color: #333;
+    border-color: #3da6ff;
 }
 .form-group{
-
-
-
+    margin-bottom: 15px;
 }

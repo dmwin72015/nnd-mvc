@@ -1,16 +1,20 @@
 @charset "UTF-8";
+.container-body,
+.main-container{
+    background-color: #f5f5f5;
+}
 //文章通用
 .article{
     //height: 100%;
     min-height:100%;
-    position: relative;
+    //position: relative;
     overflow: hidden;
     background-color: #f5f5f5;
 }
 
 
 //列表页
-.article.list {
+.list {
     padding-top: 10px;
     overflow: hidden;
     background-color: #f5f5f5;
@@ -68,48 +72,67 @@
 }
 
 //文章详情页
-.article.detail {
+.detail {
     position: relative;
     overflow: hidden;
-}
-
-.art-content {
-    line-height: 24px;
-    padding: 0 20px;
-    float: left;
-    width: 800px;
-
-    h1 {
-        text-align: center;
-        padding: 10px 0;
-    }
-    p {
-        text-indent: 2em;
-    }
-}
-
-
-//添加
-
-#toolbar-container{
-    //margin-left: -8px;
-}
-#editor{
-    background-color: #fff;
-    box-shadow: 0 0 3px rgba(0,0,0,.3) inset;
-}
-.article-editor-wrap {
-    width: 70%;
-    position: relative;
-    height: 100%;
-    float: left;
-    textarea {
-        border: none;
-        padding: 10px;
-        width: 100%;
-        max-width: 100%;
-        overflow-y: auto;
+    .art-content {
         line-height: 24px;
+        padding: 0 20px;
+        float: left;
+        width: 800px;
+
+        h1 {
+            text-align: center;
+            padding: 10px 0;
+        }
+        p {
+            text-indent: 2em;
+        }
+    }
+
+}
+//bianji 编辑
+textarea {
+    border: none;
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+    overflow-y: auto;
+    line-height: 24px;
+}
+
+.split-line{
+    display: none;
+    position: absolute;
+    top:0;
+    left:70%;
+    width: 3px;
+    height:100%;
+    background: #ccc;
+    margin-left: 15px;
+    &:hover{
+        cursor: col-resize;
+    }
+}
+
+
+//添加&编辑
+.edit{
+    //margin: -8px;
+    .article-editor-wrap {
+        width: 70%;
+        position: relative;
+        height: 100%;
+        float: left;
+        .ql-toolbar.ql-snow {
+            border: none;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        .ql-container.ql-snow,
+        .ql-editor.ql-blank {
+            border: none;
+        }
     }
     #art_title {
         width: 100%;
@@ -123,66 +146,36 @@
 
     }
     #editor {
-        min-height: 500px;
+        min-height: 600px;
+        border-bottom: 1px solid #ddd;
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,.3) inset;
     }
+    textarea.form-control{
+        height:100px;
+    }
+    .art-side {
+        float: right;
+        //position: fixed;
+        top:60px;
+        right: 10px;
+        width: 30%;
 
-    .ql-toolbar.ql-snow {
-        border: none;
-        border-top: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
-    }
-    .ql-container.ql-snow,
-    .ql-editor.ql-blank {
-        border: none;
+        .option-wrap{
+            padding:20px;
+        }
+        .title {
+            font-size: 20px;
+            text-align: center;
+            //font-weight: bold;
+        }
+        p {
+            line-height: 30px;
+        }
     }
 }
 
-.art-side {
-    float: right;
-    //position: fixed;
-    top:60px;
-    right: 10px;
-    width: 30%;
 
-    .option-wrap{
-        padding-top: 10px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-    .title {
-        font-size: 20px;
-        text-align: center;
-        //font-weight: bold;
-    }
-    p {
-        line-height: 30px;
-    }
-    .info-key {
-        display: inline-block;
-        width: 50%;
-        text-align: right;
-        padding-right: 10px;
-    }
-}
-
-.art-fn-btn{
-    .btn{
-        //background: ;
-    }
-}
-.split-line{
-    position: absolute;
-    top:0;
-    left:70%;
-    width: 3px;
-    height:100%;
-    margin-left: 15px;
-    background: #ccc;
-
-    &:hover{
-        cursor: col-resize;
-    }
-}
 
 //fix定位的之后
 .fix-head {
@@ -193,4 +186,30 @@
         padding-top: 50px;
         margin: -8px;
     }
+
+
+
+    //编辑
+    .article-editor-wrap{
+        position: fixed;
+        left: 0;
+        top:0;
+        padding-left: 50px;
+        padding-top: 50px;
+        width: 70%;
+        min-height: 100%;
+        border-right: 3px solid #aaa;
+    }
+
+    .art-side{
+
+    }
+
+
+
+
+    .split-line{
+        display: none;
+    }
+
 }

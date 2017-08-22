@@ -29,15 +29,15 @@ $('.has-sub-menu').click(function () {
     }
 
 }).on('mouseenter', function () {
-    if (!$('.page-box').hasClass('min-menu')) return;
-    var $subMenu = $(this).find('.sub-menu').show();
-    setTimeout(function(){
-        $subMenu.addClass('show');
-    },100)
+    // if (!$('.page-box').hasClass('min-menu')) return;
+    // var $subMenu = $(this).find('.sub-menu').show();
+    // setTimeout(function(){
+    //     $subMenu.addClass('show');
+    // },100)
 }).on('mouseleave', function () {
-    if (!$('.page-box').hasClass('min-menu')) return;
-    var $subMenu = $(this).find('.sub-menu');
-    $subMenu.removeClass('show');
+    // if (!$('.page-box').hasClass('min-menu')) return;
+    // var $subMenu = $(this).find('.sub-menu');
+    // $subMenu.removeClass('show');
 }).on('dm-min', function () {
     var menuName = $(this).find('.menu-name').text();
     $(this).find('.sub-menu').find('.father-menu-name').remove();
