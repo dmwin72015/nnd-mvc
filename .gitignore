@@ -2,7 +2,7 @@ node_modules
 .idea
 .editorconfig
 logs
-# gulpfile.js
+gulpfile.js
 public-src
 .editorconfig
 tmp
