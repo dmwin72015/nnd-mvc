@@ -30,8 +30,8 @@
 
 
 {<contentBody}
-<div class="row" id="app">
-    <section class="data-list article-list" v-bind:class="{ status }" >
+<div class="row article list" id="app">
+    <section class="data-list " v-bind:class="{ status }" >
         <ul class="list-group">
             {#articles}
             <li class="list-group-item">
@@ -58,7 +58,9 @@
             {/articles}
         </ul>
     </section>
+    <!--##################-->
 
+    <!--##################-->
     <div class="view">
         <transition name="fade">
             <router-view :title="title" :html-content="html"></router-view>

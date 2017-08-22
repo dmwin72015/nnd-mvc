@@ -77,8 +77,7 @@ gulp.task('tw-js', function (cb) {
 // application/views/assets_src/quotation/list.js.html
 
 var files = require('./public-src/gulpPlugin/files');
-var entry_bran = files;
-var dest_bran = '/xin/project/www/trunk/application/views/assets/cardetail';
+var dest_bran = '/xin/project/www/trunk/application/views/assets/sale';
 
 gulp.task('br-js', function (cb) {
     gulp.src(files)
