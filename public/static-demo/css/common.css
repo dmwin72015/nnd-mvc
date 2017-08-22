@@ -24,3 +24,17 @@ a:hover{
     background-color: #f2dede;
     color: #a94442;
 }
+
+/*form*/
+.form-control{
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    line-height: 1.5em;
+    border:1px solid #ccc
+}
+.form-group{
+
+
+
+}

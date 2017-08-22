@@ -119,6 +119,18 @@
                     <a href="#list" class="active">添加</a>
                 </li>
             </ul>
+
+            <ul class="nav menu-nav pull-right art-fn-btn">
+                <li>
+                    <a class="btn" href="#save"> 保存</a>
+                </li>
+                <li>
+                    <a class="btn" href="#cancle">返回</a>
+                </li>
+                <li>
+                    <a class="btn" href="#prelook">预览</a>
+                </li>
+            </ul>
         </header>
         <section class="container-body">
             <!--这里是内容区域参考来源:https://agileui.com/demo/supina-theme-package/-->
@@ -173,31 +185,23 @@
                             <button class="ql-clean"></button>
                         </span>
                     </div>
-                    <div id="editor">
+                    <div id="editor" class="content-wrap">
                         <!--<textarea name="editor" id="" cols="30" rows="10"  ></textarea>-->
                     </div>
                 </div>
-                <aside class="art-side" style="display: ;">
-                    <p class="title">
-                        全文搜索引擎 Elasticsearch 入门教程
-                    </p>
+                <aside class="art-side" style="">
 
-                    <p>
-                        <span class="info-key">作者</span> <span class="info-val">一名</span>
-                    </p>
+                    <section class="option-wrap">
+                        <p class="form-group">
+                            <label for="author">作者</label>
+                            <input type="text" class="form-control" id="author">
+                        </p>
 
-                    <p>
-                        <span class="info-key"> 来源</span> <span class="info-val">如一封的网站</span>
-                    </p>
-                    <p>
-                        <span class="info-key">  创建时间</span> <span class="info-val">2017-08-12</span>
-                    </p>
-                    <p>
-                        <span class="info-key"> 发布时间</span> <span class="info-val"> 08-12 00:00:00</span>
-                    </p>
-                    <p>
-                        <span class="info-key"> 最后一次编辑</span> <span class="info-val">2017-08-12 00:00:00</span>
-                    </p>
+                        <p>
+                            <label for="srource">来源</label>
+                            <input type="text" class="form-control" id="srource">
+                        </p>
+                    </section>
                 </aside>
             </div>
             <div class="split-line">

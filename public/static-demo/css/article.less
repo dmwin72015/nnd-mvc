@@ -86,27 +86,6 @@
     }
 }
 
-.art-side {
-    position: absolute;
-    top: 10px;
-    right:0;
-    width: 30%;
-
-    .title {
-        font-size: 20px;
-        text-align: center;
-        //font-weight: bold;
-    }
-    p {
-        line-height: 30px;
-    }
-    .info-key {
-        display: inline-block;
-        width: 50%;
-        text-align: right;
-        padding-right: 10px;
-    }
-}
 
 //添加
 
@@ -117,7 +96,7 @@
     width: 70%;
     position: relative;
     height: 100%;
-
+    float: left;
     textarea {
         border: none;
         padding: 10px;
@@ -152,6 +131,39 @@
     }
 }
 
+.art-side {
+    float: right;
+    //position: fixed;
+    top:60px;
+    right: 10px;
+    width: 30%;
+
+    .option-wrap{
+        padding-top: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .title {
+        font-size: 20px;
+        text-align: center;
+        //font-weight: bold;
+    }
+    p {
+        line-height: 30px;
+    }
+    .info-key {
+        display: inline-block;
+        width: 50%;
+        text-align: right;
+        padding-right: 10px;
+    }
+}
+
+.art-fn-btn{
+    .btn{
+        //background: ;
+    }
+}
 .split-line{
     position: absolute;
     top:0;
@@ -162,7 +174,7 @@
     background: #ccc;
 
     &:hover{
-        cursor: ne-resize;
+        cursor: col-resize;
     }
 }
 
