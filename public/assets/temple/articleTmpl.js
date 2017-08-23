@@ -24,13 +24,19 @@
                     </div>\
                 </div>',
             props: ['title', 'htmlContent'],
+
+            methods:{
+                test :function(){
+                    alert('a')
+                }
+            }
         },
 
         '404':{
             template: '<p>暂时无内容</p>'
         }
 
-    }
+    };
 
     tmpl.article = article
-})(window, window.Tmpl = window.Tmpl || {})
+})(window, window.Tmpl = window.Tmpl || {});
