@@ -14,7 +14,7 @@
         { path: '/detail', component: detail },
         { path: '/404', component: NotFound }
     ];
-
+    
     //动态路由
     let router = new VueRouter({
         routes: [
@@ -32,7 +32,7 @@
             isList:'',
             isAdd:'',
             isDel:'',
-            status:true
+            status:false
         },
         created() {
             // 组件创建完后获取数据，
@@ -44,6 +44,11 @@
         },
         methods: {
             fetchData() {
+                if(this.$route.path == '/del'){
+                    this.$data.status = true;
+                    return;
+                }
+                this.$data.status = false;
                 var that = this;
                 var myHeaders = new Headers();
                 var myInit = {

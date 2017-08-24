@@ -241,8 +241,8 @@
 
 
 {<contentBody}
-<div class="row article list">
-    <section class="data-list "  :class="{aaa:status}" >
+<div class="row article list" :class="{ 'select-mod' :status}">
+    <section class="data-list "   >
         <ul class="list-group">
             {#articles}
             <li class="list-group-item">
@@ -271,10 +271,11 @@
 {/contentBody}
 
 {<selfJs}
-
+<script src="/static-demo/js/common.js"></script>
 <script src="/assets/js/vue.js"></script>
 <script src="/assets/js/vue-router.js"></script>
 <script src="/assets/temple/articleTmpl.js"></script>
 <script src="/assets/js/sp-art.js"></script>
+
 
 {/selfJs}

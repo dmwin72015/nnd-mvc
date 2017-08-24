@@ -1,20 +1,10 @@
 /**
  * Created by mjj on 2017/8/16.
  */
-var $wrapper = $('.page-box');
-$('#hideLeftBar').click(function () {
-    $('.nav-menu span').toggle();
-    $('.user-name').toggle();
 
-    $('.page-box').toggleClass('min-menu');
-    $('.user-avator').toggleClass('pull-right');
 
-    if ($('.page-box').hasClass('min-menu')) {
-        $('.has-sub-menu').trigger('dm-min');
-    } else {
-        $('.has-sub-menu').trigger('dm-max');
-    }
-});
+
+
 
 $('.has-sub-menu').click(function () {
     if ($wrapper.hasClass('min-menu')) return;
@@ -46,9 +36,25 @@ $('.has-sub-menu').click(function () {
     $(this).find('.sub-menu').find('.father-menu-name').remove();
 });
 
-$('#hideLeftBar').click();
+
 
 (function () {
+    var $wrapper = $('.page-box');
+    $('#hideLeftBar').click(function () {
+        $('.nav-menu span').toggle();
+        $('.user-name').toggle();
+
+        $('.page-box').toggleClass('min-menu');
+        $('.user-avator').toggleClass('pull-right');
+
+        if ($('.page-box').hasClass('min-menu')) {
+            $('.has-sub-menu').trigger('dm-min');
+        } else {
+            $('.has-sub-menu').trigger('dm-max');
+        }
+    });
+
+    $('#hideLeftBar').click();
     var oDom = document.querySelector('#time');
     oDom.style.letterSpacing = '1px';
     var dbNum = function (num) {
