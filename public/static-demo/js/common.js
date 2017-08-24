@@ -53,22 +53,6 @@ $('.has-sub-menu').click(function () {
 });
 
 (function () {
-    var $wrapper = $('.page-box');
-    $('#hideLeftBar').click(function () {
-        $('.nav-menu span').toggle();
-        $('.user-name').toggle();
-
-        $('.page-box').toggleClass('min-menu');
-        $('.user-avator').toggleClass('pull-right');
-
-        if ($('.page-box').hasClass('min-menu')) {
-            $('.has-sub-menu').trigger('dm-min');
-        } else {
-            $('.has-sub-menu').trigger('dm-max');
-        }
-    });
-
-    $('#hideLeftBar').click();
     var oDom = document.querySelector('#time');
     oDom.style.letterSpacing = '1px';
     var dbNum = function (num) {

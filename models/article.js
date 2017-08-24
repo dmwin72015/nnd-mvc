@@ -25,6 +25,7 @@ let articleField = {
         type: ObjectId,
         required: true
     },
+
     createdDate: { //创建日期
         type: Date,
         default: Date.now

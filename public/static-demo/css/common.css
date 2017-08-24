@@ -48,6 +48,10 @@ a:hover{
     background-color: #f2dede;
     color: #a94442;
 }
+
+.hide{
+    display: none;
+}
 /*left-side*/
 
 .min-menu .has-sub-menu:hover .sub-menu{

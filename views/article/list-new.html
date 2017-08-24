@@ -1,6 +1,7 @@
 {>"include/layout-new.html"/}
 
 {<selfCss}
+<link href="/static-demo/plugin/quill/quill.snow.css" rel="stylesheet">
 <style>
     .sk-fading-circle {
         margin: 100px auto;
@@ -216,10 +217,26 @@
     </ul>
 
     <ul class="nav menu-nav pull-right art-tool-btn">
-        <li>
-            <!--<a href="#del" class="btn btn-del"  :class="{avtive:isDel}">删除</a>-->
-            <router-link to="/del" class="btn btn-del" >删除</router-link>
-        </li>
+
+
+        <template v-if="mode == 'list' || mode == 'del'">
+            <li>
+                <!--<a href="#del" class="btn btn-del"  :class="{avtive:isDel}">删除</a>-->
+                <router-link to="/del" class="btn btn-del" >删除</router-link>
+            </li>
+        </template>
+
+        <template v-else-if="mode === 'add'">
+            <li>
+                <a class="btn" href="javascript:;" v-on:click="save_article" > 保存</a>
+            </li>
+            <li>
+                <router-link to="/" class="btn" >取消</router-link>
+            </li>
+            <li>
+                <a class="btn"> 预览</a>
+            </li>
+        </template>
     </ul>
 </header>
 {/contentHead}
@@ -270,9 +287,6 @@
             </li>
         </ul>
     </section>
-    <!--##################-->
-
-    <!--##################-->
 </div>
 
 <transition name="fade">
@@ -282,6 +296,7 @@
 {/contentBody}
 
 {<selfJs}
+<script src="/static-demo/plugin/quill/quill.min.js"></script>
 <script src="/assets/js/vue.js"></script>
 <script src="/assets/js/vue-router.js"></script>
 <script src="/assets/temple/articleTmpl.js"></script>

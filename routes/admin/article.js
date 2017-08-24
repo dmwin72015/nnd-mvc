@@ -8,9 +8,12 @@ module.exports = {
 
     '/': article.list,
     
-    '/add':article.toAdd,
+    '/add':{
+        get:article.toAdd,
+        put:article.saveOne
+    },
 
     '/detail/:id': {
         'post': article.detail
-    }
+    },
 };
