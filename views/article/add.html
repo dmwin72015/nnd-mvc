@@ -1,31 +1,157 @@
-{>"include/layout.html"/}
-{<selfCss}
-    <link rel="stylesheet" href="/static/css/tp-spider.css">
-    <script src="/assets/lib/ckeditor/ckeditor.js"></script>
-{/selfCss}
+{>"include/layout-new.html"/}
 
-{<content}
-    <div class="box">
-        <header class="box-head">
-            <h3 class="title">测试CKEditor</h3>
-        </header>
-        <div class="box-body">
-            <textarea name="editor1" id="" cols="30" rows="10"></textarea>
+{<selfCss}
+<link href="/static-demo/plugin/quill/quill.snow.css" rel="stylesheet">
+{/selfCss}
+<!--皮肤颜色-->
+{<skin}sk-green{/skin}
+{<contentHead}
+<header class="container-header" >
+    <ul class="nav menu-nav pull-left">
+        <li>
+            <!--<a href="#/"  class="btn active" :class="{avtive:isList}">文章</a>-->
+            <router-link to="/"  class="btn" >文章</router-link>
+        </li>
+
+        <li>
+            <!--<a href="#add" class="btn" :class="{avtive:isAdd}">添加</a>-->
+            <router-link to="/add" class="btn" >添加</router-link>
+        </li>
+    </ul>
+
+
+    <template>
+        <ul class="nav menu-nav pull-right art-fn-btn">
+            <li>
+                <a class="btn" href="javascript:;" v-on:click="save_article" > 保存</a>
+            </li>
+            <li>
+                <router-link to="/" class="btn" >取消</router-link>
+            </li>
+            <li>
+                <a class="btn"> 预览</a>
+            </li>
+        </ul>
+    </template>
+
+</header>
+{/contentHead}
+
+
+{<contentBody}
+
+<div class="row article edit">
+    <div class="article-editor-wrap">
+        <p class="title-wrap">
+            <!--<input type="text" id="art_title" placeholder="标题">-->
+            <textarea  rows="1" id="art_title"  placeholder="标题"></textarea>
+        </p>
+        <div id="toolbar-container">
+            <span class="ql-formats">
+                <!--<select class="ql-font"></select>-->
+                <select class="ql-size"></select>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-strike"></button>
+            </span>
+            <span class="ql-formats">
+                <select class="ql-color"></select>
+                <select class="ql-background"></select>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-script" value="sub"></button>
+                <button class="ql-script" value="super"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-header" value="1"></button>
+                <button class="ql-header" value="2"></button>
+                <button class="ql-blockquote"></button>
+                <button class="ql-code-block"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-list" value="ordered"></button>
+                <button class="ql-list" value="bullet"></button>
+                <button class="ql-indent" value="-1"></button>
+                <button class="ql-indent" value="+1"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-direction" value="rtl"></button>
+                <select class="ql-align"></select>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-link"></button>
+                <button class="ql-image"></button>
+                <button class="ql-video"></button>
+                <button class="ql-formula"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-clean"></button>
+            </span>
         </div>
-        <div class="box-foot btn-group" style="overflow: hidden;">
-            <span class="btn btn-green">保存</span> 
-            <span class="btn btn-danger">取消</span>
+        <div id="editor" class="content-wrap">
+            <!--<textarea name="editor" id="" cols="30" rows="10"  ></textarea>-->
         </div>
-        <script type="text/javascript">
-            CKEDITOR.replace('editor1');
-        </script>
-{/content}
+    </div>
+    <aside class="art-side" style="">
+        <section class="option-wrap">
+            <div class="form-group">
+                <label for="cate">类别</label>
+                <input type="text" class="form-control" id="cate">
+                <template>
+
+
+                </template>
+            </div>
+            <div class="form-group">
+                <label for="author">作者</label>
+                <input type="text" class="form-control" id="author">
+            </div>
+            <div class="form-group">
+                <label for="source">来源</label>
+                <input type="text" class="form-control" id="source">
+            </div>
+            <div class="form-group">
+                <label for="pub_date">发布时间</label>
+                <input type="text" class="form-control" id="pub_date">
+            </div>
+            <div class="form-group">
+                <label for="labels">标签</label>
+                <textarea name="beizhu" class="form-control" id="labels"></textarea>
+                <div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="remarks">备注</label>
+                <textarea name="beizhu" class="form-control" id="remarks"></textarea>
+            </div>
+        </section>
+    </aside>
+</div>
+
+{/contentBody}
 
 {<selfJs}
-<script src="/static/js/dashboard.bundle.js"></script>
-<!-- <script src="/assets/js/jquery-3.2.1.js"></script> -->
 <script src="/assets/js/vue.js"></script>
 <script src="/assets/js/vue-router.js"></script>
-<!-- <script src="/assets/js/sp-art.js"></script> -->
-
+<script src="/assets/temple/articleTmpl.js"></script>
+<script src="/assets/js/sp-art.js"></script>
+<script src="/static-demo/plugin/quill/quill.min.js"></script>
+<script>
+    var options = {
+        debug: 'info',
+        placeholder: '内容输入区域...',
+        readOnly: false,
+        modules: {
+//            'formula': true,
+            'syntax': false,
+            'toolbar':'#toolbar-container'
+        },
+        theme: 'snow'
+    };
+    var quill = new Quill('#editor', options);
+</script>
 {/selfJs}

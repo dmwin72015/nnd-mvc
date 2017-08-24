@@ -1,10 +1,26 @@
 /**
  * Created by mjj on 2017/8/16.
  */
+var $wrapper = $('.page-box');
+$('#hideLeftBar').click(function () {
 
+    $('.user-avator').toggleClass('pull-right');
 
+    if ($('.page-box').hasClass('min-menu')) {
+        $('.page-box').removeClass('min-menu');
+        $('.nav-menu span').show();
+        $('.user-name').show();
 
+        $('.has-sub-menu').trigger('dm-max');
 
+    } else {
+        $('.page-box').addClass('min-menu');
+        $('.nav-menu span').hide();
+        $('.user-name').hide();
+
+        $('.has-sub-menu').trigger('dm-min');
+    }
+});
 
 $('.has-sub-menu').click(function () {
     if ($wrapper.hasClass('min-menu')) return;
@@ -35,8 +51,6 @@ $('.has-sub-menu').click(function () {
 }).on('dm-max', function () {
     $(this).find('.sub-menu').find('.father-menu-name').remove();
 });
-
-
 
 (function () {
     var $wrapper = $('.page-box');
@@ -69,6 +83,6 @@ $('.has-sub-menu').click(function () {
         oD = new Date(), oH = oD.getHours(), oM = oD.getMinutes(),oS = oD.getSeconds();
         oDom.innerText = dbNum(oH>12 ? oH-12 :oH) + ':' + dbNum(oM) + ':' + dbNum(oS);
     }
-    setTime();
-    setInterval(setTime, 1000);
+    // setTime();
+    // setInterval(setTime, 1000);
 })();

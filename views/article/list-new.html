@@ -190,50 +190,35 @@
                -webkit-transform: scaleY(1.0);
            }
     }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .3s
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+        opacity: 0
+    }
 </style>
 {/selfCss}
 <!--皮肤颜色-->
 {<skin}sk-green{/skin}
 {<contentHead}
-<!--<div class="sk-fading-circle">-->
-    <!--<div class="sk-circle1 sk-circle"></div>-->
-    <!--<div class="sk-circle2 sk-circle"></div>-->
-    <!--<div class="sk-circle3 sk-circle"></div>-->
-    <!--<div class="sk-circle4 sk-circle"></div>-->
-    <!--<div class="sk-circle5 sk-circle"></div>-->
-    <!--<div class="sk-circle6 sk-circle"></div>-->
-    <!--<div class="sk-circle7 sk-circle"></div>-->
-    <!--<div class="sk-circle8 sk-circle"></div>-->
-    <!--<div class="sk-circle9 sk-circle"></div>-->
-    <!--<div class="sk-circle10 sk-circle"></div>-->
-    <!--<div class="sk-circle11 sk-circle"></div>-->
-    <!--<div class="sk-circle12 sk-circle"></div>-->
-<!--</div>-->
-<!--<div class="spinner">-->
-    <!--<div class="rect1"></div>-->
-    <!--<div class="rect2"></div>-->
-    <!--<div class="rect3"></div>-->
-    <!--<div class="rect4"></div>-->
-    <!--<div class="rect5"></div>-->
-<!--</div>-->
-
 <header class="container-header" >
     <ul class="nav menu-nav pull-left">
         <li>
             <!--<a href="#/"  class="btn active" :class="{avtive:isList}">文章</a>-->
-            <router-link to="/"  class="btn" :class="{avtive:isList}">文章</router-link>
+            <router-link to="/"  class="btn" >文章</router-link>
         </li>
 
         <li>
             <!--<a href="#add" class="btn" :class="{avtive:isAdd}">添加</a>-->
-            <router-link to="/add" class="btn" :class="{avtive:isAdd}">添加</router-link>
+            <router-link to="/add" class="btn" >添加</router-link>
         </li>
     </ul>
 
     <ul class="nav menu-nav pull-right art-tool-btn">
         <li>
             <!--<a href="#del" class="btn btn-del"  :class="{avtive:isDel}">删除</a>-->
-            <router-link to="/del" class="btn btn-del"  :class="{avtive:isDel}">删除</router-link>
+            <router-link to="/del" class="btn btn-del" >删除</router-link>
         </li>
     </ul>
 </header>
@@ -241,8 +226,9 @@
 
 
 {<contentBody}
-<div class="row article list" :class="{ 'select-mod' :status}">
-    <section class="data-list "   >
+
+<div class="row article list" :class="{'select-mod':status}">
+    <section class="data-list ">
         <ul class="list-group">
             {#articles}
             <li class="list-group-item">
@@ -259,15 +245,40 @@
             {/articles}
         </ul>
     </section>
+
+    <section class="data-page art-list-page">
+
+        <span class="page-count">
+            1/64
+        </span>
+
+        <ul class="page-navigation">
+            <li>
+                <a href="#" class="prevs">
+                    <i class="fa  fa-chevron-left"></i>
+                </a>
+            </li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li class="active"><a href="#">5</a></li>
+            <li>
+                <a href="#" aria-label="Next">
+                    <i class="fa  fa-chevron-right"></i>
+                </a>
+            </li>
+        </ul>
+    </section>
     <!--##################-->
 
     <!--##################-->
 </div>
-<div class="view">
-    <transition name="fade">
-        <router-view :title="title" :html-content="html"></router-view>
-    </transition>
-</div>
+
+<transition name="fade">
+    <router-view :title="title" :html-content="html"></router-view>
+</transition>
+
 {/contentBody}
 
 {<selfJs}
@@ -275,6 +286,4 @@
 <script src="/assets/js/vue-router.js"></script>
 <script src="/assets/temple/articleTmpl.js"></script>
 <script src="/assets/js/sp-art.js"></script>
-
-
 {/selfJs}

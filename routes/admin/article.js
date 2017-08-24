@@ -7,6 +7,8 @@ let article = require('../../controllers/article');
 module.exports = {
 
     '/': article.list,
+    
+    '/add':article.toAdd,
 
     '/detail/:id': {
         'post': article.detail
