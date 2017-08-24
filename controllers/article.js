@@ -57,6 +57,16 @@ exports.detail = function (req, res, next) {
 //保存新增
 
 exports.saveOne = function (req, res, next) {
-    
+    res.render('article/add', {
+        msg: '暂无文章'
+    });
+
+};
+
+
+exports.toAdd = function(req, res, next){
+    res.render('article/add', {
+        msg: '暂无文章'
+    });
 
 };

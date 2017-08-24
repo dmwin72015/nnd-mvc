@@ -3,16 +3,22 @@
  */
 var $wrapper = $('.page-box');
 $('#hideLeftBar').click(function () {
-    $('.nav-menu span').toggle();
-    $('.user-name').toggle();
 
-    $('.page-box').toggleClass('min-menu');
     $('.user-avator').toggleClass('pull-right');
 
     if ($('.page-box').hasClass('min-menu')) {
-        $('.has-sub-menu').trigger('dm-min');
-    } else {
+        $('.page-box').removeClass('min-menu');
+        $('.nav-menu span').show();
+        $('.user-name').show();
+
         $('.has-sub-menu').trigger('dm-max');
+
+    } else {
+        $('.page-box').addClass('min-menu');
+        $('.nav-menu span').hide();
+        $('.user-name').hide();
+
+        $('.has-sub-menu').trigger('dm-min');
     }
 });
 
@@ -46,7 +52,7 @@ $('.has-sub-menu').click(function () {
     $(this).find('.sub-menu').find('.father-menu-name').remove();
 });
 
-$('#hideLeftBar').click();
+// $('#hideLeftBar').click();
 
 (function () {
     var oDom = document.querySelector('#time');
@@ -63,6 +69,6 @@ $('#hideLeftBar').click();
         oD = new Date(), oH = oD.getHours(), oM = oD.getMinutes(),oS = oD.getSeconds();
         oDom.innerText = dbNum(oH>12 ? oH-12 :oH) + ':' + dbNum(oM) + ':' + dbNum(oS);
     }
-    setTime();
-    setInterval(setTime, 1000);
+    // setTime();
+    // setInterval(setTime, 1000);
 })();
