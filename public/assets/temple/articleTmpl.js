@@ -63,18 +63,32 @@
             }
         },
         detail: {
-            template: '<div class="view-wrap article-detail-box">\
-                    <div class="wrap-close" >\
-                        <router-link to="/">\
-                        <i class="fa fa-close fa-2x"></i>\
-                        </router-link>\
-                    </div>\
-                    <div class="main-content">\
-                        <p v-html>{{ title }}</p>\
-                        <p v-html="htmlContent"></p>\
-                    </div>\
+            template: '<div class="row article detail ">\
+                    <article class="art-content">\
+                        <h1>{{data.title}}</h1>\
+                        <div v-html="data.htmlContent">\
+                        </div>\
+                    </article>\
+                    <aside class="art-side">\
+                        <p class="title">{{data.title}}</p>\
+                        <p class="info-group">\
+                            <span class="info-name">作者</span> <span class="info-val">{{data.author}}</span>\
+                        </p>\
+                        <p class="info-group">\
+                            <span class="info-name">来源</span> <span class="info-val">{{data.source}}</span>\
+                        </p>\
+                        <p class="info-group">\
+                            <span class="info-name">创建时间</span> <span class="info-val">{{data.createdDate | formatDate  }}</span>\
+                        </p>\
+                        <p class="info-group">\
+                            <span class="info-name">发布时间</span> <span class="info-val">{{data.publishDate | formatDate }}</span>\
+                        </p>\
+                        <p class="info-group">\
+                            <span class="info-name">最后一次编辑</span> <span class="info-val">{{data.lastEdit | formatDate }}</span>\
+                        </p>\
+                    </aside>\
                 </div>',
-            props: ['title', 'htmlContent'],
+            props: ['data'],
 
             methods:{
                 test :function(){

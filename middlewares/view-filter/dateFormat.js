@@ -5,5 +5,6 @@ var moment = require('moment');
 
 module.exports = function(value) {
     var result = moment(value).format("YYYY-MM-DD HH:mm:ss");
+    console.log(result);
     return result;
 };

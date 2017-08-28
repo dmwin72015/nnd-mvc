@@ -251,7 +251,7 @@
 
 {<contentBody}
 
-<div class="row article list" :class="{'select-mod':status}">
+<div class="row article list" :class="{'select-mod':status}" v-if="isList">
     <section class="data-list ">
         <ul class="list-group">
             {#articles}
@@ -297,7 +297,7 @@
 </div>
 
 <transition name="fade">
-    <router-view :title="title" :html-content="html"></router-view>
+    <router-view :data="data"></router-view>
 </transition>
 
 {/contentBody}

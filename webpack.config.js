@@ -1,68 +1,72 @@
-var path = require('path');
-var webpack = require('webpack');
-var moment = require('moment');
-var glob = require('glob');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-var libfiles = glob.sync(path.join(__dirname, 'appSrc/lib/*.js'));
-var rootPath = '/xin/project/note.yonglinchen.com/static';
-var baseJsPath = path.join(rootPath, 'js');
-var baseCssPath = path.join(rootPath, 'css');
-var baseImgPath = path.join(rootPath, 'img');
-var baseMapPath = path.join(rootPath, 'maps');
-
+const path = require('path');
+const webpack = require('webpack');
+const moment = require('moment');
+const glob = require('glob');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
-    entry: {
-        // day: ['./appSrc/js30/day12.js', './appSrc/js30/zoom.js'],
-        lib: ['./appSrc/lib/lib.js', './appSrc/lib/keycode.js', './appSrc/lib/cornify.js'],
-        login: ['./appSrc/login/login.js'],
-        dashboard: ['./appSrc/login/dashboard.js'],
-        // home: ['./appSrc/main.js', './appSrc/mod1.js', './appSrc/mod2.js', './appSrc/mod3.js'],
-        vote: ['./appSrc/less/toupiao.less','./appSrc/less/common.less']
-    },
+    entry: './public-src/main.js',
+
     output: {
-        // path: __dirname + '/public_back',
-        path: rootPath,
-        filename: 'js/[name].bundle.js'
-        // sourceMapFilename: "maps/[file].map"
+        path: path.resolve(__dirname, 'public-src/dist'),
+        publicPath: '/nnd-mvc/public-src/dist/',
+        filename: '[name].bundle.js'
     },
+
     module: {
-        rules: [{
-            test: /\.(css|less)$/,
-            use: ExtractTextPlugin.extract({
-                use: ['css-loader', 'less-loader']
-            })
-        }, {
-            test: /\.(png|jpg|gif)$/,
-            loader: 'url-loader?limit=8192&name=/static/img/[name].[ext]'
-        }]
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                options: {
+                    vue: {
+                        css: ExtractTextPlugin.extract({
+                            use: 'css-loader',
+                            fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
+                        })
+                    }
+                }
+            }, {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/
+            }, {
+                test: /\.(png|jpg|gif|svg)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]?[hash]'
+                }
+            }, {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            outputPath:'fonts/',
+                            name:'[hash].[ext]'
+                        }
+                    }
+                ]
+            }
+
+        ]
     },
-    stats: {
-        colors: true
-    },
-    // devtool: 'source-map',
     plugins: [
-        // new webpack.optimize.UglifyJsPlugin({
-        //     comoressor: {
-        //         warnings: true
-        //     }
-        // }),
-        new webpack.BannerPlugin(moment().format('YYYY-MM-DD HH:mm:ss') + '-This file is created by 董敏'),
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['lib'],
-            filename: 'js/[name].js'
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            names: 'commons',
-            filename: 'js/[name].js',
-            mixChunks: 2
-        }),
-        new ExtractTextPlugin('css/tp-[name].css'),
-        new webpack.SourceMapDevToolPlugin({
-            filename: "maps/[file].map"
+        new ExtractTextPlugin("style.css"),
+        new CleanWebpackPlugin(['public-src/dist']),
+        new HtmlWebpackPlugin({
+            filename: 'main.html',
+            template: './public-src/index.html',
+            hash: true,
+            inject: true,
+            minify: {
+                collapseWhitespace: true,
+                minifyCSS: true,
+                collapseInlineTagWhitespace: true
+            },
+            showErrors: true
         })
     ]
-    //, devServer: {
-    //     inline: true,
-    // }
+    // devtool: '#eval-source-map'
 };

@@ -3,6 +3,5 @@
  */
 
 module.exports = function(value) {
-    console.log(value);
     return value.charAt(value.length-1);
 };
