@@ -5,6 +5,8 @@ const glob = require('glob');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+
 module.exports = {
     entry: './public-src/main.js',
 
@@ -66,7 +68,8 @@ module.exports = {
                 collapseInlineTagWhitespace: true
             },
             showErrors: true
-        })
+        }),
+        new ManifestPlugin()
     ]
     // devtool: '#eval-source-map'
 };
