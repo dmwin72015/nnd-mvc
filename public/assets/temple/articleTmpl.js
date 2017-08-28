@@ -7,7 +7,7 @@
             '    <div class="article-editor-wrap">\n' +
             '        <p class="title-wrap">\n' +
             '            <!--<input type="text" id="art_title" placeholder="标题">-->\n' +
-            '            <textarea  rows="1" id="art_title"  placeholder="标题"></textarea>\n' +
+            '            <textarea  rows="1" id="art_title"  placeholder="标题" v-model.trim="title"></textarea>\n' +
             '        </p>\n' +
             '        <div id="editor" class="content-wrap">\n' +
             '            <!--<textarea name="editor" id="" cols="30" rows="10"  ></textarea>-->\n' +
@@ -17,11 +17,11 @@
             '        <section class="option-wrap">\n' +
             '            <div class="form-group">\n' +
             '                <label for="cate">类别</label>\n' +
-            '                <input type="text" class="form-control" id="cate">\n' +
+            '                <input type="text" class="form-control" id="cate" v-model.trim="cate.name">\n' +
             '            </div>\n' +
             '            <div class="form-group">\n' +
             '                <label for="author">作者</label>\n' +
-            '                <input type="text" class="form-control" id="author">\n' +
+            '                <input type="text" class="form-control" id="author" v-model.trim="author.name">\n' +
             '            </div>\n' +
             '            <div class="form-group">\n' +
             '                <label for="source">来源</label>\n' +
@@ -34,9 +34,6 @@
             '            <div class="form-group">\n' +
             '                <label for="labels">标签</label>\n' +
             '                <textarea name="beizhu" class="form-control" id="labels"></textarea>\n' +
-            '                <div>\n' +
-            '\n' +
-            '                </div>\n' +
             '            </div>\n' +
             '            <div class="form-group">\n' +
             '                <label for="remarks">备注</label>\n' +
@@ -45,6 +42,19 @@
             '        </section>\n' +
             '    </aside>\n' +
             '</div>',
+            data:function () {
+                return {
+                    title:'',
+                    cate:{
+                        id:'',
+                        name:'22'
+                    },
+                    author:{
+                        id:'',
+                        name:''
+                    }
+                }
+            },
             methods:{
                 subinfo:function(){
 

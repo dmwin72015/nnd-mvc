@@ -1,32 +1,32 @@
 (function (Vue) {
-    if (!Vue) return
-    let tmpl = this.Tmpl || {}
+    if (!Vue) return;
+    let tmpl = this.Tmpl || {};
 
     //所有模板
-    let articleTmpl = tmpl.article
+    let articleTmpl = tmpl.article;
 
-    let detail = articleTmpl.detail
+    let detail = articleTmpl.detail;
 
-    let add = articleTmpl.add
+    let add = articleTmpl.add;
 
-    let NotFound = articleTmpl['404']
+    let NotFound = articleTmpl['404'];
 
-    let modes = ['list', 'del', 'add']
+    let modes = ['list', 'del', 'add'];
 
     //静态路由
     let routes = [
         {path: '/detail', component: detail},
-        {path: '/404', component: NotFound},
-    ]
+        {path: '/404', component: NotFound}
+    ];
 
     //路由方法
     let methods = {
         'detail': showDetail,
         'list': showList,
-        'add': addArticle,
+        'add': toAdd,
         'del': toDelete,
         'home':showList
-    }
+    };
 
     //动态路由
     let router = new VueRouter({
@@ -36,9 +36,9 @@
             {path: '/detail/:id', component: detail, name: 'detail'},
             {path: '/add', component: add, name: 'add'},
             {path: '/del', name: 'del'},
-            {path: '/404', name: '404', component: NotFound},
-        ],
-    })
+            {path: '/404', name: '404', component: NotFound}
+        ]
+    });
 
     this.app = new Vue({
         router,
@@ -46,7 +46,7 @@
             title: '',
             html: '',
             mode: 'list',
-            loading: true,
+            loading: true
         },
         created () {
             // 组件创建完后获取数据，
@@ -58,17 +58,21 @@
 
         },
         watch: {
-            '$route': 'mainRoute',
+            '$route': 'mainRoute'
         },
         computed: {
             status: function () {
                 return this.mode === 'del'
-            },
+            }
         },
         methods: {
             save_article () {
-                alert('保存')
-                let title = ''
+                alert('保存');
+                let title = '';
+                console.log(this);
+                console.log(this.$route);
+
+
 
             },
             mainRoute () {
@@ -78,22 +82,22 @@
                 method && (typeof method === 'function') &&
                 method.call(this, current_route.params)
                 this.loading = false;
-            },
-        },
-    }).$mount('.main-container')
+            }
+        }
+    }).$mount('.main-container');
 
     //detail
     function showDetail (params) {
-        this.mode = 'detail'
-        let that = this
-        let myHeaders = new Headers()
+        this.mode = 'detail';
+        let that = this;
+        let myHeaders = new Headers();
         let myInit = {
             method: 'POST',
             headers: myHeaders,
             mode: 'cors',
-            cache: 'default',
-        }
-        let id = params.id
+            cache: 'default'
+        };
+        let id = params.id;
         if (!id) {
             return
         }
@@ -101,11 +105,11 @@
             return response.json()
         }).then((body) => {
             if (body.status !== '1') {
-                that.$data.title = '未知错误'
+                that.$data.title = '未知错误';
                 that.$data.html = ''
             } else {
-                that.$data.title = body.data.title
-                that.$data.html = body.data.htmlContent
+                that.$data.title = body.data.title;
+                that.$data.html = body.data.htmlContent;
             }
             this.loading = false
         }).catch((err) => {
@@ -115,13 +119,13 @@
 
     //list
     function showList (params) {
-        this.mode = 'list'
+        this.mode = 'list';
         let page = params.page || 1;
         $('.article.list').show();
     }
 
     //add
-    function addArticle () {
+    function toAdd () {
         this.mode = 'add';
         $('.article.list').hide();
         let toolbarOptions = [
@@ -149,7 +153,7 @@
             placeholder: '内容输入区域...',
             readOnly: false,
             modules: {
-                'toolbar':toolbarOptions,
+                'toolbar':toolbarOptions
             },
             theme: 'snow'
         };
@@ -161,7 +165,6 @@
 
     //del
     function toDelete () {
-        console.log('----')
-        this.mode = 'del'
+        this.mode = 'del';
     }
-}.call(this, window.Vue))
+}.call(this, window.Vue));

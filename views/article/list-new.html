@@ -217,15 +217,22 @@
     </ul>
 
     <ul class="nav menu-nav pull-right art-tool-btn">
-
-
-        <template v-if="mode == 'list' || mode == 'del'">
+        <template v-if="mode == 'list'">
             <li>
-                <!--<a href="#del" class="btn btn-del"  :class="{avtive:isDel}">删除</a>-->
                 <router-link to="/del" class="btn btn-del" >删除</router-link>
             </li>
         </template>
-
+        <template v-else-if="mode === 'del'">
+            <li>
+                <a class="btn" href="javascript:;" v-on:click="save_article">确定</a>
+            </li>
+            <li>
+                <router-link to="/" class="btn btn-del" >返回</router-link>
+            </li>
+            <li>
+                <router-link to="/del" class="btn btn-del" >删除</router-link>
+            </li>
+        </template>
         <template v-else-if="mode === 'add'">
             <li>
                 <a class="btn" href="javascript:;" v-on:click="save_article" > 保存</a>
