@@ -1,0 +1,11 @@
+{
+  "presets": [
+    "env"
+    //    ["stage-0"]
+  ],
+  "plugins": [
+    "babel-plugin-transform-runtime",
+    "syntax-dynamic-import"
+  ],
+  "comments": false
+}

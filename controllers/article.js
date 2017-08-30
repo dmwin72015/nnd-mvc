@@ -12,7 +12,7 @@ exports.newAndSave = function (articleData, callback) {
 exports.update = function (req, res, next) {
     var id = req.query.id;
 
-    
+
 };
 
 //显示列表
@@ -55,9 +55,18 @@ exports.detail = function (req, res, next) {
 //保存新增
 
 exports.saveOne = function (req, res, next) {
-    var data = req.body
-
-
+    var data = req.body;
+    if(!data){
+        res.json({});
+        return;
+    }
+    Article.insertOne(data, function (err, doc) {
+        if(err){
+            res.json(err);
+            return;
+        }
+        err.json(doc);
+    });
 };
 
 exports.toAdd = function (req, res, next) {

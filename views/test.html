@@ -1,12 +1,67 @@
-{>"include/layout-new.html"/}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.js"></script>
+</head>
+<br>
+<input type="text" id="text">
+<input type="button" value="翻译" id="btn">
+</br>
+<div id="result">
+</div>
+</body>
+<script>
+$(function() {
+    $('#btn').on('click', function() {
+        $.ajax({
+            url: '/test',
+            type: 'post',
+            data: { text: $('#text').val() },
+            success: function(data) {
+                if (data.errorCode == 0) {
+                    console.log(data);
+                    var result = render(data);
+                    document.querySelector('#result').innerHTML = result;
+                }
+            }
+        })
+    });
+});
 
 
+function render(data) {
+    var str = '<p>翻译结果</p>';
 
-{<contentHead}
-    头不信
-{/contentHead}
+    if (typeof data.translation == 'string') {
+        str += '<ul><li>' + data.translation + '</li></ul>';
 
+    } else if (Array.isArray(data.translation)) {
+        str += '<ul>';
 
-{<contentBody}
-    内容
-{/contentBody}
+        for (var i = 0; i < data.translation.length; i++) {
+            str += '<li>' + data.translation[i] + '</li>'
+        }
+
+        str += '</ul>';
+    }
+
+    if (data.web) {
+        str += '<p>网络释义</p>';
+        str += '<ul>';
+
+        for (var i = 0; i < data.web.length; i++) {
+            var item = data.web[i];
+            str += '<li><span>' + item.key+ '</span> : <span>' + item.value.join(',') + '</span></li>' 
+        }
+        str += '</ul>';
+    }
+
+    return str;
+
+}
+</script>
+
+</html>
