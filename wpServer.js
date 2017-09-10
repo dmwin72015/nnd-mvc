@@ -19,7 +19,7 @@ app.use(webpackDevMiddleware(compiler, {
     lazy:false,
     watchOptions:{
         aggregateTimeout: 300,
-        poll: true,
+        // poll: true,
         ignored: /node_modules/,
         poll:1000
     }

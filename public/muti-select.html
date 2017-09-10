@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/assets/js/jquery-3.2.1.js"></script>
+    <script src="http://pa.br.xin.com/assets/js/echarts.min.js"></script>
+    <style>
+        ul{
+            width: 100px;
+            height: 30px;
+        }
+        .on{
+            background: #fff;
+        }
+        .off{
+            background: red;
+        }
+        p{
+            margin:0;
+        }
+        #box{
+            width: 500px;
+            height: 500px;
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+<p class="btn">选择纵轴2</p>
+<ul id="test" style="height:100px;">
+    <li  class="on" style="display: none;">y1</li>
+    <li  class="on" style="display: none;">y2</li>
+    <li  class="on" style="display: none;">y3</li>
+    <li  class="on" style="display: none;">y4</li>
+</ul>
+<input type="button" value="画图" class="draw">
+<div id="box"></div>
+<script>
+    $('.btn').on('click',function(){
+        $('.btn').attr('btn');
+        if($('.btn').attr('btn')==0){
+            $('ul li').slideUp();
+            $('.btn').attr('btn','1')
+        }else{
+            $('ul li').slideDown();
+            $('.btn').attr('btn','0')
+        }
+    });
+    var creatItem = [
+        {
+            typeId:'1',
+            dataX:["一","二","三","四","五","六"],
+            series:[
+                {
+                    name:'1',
+                    type:'line',
+                    data:[5, 20, 36, 10, 10, 20]
+                }
+            ]
+    },{
+       typeId:'2',
+       dataX:["一","二","三","四","五","六"],
+        series:
+            [
+                {
+                    name:'2',
+                    type:'line',
+                    data:[5, 22, 12, 23, 16, 35]
+                }
+            ]
+        },{
+            typeId:'3',
+            dataX:["一","二","三","四","五","六"],
+            series:
+                [
+                    {
+                        name:'3',
+                        type:'line',
+                        data:[5, 22, 12, 23, 34, 35]
+                    }
+                ]
+        },{
+            typeId:'4',
+            dataX:["一","二","三","四","五","六"],
+            series:
+            [
+                {
+                    name:'4',
+                    type:'line',
+                    data:[5, 22, 12,12, 16, 35]
+                }
+            ]},{
+            typeId:'5',
+            dataX:["一","二","三","四","五","六"],
+            series:
+                [
+                    {
+                        name:'5',
+                        type:'line',
+                        data:[5, 16, 12, 23, 16, 35]
+                    }
+                ]
+        }
+    ]
+    var creatStr = '';
+    var selectArr=[];
+    for(var i=0; i<creatItem.length; i++){
+        creatStr+='<li class="on" style="display: none" typeId="'+creatItem[i].typeId+'">y'+creatItem[i].typeId+'</li>'
+    }
+    $('#test').html(creatStr)
+    $('ui li').attr('data-select',0);
+    var selectObj={};
+    //  选择选中模型
+    $('ul li').on('click',function(){
+        var index=$(this).index();
+        var selectValue = $(this).attr('data-select');
+
+        if(selectValue == 0){
+            $(this).attr('data-select','1');
+            delete selectObj[index];
+        }else{
+            $(this).attr('data-select','0');
+            selectObj[index]=creatItem[index].series[0];
+        }
+        // 切换class
+        $(this).toggleClass("off");
+        var arr =[];
+        for(var name in selectObj){
+            arr.push(selectObj[name])
+        }
+        selectArr = arr;
+
+        console.log(selectArr)
+        //console.log(selectArr)
+    });
+   /* function inherit(superType, subType) {
+        var F = function() {};
+        F.prototype = superType.prototype;
+        subType.prototype = new F();
+        subType.prototype.constructor = subType;
+    }
+    //基础表
+    function ChartBase(idName,data){
+        this.data=jQuery.extend(true, {}, data);
+        this.chart=echarts.init(document.getElementById(idName));
+        this.option={
+            title:{
+                left:'left'
+            },
+            tooltip:{
+                trigger: 'axis'
+            },
+            legend:{
+
+            },
+            grid:{
+                left: '10%',
+                top: 60,
+                right: '10%',
+                bottom: 60
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    dataView: {readOnly: false},
+                    magicType: {type: ['line', 'bar']},
+                    restore: {},
+                    saveAsImage: {}
+                }
+            }
+        }
+    }
+    ChartBase.prototype.init=function(){
+        this.chart.setOption(this.option);
+    };
+    //折线图、柱状图
+    function LineChart(idName,data){
+        ChartBase.call(this,idName,data);
+        this.option=jQuery.extend(true,{
+            xAxis:{
+                data:["一","二","三","四","五","六"]
+            },
+            yAxis:{
+
+            },
+            series:data,
+            dataZoom: [
+                {
+                    type: 'slider',
+                    show: true,
+                    xAxisIndex: [0],
+                    start: 1,
+                    end: 100
+                },
+                {
+                    type: 'slider',
+                    show: true,
+                    yAxisIndex: [0],
+                    left: '93%',
+                    start: 1,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    xAxisIndex: [0],
+                    start: 1,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    yAxisIndex: [0],
+                    start: 1,
+                    end: 100
+                }
+            ]
+        },this.option);
+    }
+    inherit(ChartBase, LineChart);
+    //变量选择*/
+
+    function lineChart(idName,data){
+        var MyChart=echarts.init(document.getElementById(idName));
+        option={
+            title:{
+                left:'left'
+            },
+            tooltip:{
+                trigger: 'axis'
+            },
+            legend:{
+
+            },
+            grid:{
+                left: '10%',
+                top: 60,
+                right: '10%',
+                bottom: 60
+            },
+            toolbox : {
+                show: true,
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    dataView: {readOnly: false},
+                    magicType: {type: ['line', 'bar']},
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+                xAxis:{
+                    data:["一","二","三","四","五","六"]
+                },
+                yAxis:{
+                },
+                series:data,
+                dataZoom: [
+                    {
+                        type: 'slider',
+                        show: true,
+                        xAxisIndex: [0],
+                        start: 1,
+                        end: 100
+                    },
+                    {
+                        type: 'slider',
+                        show: true,
+                        yAxisIndex: [0],
+                        left: '93%',
+                        start: 1,
+                        end: 100
+                    },
+                    {
+                        type: 'inside',
+                        xAxisIndex: [0],
+                        start: 1,
+                        end: 100
+                    },
+                    {
+                        type: 'inside',
+                        yAxisIndex: [0],
+                        start: 1,
+                        end: 100
+                    }
+                ]
+        };
+        MyChart.setOption(option,true)
+    }
+$('.draw').on('click',function(){
+    lineChart('box',selectArr)
+});
+</script>
+</body>
+</html>

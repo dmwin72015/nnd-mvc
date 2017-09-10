@@ -12,7 +12,7 @@ const server = new webpackServer(compiler, {
     },
     hot: true,
     compress: true,
-    contentBase: path.join(__dirname, "public"),
+    contentBase: path.join(__dirname, "public-src/dist"),
     headers: {
         "X-Server-Name": "WebPackServer-Demo"
     },

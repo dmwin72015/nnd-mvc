@@ -1,0 +1,347 @@
+@base-font-size: 16px;
+@base-color: #c0e3e7;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased; // 1
+  -webkit-text-size-adjust: 100%; // 2
+  -ms-text-size-adjust: 100%; // 2
+}
+
+img {
+  max-width: 100%;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+// Mixin itself
+.clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+/*************************/
+body {
+  font-size: 16px;
+  background-color: #f3f3f3;
+  font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
+}
+
+.dm-wrapper {
+
+}
+
+.dm-head-inner {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: table;
+
+  & > section {
+    display: table-cell;
+  }
+
+}
+
+.head-nav {
+
+  .nav-item {
+    display: inline-block;
+    padding: 10px 0;
+
+  }
+}
+
+.dm-container, .dm-head-inner {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.dm-side-box {
+  box-shadow: -4px 7px 15px 1px rgba(0, 0, 0, .2);
+}
+
+.dm-side-btn-box {
+  padding: 50px 0;
+  text-align: center;
+}
+
+//个人信息
+.person-info-box {
+  width: 100%;
+  background-color: #c0e3e7;
+  .avatar {
+    padding: 30px 52px 30px;
+
+    img {
+      border-radius: 100%;
+    }
+  }
+
+  .info {
+    text-align: center;
+    h3 {
+      font-size: 24px;
+      font-weight: bold;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .job {
+      font-size: 13px;
+      color: #757575;
+    }
+  }
+
+  .social {
+    text-align: center;
+    padding: 20px 0;
+    & > li {
+      display: inline-block;
+      padding: 0 10px;
+    }
+    .icon {
+      width: 24px;
+    }
+  }
+}
+
+#download-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  text-transform: uppercase;
+  background-color: #333;
+  color: #f2f2f2;
+  border-radius: 1.5em;
+}
+
+.dm-content-box {
+
+  .dm-content-part {
+    padding: 20px;
+    border: 1px solid #e1e1e1;
+    background-color: #fff;
+    margin-bottom: 1.5em;
+  }
+
+  .main-title {
+    font-size: 26px;
+    margin-top: 20px;
+    word-spacing: 0.3em;
+    letter-spacing: 0.1em;
+    line-height: 34px;
+  }
+
+  section {
+    padding-bottom: 1.5em;
+    margin-bottom: 2em;
+    border-bottom: 1px solid #ccc;
+  }
+
+  section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+  }
+  .content-paper {
+
+  }
+}
+
+//关于我
+.about-me {
+  padding-top: 15px;
+
+  h3 {
+    font-size: @base-font-size*1.2;
+    color: #757575;
+    padding-bottom: 15px;
+  }
+  .col-half {
+    width: 50%;
+    float: left;
+  }
+
+  .detail {
+
+    table {
+      td {
+        padding: 8px;
+      }
+      td:first-child {
+        text-align: right;
+        font-weight: bold;
+      }
+    }
+
+  }
+
+  .skill {
+
+    li {
+      margin-bottom: 1.2em;
+    }
+
+    strong {
+      display: block;
+      font-size: @base-font-size * .8;
+      line-height: 1.2em;
+      padding-bottom: 0.7em;
+    }
+  }
+}
+
+//工作经历
+.experience-box {
+  position: relative;
+
+  .experience-list {
+    position: relative;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-left: 210px;
+  }
+
+  .experience-list::before {
+    content: ' ';
+    position: absolute;
+    left: -2px;
+    top:40px;
+    width: 1px;
+    bottom:0;
+    background-color: @base-color;
+  }
+  .position {
+    font-size: @base-font-size;
+    position: relative;
+  }
+
+  .position::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    left: -24px;
+    top: 0;
+    background-color: #222;
+    border-radius: 100%;
+  }
+  .experience-item {
+    padding-left: 20px;
+    position: relative;
+    border-bottom: none;
+    .time-range {
+      position: absolute;
+      width: 160px;
+      left: -185px;
+      padding: 8px 15px;
+      top:-13px;
+      background-color: @base-color;
+      text-align: right;
+    }
+    .time-range::after{
+      content: " ";
+      top: 0;
+      left: 100%;
+      width: 0;
+      height: 0;
+      position: absolute;
+      border-top: 16px solid transparent!important;
+      border-bottom: 16px solid transparent!important;
+      border-right: 10px solid transparent!important;
+      border-left: 10px solid transparent;
+      border-color: @base-color;
+    }
+    .company {
+      padding: 15px 0;
+    }
+    p {
+      font-size: @base-font-size * 0.8;
+      line-height: 1.5em;
+    }
+  }
+
+}
+
+//大量纯文本框子
+.text-box {
+  line-height: 1.6em;
+  font-size: 16px;
+
+  b {
+    line-height: 2em;
+  }
+}
+
+//背景svg
+.dm-bg-shape {
+  position: fixed;
+  top: 0;
+  z-index: -1;
+
+}
+
+#shape-1 {
+  left: 0;
+  polygon {
+    fill: #e1e1e1;
+  }
+}
+
+#shape-2 {
+  right: 0;
+  polygon {
+    fill: #c0e3e7;
+  }
+}
+
+//进度条
+
+.progress {
+
+  background-color: #f2f2f2;
+  .progress-bar {
+    background-color: #c0e3e7;
+    display: block;
+    height: 5px;
+  }
+
+}
+
+@media (min-width: 1000px) {
+  .dm-wrapper {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  .dm-head-inner,
+  .dm-content-box {
+    padding-left: 335px;
+  }
+
+  .dm-side-box {
+    width: 300px;
+    float: left;
+  }
+
+  .dm-container, .dm-head-inner {
+    width: 1180px;
+  }
+
+  .content-paper,
+  .main-title {
+    margin-right: 3%;
+    margin-left: 3%;
+  }
+
+}
+
