@@ -243,6 +243,8 @@
             {+contentBody}
 
             {/contentBody}
+
+            {+loading}
             <transition name="fade">
                 <div class="content-loading" v-if="loading">
                     <div class="spinner">
@@ -261,6 +263,7 @@
                 <!--<div class="rect5"></div>-->
                 <!--</div>-->
             </transition>
+            {/loading}
         </section>
     </section>
     <!-- 内容区域 end -->
