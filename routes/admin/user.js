@@ -2,7 +2,7 @@
  * Created by dong on 2017/6/17.
  */
 let user = require('../../controllers/user');
-let userAll = function (req, res, next) {
+let userAll = function(req, res, next) {
     var action = req.params.action;
 
     if (req.route.methods.get) {
@@ -23,15 +23,15 @@ let userAll = function (req, res, next) {
 
 
 let reqGetHander = {
-    list: function (req, res, next) {
+    list: function(req, res, next) {
         res.render('user/adminer.html');
     }
 };
 
 let reqPostHander = {
-    add: function (req, res, next) {
+    add: function(req, res, next) {
         "use strict";
-        userMod.insertOne(req.body, function (err, data) {
+        userMod.insertOne(req.body, function(err, data) {
             if (err) {
                 res.json(err);
             } else {
@@ -39,9 +39,15 @@ let reqPostHander = {
             }
         });
     },
-    update:user.updateUser
+    update: user.updateUser
 };
 module.exports = {
+    '/': function(req , res, next) {
+        console.log(req.session)
+
+        res.render('user/detail.html')
+    },
+
     '/:action': {
         get: userAll,
         post: userAll

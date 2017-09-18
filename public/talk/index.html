@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>talk</title>
+    <script type="text/javascript" src="http://localhost:9700/socket.io/socket.io.js"></script>
+    <style>
+        body {
+            font-size: 14px;
+        }
+
+        .text-primary {
+            color: #007AFF;
+        }
+
+        .talk-box {
+            width: 600px;
+            height: 400px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .talk-box .head {
+            height: 35px;
+            background: #f5f5f5;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom: 1px solid #ddd;
+            line-height: 35px;
+            padding: 0 8px;
+        }
+
+        .talk-box .num {
+            font-style: normal;
+        }
+
+        .content-wrap {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .content-wrap .other {}
+
+        .content-wrap .user-name,
+        .content-wrap .user-words {
+            padding: 8px;
+        }
+
+        .content-wrap .user-name {
+            display: block;
+        }
+
+        .content-wrap .user-name>img {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .content-wrap .user-name .user-name-text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .content-wrap .user-words {
+            background-color: #d9edf7;
+            max-width: 60%;
+            display: inline-block;
+            margin-left: 20px;
+        }
+        .content-wrap .my {
+            text-align: right;
+        }
+        .content-wrap .my .user-name{
+            text-align: right;
+        }
+        .content-wrap .my .user-words{
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="talk-box">
+    <header class="head">
+        <span>当前在线人数：<em class="num text-primary">12</em></span>
+    </header>
+    <section class="content-wrap">
+        <div class="content-inner">
+            <div class="other">
+                    <span class="user-name">
+                    	<img src="/assets/images/admin-light.png" alt="">
+                    	<span class="user-name-text">张三南沙</span>
+                    </span>
+                <span class="user-words">阿斯达多撒阿萨德啊</span>
+            </div>
+            <div class="my">
+                    <span class="user-name">
+                    	<img src="/assets/images/admin-light.png" alt="">
+                    	<span class="user-name-text">张三南沙</span>
+                    </span>
+                <span class="user-words">阿斯达多撒阿萨德啊</span>
+            </div>
+        </div>
+    </section>
+    <section class="send-wrap">
+    </section>
+</div>
+</body>
+<script type="tmpl/html">
+
+</script>
+<script type="text/javascript">
+    var socket = io('http://localhost:9700');
+    socket.on('pass', function(data) {
+        console.log(data);
+        socket.emit('recive-data', { my: 'data' });
+    });
+</script>
+
+</html>
