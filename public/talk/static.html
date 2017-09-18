@@ -4,57 +4,80 @@
 <head>
     <meta charset="UTF-8">
     <title>静态页面</title>
-    <style>
-    * {
-        box-sizing: border-box;
-    }
-
-    textarea {
-    	outline: none;
-        display: block;
-        padding: 5px;
-        height: 168px;
-        line-height: 20px;
-        border: none;
-        overflow: auto;
-        resize: none;
-        background: 0 0;
-        /*border:1px solid #ddd;*/
-        margin:0 auto;
-        width: 400px;
-    }
-    .shandow{
-    	box-shadow:  inset 0 1px 1px rgba(0,0,0,0.2) , 0 0 #fff,0 0 #fff,0 0 #fff;
-    }
-	.dm-chat-box{
-		width: 600px;
-		height:500px;
-		position: fixed;
-		left:100px;
-		top:20px;
-		border:1px solid #d9d9d9;
-		box-shadow: 0 0 2px rgba(0,0,0,0.3);
-		border-radius: 3px;
-		background-color: #f6f6f6;
-	}
-	.dm-chat-title{
-		height: 60px;
-		cursor: move;
-	}
-    </style>
+    <link rel="stylesheet/less" type="text/css" href="talk.less" />
+    <script>
+        less = {
+            env: "development",
+            async: false,
+            fileAsync: false,
+            poll: 1000,
+            functions: {},
+            dumpLineNumbers: "comments",
+            relativeUrls: false,
+            rootpath: ":/a.com/"
+        };
+    </script>
+    <script src="http://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
 </head>
 
 <body>
-    <div class="dm-chat-box">
-		<section class="dm-chat-title">
-			
-		</section>
-		
-		<section class="dm-chat-content">
-			
-		</section>
+<div class="dm-chat-wrapper dm-popup-box">
+    <section class="dm-wrapper-title">
 
-    </div>
+    </section>
+
+    <section class="dm-wrapper-content">
+        <ul class="dm-chat-userlist dm-user-list">
+            <li>aaaaa</li>
+            <li>aaaaa</li>
+            <li>aaaaa</li>
+            <li>aaaaa</li>
+            <li>aaaaa</li>
+            <li>aaaaa</li>
+        </ul>
+
+        <div class="dm-chat-box">
+            <div class="dm-chat-inner">
+                <div class="dm-chat-title">
+                    <div class="dm-chat-info">
+                        <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="" class="dm-avatar">
+                        <a class="dm-chat-name no-break" title="主机主机主机主机主机主机主机主机主机主机主机主机主机主机主机">主机主机主机主机主主机</a>
+                    </div>
+                </div>
+
+                <div class="dm-chat-main">
+                    <ul>
+                        <li>
+                            <div class="chat-user">
+                                <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="dm-avatar" alt="">
+                                <span class="user-name no-break">
+                                    zhang张阿森纳
+                                    <i class="time">2017-10-12 12:23:31</i>
+                                </span>
+                            </div>
+                            <div class="chat-text">
+                                z上单阿斯顿阿斯顿阿斯顿阿三阿四z上单阿斯顿阿斯顿阿斯顿阿三阿四z上单阿斯顿阿斯顿阿斯顿阿三阿四z上单阿斯顿阿斯顿阿斯顿阿三阿四
+                            </div>
+                        </li>
+                        <li class="mine">
+                            <div class="chat-user">
+                                <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="dm-avatar" alt="">
+                                <span class="user-name no-break">
+                                     <i class="time">2017-10-12 12:23:31</i>
+                                    zhang张阿森纳
+                                </span>
+                            </div>
+                            <div class="chat-text">
+                                z上单阿斯顿阿斯顿阿斯顿阿三阿四z上单阿斯顿阿斯顿阿斯顿阿三阿四z上单阿斯顿阿斯顿阿斯顿阿三阿四z上单阿斯顿阿斯顿阿斯顿阿三阿四
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
 </body>
 
 </html>
