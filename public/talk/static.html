@@ -123,8 +123,6 @@
         </section>
     </div>
 </body>
-<script src="http://localhost:9700/socket.io/socket.io.js"></script>
-<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script type="html/tmpl" id="others">
 <li>
     <div class="chat-user">
@@ -145,6 +143,10 @@
     <div class="chat-text"><%words%></div>
 </li>
 </script>
+<script src="http://localhost:9700/socket.io/socket.io.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="./talk.js"></script>
+
 <script type="text/javascript">
 var transitionEvent = (function() {
     var t,
@@ -186,7 +188,6 @@ oDiv.classList.add('dm-bounceIn');
 
 oDiv.addEventListener(animationEvent, function() {
     oDiv.classList.remove('dm-bounceIn');
-    console.log('aaaaa')
 });
 
 $('.dropdown').click(function(){
