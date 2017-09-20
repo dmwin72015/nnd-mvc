@@ -32,7 +32,7 @@ app.use(session({
     secret: 'dongmin-pc',
     resave: false,
     saveUninitialized: true,
-    cookie: {maxAge: 60 * 60 * 1000}
+    cookie: { maxAge: 60 * 60 * 1000 }
 }))
 
 
@@ -52,8 +52,7 @@ app.use(require('./routes/test'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    console.log('---');
-    var err = new Error('Not Found');
+app.js    var err = new Error('Not Found');
     err.status = 404;
     // res.sendStatus(404);
     res.status(404).render('40x', {
