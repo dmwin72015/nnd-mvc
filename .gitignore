@@ -6,3 +6,4 @@ gulpfile.js
 public-src
 .editorconfig
 tmp
+socket-io/node_modules
