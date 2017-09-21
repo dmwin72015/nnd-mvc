@@ -1,104 +1,49 @@
-var app = require('http').createServer(handler)
-var io = require('socket.io')(app);
-var fs = require('fs');
-var moment = require('moment');
-var xss = require('xss');
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
-app.listen(9700);
-require('./core/model');
+var index = require('./routes/index');
+var users = require('./routes/users');
 
-let static = __dirname + "/public";
+var app = express();
 
-
-function handler(req, res) {
-    fs.readFile(static + '/index.html', function(err, data) {
-        if (err) {
-            res.writeHead(500);
-            return res.end('Error loading index.html');
-        }
-        res.writeHead(200);
-        res.end(data);
-    });
-}
-
-io.on('connection', function(socket) {
-    reciveMessage(socket);
-
-    console.log(socket.request.headers);
-    // console.log(socket);
+// view engine setup
+app.engine('html', require('express-art-template'));
+app.set('view engine', 'html');
+app.set('view options', {
+    debug: process.env.NODE_ENV !== 'production'
 });
 
-function reciveMessage(socket) {
-    socket.on('client-msg', function(data) {
-        var _send_data = {
-            words: escape(data.words),
-            name: socket.id,
-            time: moment().format('YYYY-MM-DD HH:mm:ss')
-        };
-        allBrandcastMessage(_send_data);
-        // bradcastMessage(socket,_send_data);
-    })
-}
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-function bradcastMessage(socket, data) {
-    socket.broadcast.emit('broadcast-msg', data);
-}
+app.use('/', index);
+app.use('/users', users);
 
-function allBrandcastMessage(data) {
-    // io.sockets.emit('message', "this is a test");
-    io.sockets.emit('all-broadcast-msg', data.words);
-}
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
 
-/** Used to map HTML entities to characters. */
-var htmlEscapes = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;',
-    '`': '&#96;'
-};
+// error handler
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-var htmlUnescapes = {
-    '&amp;': '&',
-    '&lt;': '<',
-    '&gt;': '>',
-    '&quot;': '"',
-    '&#39;': "'",
-    '&#96;': '`'
-};
-var reEscapedHtml = /&(?:amp|lt|gt|quot|#39|#96);/g,
-    reUnescapedHtml = /[&<>"'`]/g,
-    reHasEscapedHtml = RegExp(reEscapedHtml.source),
-    reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+});
 
-function escapeHtmlChar(chr) {
-    return htmlEscapes[chr];
-}
-
-function unescapeHtmlChar(chr) {
-    return htmlUnescapes[chr];
-}
-
-function baseToString(value) {
-    return value == null ? '' : (value + '');
-}
-
-function escape(string) {
-    // Reset `lastIndex` because in IE < 9 `String#replace` does not.
-    string = baseToString(string);
-    return (string && reHasUnescapedHtml.test(string)) ?
-        string.replace(reUnescapedHtml, escapeHtmlChar) :
-        string;
-}
-
-function unescape(string) {
-    string = baseToString(string);
-    return (string && reHasEscapedHtml.test(string)) ?
-        string.replace(reEscapedHtml, unescapeHtmlChar) :
-        string;
-}
-
-// io.on('msg', function(data) {
-//     Socket_obj.broadcast.emit('everyone', { msg: data.msg });
-// });
+module.exports = app;

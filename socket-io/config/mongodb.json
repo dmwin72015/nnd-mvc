@@ -1,13 +1,19 @@
-{	
+{
     "host": "66.112.217.251",
     "port": "27017",
     "user": "chatadmin",
     "pass": "chatadmin_2017",
-    "db":{
-    	"databaseName":"chat",
-    	"native_parser":true
-    },
-    "server":{
-		"poolSize":8,
+    "conf":
+    {
+        "db":
+        {
+            "databaseName": "chat",
+            "native_parser": true
+        },
+        "server":
+        {
+            "poolSize": 8
+        },
+        "useMongoClient": true
     }
 }
