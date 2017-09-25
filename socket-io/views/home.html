@@ -361,37 +361,73 @@ var app = new Vue({
 
 
 $('body').on('mousedown', '.dm-wrapper-title', function(ev) {
-    var x = ev.pageX;
-    var y = ev.pageY;
+    var that = this;
+    var $parent = $(that).parent();
+    var eleWidth = that.offsetWidht;
+    var eleHeight = that.offsetHeight;
 
-    $(this).parent()
-        .on('selectstart',function(){
+    var pageX = ev.pageX || ev.clientX;
+    var pageY = ev.pageY || ev.clientY
+    var relativeX = pageX - $parent[0].offsetLeft;
+    var relativeY = pageY - $parent[0].offsetTop;
+    var x = pageX - relativeX;
+    var y = pageY - relativeY;
+    console.log($parent[0].offsetLeft, $parent[0].offsetTop)
+
+    $parent
+        .on('selectstart', function() {
             return false;
         })
         .on('dragstart', function(ev) {
             console.log('move....');
             var dataTransfer = ev.dataTransfer;
             // dataTransfer.setData("text/plain","人员其内容");
-            dataTransfer.effectAllowed = 'move';
-            dataTransfer.setDragImage(ev.target, 0, 0);
+            // dataTransfer.effectAllowed = 'move';
+            // dataTransfer.setDragImage(ev.target, 0, 0); //复制出一个同样的元素，透明效果，
             console.log(dataTransfer.types);
         })
-        .on('drag',function(){
+        .on('drag', function() {
             console.log('拖动')
+            $(this).css({
+                left: x + 'px',
+                top: y + 'px'
+            })
         })
-        .on('drop', function(){
+        .on('drop', function() {
             console.log('释放')
         })
         .on('dragend', function(ev) {
+            ev.preventDefault()
             console.log('拖拽结束...');
             console.log(ev);
-            $(this).css({
-                left:ev.pageX + 'px',
-                top:ev.pageY + 'px'
-            })
+            // $(this).css({
+            //     left: x + 'px',
+            //     top: y + 'px'
+            // })
             $(this).off('drag').off('selectstart').off('dragstart').off('drop');
+            $('body').off('dragover').off('dragenter');
         })
-
+    var maxLeft = $('body').width() - eleWidth;
+    var maxTop = $('body').height() - eleHeight;
+    $('body').on('dragover', function(ev) {
+        ev.preventDefault(); //阻止了一些动画效果，目前在chrome下测试，阻止，一个阴影淡出的一个效果
+        x = (ev.pageX || ev.clientX) - relativeX;
+        y = (ev.pageY || ev.clientY) - relativeY;
+        if (x <= 0) {
+            x = 0;
+        }
+        if (y <= 0) {
+            y = 0;
+        }
+        if (x >= maxLeft) {
+            x = maxLeft;
+        }
+        if (y >= maxTop) {
+            y = maxTop;
+        }
+    }).on('dragenter', function(ev) {
+        ev.preventDefault();
+    })
 });
 </script>
 
