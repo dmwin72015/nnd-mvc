@@ -1,0 +1,7 @@
+{
+    "host": "66.112.217.251",
+    "port": "16379",
+    "pass": "redis_dm2017",
+    "db": 3,
+    "secret": "dongmin socket"
+}

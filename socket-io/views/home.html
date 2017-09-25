@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}} - 首页</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet/less" type="text/css" href="/less/talk.less" />
+    <script>
+    less = {
+        env: "development",
+        async: false,
+        fileAsync: false,
+        poll: 1000,
+        functions: {},
+        dumpLineNumbers: "comments",
+        relativeUrls: false,
+        rootpath: "/less/source/"
+    };
+    </script>
+    <script src="http://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <style>
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity .3s
+    }
+
+    .fade-enter,
+    .fade-leave-to {
+        opacity: 0
+    }
+    </style>
+</head>
+
+<body>
+    <div id="page_bg">
+    </div>
+    <div class="panel-box" id="main-panel" draggable="true">
+        <header class="panel-header">
+            <h3 class="">登录{%title%}</h3>
+        </header>
+        <div class="panel-body">
+            <template v-if="hasLogin">
+                <nav class="tab-nav clearfix">
+                    <a href="javascript:;" class="tab-nav-item user active"><img src="/images/user.png" alt=""> </a>
+                    <a href="javascript:;" class="tab-nav-item users"> <img src="/images/users.png" alt=""> </a>
+                    <a href="javascript:;" class="tab-nav-item talking"> <img src="/images/bubble.png" alt=""> </a>
+                </nav>
+                <ul class="tab-body-wraper">
+                    <li class="tab-body">
+                        <section class="user-wraper">
+                            <ul class="user-list" v-on:click="toTalk">
+                                <li class="user-item" v-for="item in friends">
+                                    <a href="javascript:;" class="avatar">
+                                            <img src="/images/logo2.png" alt="">
+                                        </a>
+                                    <div class="user-info">
+                                        <p class="user-name">{{item.name}}</p>
+                                        <p class="user-desc">{{item.desc}}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
+                    </li>
+                    <li class="tab-body hide">
+                        <section class="group-wraper">
+                            tab2222222
+                        </section>
+                    </li>
+                    <li class="tab-body hide">
+                        <section class="">
+                            tab33333333
+                        </section>
+                    </li>
+                </ul>
+            </template>
+            <template v-else>
+                <div class="login-wraper" v-on:click="clickmoveing" v-on:focusin="focusmoving" v-on:focusout="blurmoving">
+                    <form action="javascript:;">
+                        <div class="form-group">
+                            <input type="text" class="form-ipt" v-model="username">
+                            <span class="ipt-label">账号</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-ipt" v-model="password">
+                            <span class="ipt-label">密码</span>
+                        </div>
+                        <template v-if="showModel == 'reg'">
+                            <div class="form-group">
+                                <input type="text" class="form-ipt" v-model="password_repeat">
+                                <span class="ipt-label">确认密码</span>
+                            </div>
+                            <div class="form-group captcha">
+                                <input type="text" class="form-ipt" placeholder="" v-model="captcha_val">
+                                <span class="ipt-label">图片验证码</span>
+                                <span class="capt-img">
+                                    <img v-bind:src="captcha_url" alt="" v-on:click="refresh_capt">
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input type="button" class="dm-btn primary" value="注册" v-on:click="saveUser">
+                                <a href="javascript:;" class="reg-btn" v-on:click="showModel='login'">去登录</a>
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div class="form-group">
+                                <input type="button" class="dm-btn primary" value="登录" v-on:click="loginUser">
+                                <a href="javascript:;" class="reg-btn" v-on:click="showModel='reg'">去注册</a>
+                            </div>
+                        </template>
+                    </form>
+                </div>
+            </template>
+        </div>
+        <footer class="panel-footer">
+            <div class="footer-inner">
+                <template v-if="hasLogin">
+                    <div class="err-tip" v-html="err_tip"></div>
+                </template>
+                <template v-else>
+                    <div class="user-tools">
+                        <a href="javascript:;" v-on:click="popupBox(f)">
+                            添加好友
+                        </a>
+                        <a href="javascript:;" v-on:click="popupBox(g)">
+                            创建群
+                        </a>
+                    </div>
+                </template>
+            </div>
+            <!-- <nav class="menu-nav">
+                <a href="javascript:;">1</a>
+                <a href="javascript:;">2</a>
+                <a href="javascript:;">3</a>
+                <a href="javascript:;">4</a>
+            </nav> -->
+        </footer>
+    </div>
+    <div class="dm-chat-wrapper dm-popup-box dm-anim" id="chatBox" draggable="true">
+        <section class="dm-wrapper-title"></section>
+        <section class="dm-wrapper-content">
+            <ul class="dm-chat-userlist dm-user-list hide">
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+            </ul>
+            <div class="dm-chat-box">
+                <div class="dm-chat-inner">
+                    <div class="dm-chat-title">
+                        <div class="dm-chat-info">
+                            <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="" class="dm-avatar">
+                            <a class="dm-chat-name no-break" title="主机主机主机主机主机主机主机主机主机主机主机主机主机主机主机">红衣主教
+                                <br/>
+                                <span class="dm-chat-userStatus online">(在线)</span>
+                            </a>
+                        </div>
+                        <div class="dm-wrapper-tool">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="dm-chat-main">
+                        <ul id="messages_list">
+                        </ul>
+                    </div>
+                    <div class="dm-chat-foot">
+                        <div class="dm-chat-tool">
+                            <span class="dm-icon emoji-icon">
+                                
+                            </span>
+                            <span class="dm-icon file-icon">
+                                
+                            </span>
+                            <span class="dm-icon audio-icon">
+                                
+                            </span>
+                            <span class="dm-icon video-icon">
+                                
+                            </span>
+                            <span class="dm-icon setting-icon">
+                                
+                            </span>
+                            <span class="dm-icon history-icon pull-right">
+                                <em>聊天记录</em>
+                            </span>
+                        </div>
+                        <div class="dm-chat-sendText">
+                            <textarea id="sendText" autofocus="true"></textarea>
+                        </div>
+                        <div class="dm-chat-sendBtns">
+                            <a href="javascript:;" class="dm-btn danger">关闭</a>
+                            <a href="javascript:;" class="dm-btn-group">
+                                <span class="dm-btn send">发送</span>
+                                <span class="dm-btn send dropdown" id="sendOpt"><i class="caret"></i></span>
+                                <ul class="dropdown-menu" data-toggle="sendOpt">
+                                    <li>
+                                        <i>√</i>i按Enter键发送消息
+                                    </li>
+                                    <li>
+                                        <i></i>按Ctrl+Enter键发送消息
+                                    </li>
+                                </ul>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+<script src="/js/lib/particles.js"></script>
+<script src="http://cdnjs.gtimg.com/cdnjs/libs/zepto/1.1.4/zepto.min.js"></script>
+<script src="/js/vue/vue.js"></script>
+<script>
+// function $(selector) {
+//     return document.querySelectorAll(selector);
+// }
+particlesJS.load('page_bg', '/js/lib/particles.json', function() {
+    console.log('callback - particles.js config loaded');
+    // particlesJS();
+});
+
+$('body').on('click', '.tab-nav-item', function() {
+    var $tab = $(this);
+    var index = $tab.index();
+    var $tbody = $('.tab-body').eq(index);
+    var width = $tbody.width();
+    $tbody.removeClass('hidden').siblings().addClass('hidden');
+    $tab.addClass('active').siblings().removeClass('active');
+    $tbody.closest('.tab-body-wraper').css({
+        'transform': 'translate3d(-' + width * index + 'px,0,0)'
+    })
+});
+
+var app = new Vue({
+    el: '#main-panel',
+    data: {
+        hasLogin: false,
+        showModel: 'login',
+        username: '',
+        password: '',
+        password_repeat: '',
+        captcha_val: '',
+        captcha_url: '/img/capt.gif',
+        err_tip: '',
+        friends: []
+    },
+    methods: {
+        focusmoving: function(ev) {
+            var target = ev.target;
+            $(target).next().addClass('sup');
+        },
+        clickmoveing: function(ev) {
+            var target = ev.target;
+            $(target).prev().focus();
+        },
+        blurmoving: function(ev) {
+            var target = ev.target;
+            if (!target.value) {
+                $(target).next().removeClass('sup');
+            }
+        },
+        refresh_capt: function(ev) {
+            ev.target.src = this.captcha_url + '?_=' + Date.now() + Math.random();
+        },
+        showErrTip: function(text) {
+            this.err_tip = '<span>' + text + '</span>';
+        },
+        saveUser: function() {
+            var that = this;
+            if (!that.username) {
+                that.showErrTip('请输入用户名');
+                return;
+            }
+            if (!that.password) {
+                that.showErrTip('请输入密码');
+                return;
+            }
+            if (!that.password_repeat) {
+                that.showErrTip('请重复确认密码');
+                return;
+            }
+            if (that.password_repeat !== that.password) {
+                that.showErrTip('两次密码不一致');
+                return;
+            }
+            if (!that.captcha_val) {
+                that.showErrTip('请输入图片码中数字的计算的值');
+                return;
+            }
+            $.ajax({
+                url: '/user',
+                type: 'post',
+                data: {
+                    name: that.username,
+                    pass: that.password_repeat,
+                },
+                success: function(data) {
+                    if (data && data.status == '200') {
+                        that.err_tip = '注册成功！三秒之后跳转登录页面';
+                        setTimeout(function() {
+                            that.showModel = 'login';
+                            that.err_tip = '';
+                        }, 3000)
+                    } else {
+                        that.err_tip = data.err_msg;
+                    }
+                }
+            })
+        },
+        loginUser: function() {
+            var that = this;
+            var name = this.username;
+            var pass = this.password;
+
+            if (!name || !pass) {
+                that.err_tip = '请输入用户名或者密码';
+                return;
+            }
+
+            $.ajax({
+                url: '/user/login',
+                type: 'post',
+                data: {
+                    name: name,
+                    pass: pass
+                },
+                success: function(data) {
+                    if (data && data.status == '200') {
+                        that.hasLogin = true;
+                        that.err_tip = '';
+                    } else {
+                        that.err_tip = data.err_msg;
+                    }
+                }
+            })
+        },
+        toTalk: function(ev) {
+            var target = ev.target;
+
+        },
+        popupBox: function(type) {
+            if (type == 'f') {
+
+            }
+        }
+    },
+
+    watch: {
+        showModel: function() {
+            this.username = '';
+            this.password = '';
+            this.password_repeat = '';
+        }
+    }
+});
+
+
+$('body').on('mousedown', '.dm-wrapper-title', function(ev) {
+    var x = ev.pageX;
+    var y = ev.pageY;
+
+    $(this).parent()
+        .on('selectstart',function(){
+            return false;
+        })
+        .on('dragstart', function(ev) {
+            console.log('move....');
+            var dataTransfer = ev.dataTransfer;
+            // dataTransfer.setData("text/plain","人员其内容");
+            dataTransfer.effectAllowed = 'move';
+            dataTransfer.setDragImage(ev.target, 0, 0);
+            console.log(dataTransfer.types);
+        })
+        .on('drag',function(){
+            console.log('拖动')
+        })
+        .on('drop', function(){
+            console.log('释放')
+        })
+        .on('dragend', function(ev) {
+            console.log('拖拽结束...');
+            console.log(ev);
+            $(this).css({
+                left:ev.pageX + 'px',
+                top:ev.pageY + 'px'
+            })
+            $(this).off('drag').off('selectstart').off('dragstart').off('drop');
+        })
+
+});
+</script>
+
+</html>

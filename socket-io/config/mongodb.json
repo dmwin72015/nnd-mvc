@@ -3,6 +3,7 @@
     "port": "27017",
     "user": "chatadmin",
     "pass": "chatadmin_2017",
+    "database": "chat",
     "conf":
     {
         "db":
@@ -10,10 +11,13 @@
             "databaseName": "chat",
             "native_parser": true
         },
-        "server":
+        "poolSize": 8,
+        "useMongoClient": true,
+        "auth":
         {
-            "poolSize": 8
-        },
-        "useMongoClient": true
+            "user": "chatadmin",
+            "password": "chatadmin_2017",
+            "authdb": "chat"
+        }
     }
 }
