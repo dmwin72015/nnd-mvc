@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{{title}} - 首页</title>
+    <title>{%title%} - 首页</title>
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet/less" type="text/css" href="/less/talk.less" />
     <script>
@@ -114,7 +114,7 @@
         </div>
         <footer class="panel-footer">
             <div class="footer-inner">
-                <template v-if="hasLogin">
+                <template v-if="!hasLogin">
                     <div class="err-tip" v-html="err_tip"></div>
                 </template>
                 <template v-else>
@@ -135,8 +135,15 @@
                 <a href="javascript:;">4</a>
             </nav> -->
         </footer>
+
+        <div>
+            <chat-popup v-if="chatTo" v-bind:data="chatTo" v-bind:style="styles"></chat-popup>
+        </div>
+        <div>
+            
+        </div>
     </div>
-    <div class="dm-chat-wrapper dm-popup-box dm-anim" id="chatBox" draggable="true">
+    <div class="dm-chat-wrapper dm-popup-box dm-anim hide" id="chatBox" draggable="true">
         <section class="dm-wrapper-title"></section>
         <section class="dm-wrapper-content">
             <ul class="dm-chat-userlist dm-user-list hide">
@@ -211,10 +218,93 @@
             </div>
         </section>
     </div>
+
 </body>
 <script src="/js/lib/particles.js"></script>
 <script src="http://cdnjs.gtimg.com/cdnjs/libs/zepto/1.1.4/zepto.min.js"></script>
 <script src="/js/vue/vue.js"></script>
+<script type="html/tmpl" id="chat-popup-box">
+    <div class="dm-chat-wrapper dm-popup-box dm-anim" id="chatBox" draggable="true">
+        <section class="dm-wrapper-title"></section>
+        <section class="dm-wrapper-content">
+            <ul class="dm-chat-userlist dm-user-list hide">
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+            </ul>
+            <div class="dm-chat-box">
+                <div class="dm-chat-inner">
+                    <div class="dm-chat-title">
+                        <div class="dm-chat-info">
+                            <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="" class="dm-avatar">
+                            <a class="dm-chat-name no-break" :title="user.name" :id="user.id">{{user.name}}
+                                <br/>
+                                <span class="dm-chat-userStatus online">({{user.status}})</span>
+                            </a>
+                        </div>
+                        <div class="dm-wrapper-tool">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="dm-chat-main">
+                        <ul id="messages_list">
+                            <li v-for="item in messages">
+                                <div class="chat-user">
+                                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="dm-avatar" alt="">
+                                    <span class="user-name no-break">
+                                    {{item.name}}
+                                    <i class="time">{{item.time}}</i>
+                                </span>
+                                </div>
+                                <div class="chat-text">
+                                {{item.words}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dm-chat-foot">
+                        <div class="dm-chat-tool">
+                            <span class="dm-icon emoji-icon"></span>
+                            <span class="dm-icon file-icon"></span>
+                            <span class="dm-icon audio-icon"></span>
+                            <span class="dm-icon video-icon"></span>
+                            <span class="dm-icon setting-icon"></span>
+                            <span class="dm-icon history-icon pull-right">
+                                <em>聊天记录</em>
+                            </span>
+                        </div>
+                        <div class="dm-chat-sendText">
+                            <textarea id="sendText" autofocus="true"></textarea>
+                        </div>
+                        <div class="dm-chat-sendBtns">
+                            <a href="javascript:;" class="dm-btn danger">关闭</a>
+                            <a href="javascript:;" class="dm-btn-group">
+                                <span class="dm-btn send">发送</span>
+                                <span class="dm-btn send dropdown" id="sendOpt"><i class="caret"></i></span>
+                                <ul class="dropdown-menu" data-toggle="sendOpt">
+                                    <li>
+                                        <i>√</i>i按Enter键发送消息
+                                    </li>
+                                    <li>
+                                        <i></i>按Ctrl+Enter键发送消息
+                                    </li>
+                                </ul>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</script>
+<script type="html/tmpl" id="addFriend">
+    
+</script>
 <script>
 // function $(selector) {
 //     return document.querySelectorAll(selector);
@@ -223,6 +313,24 @@ particlesJS.load('page_bg', '/js/lib/particles.json', function() {
     console.log('callback - particles.js config loaded');
     // particlesJS();
 });
+// 聊天窗口
+Vue.component('chat-popup', {
+    template: document.querySelector('#chat-popup-box').innerHTML.trim(),
+    props: ['chatTo'],
+    data: function(){
+        console.log(this);
+        return {
+            user : {
+                id:'12321',
+                name:"Sdadas",
+                time:'12312312',
+                status:"online"
+            },
+            messages:[]
+        }
+    }
+});
+// 添加好友
 
 $('body').on('click', '.tab-nav-item', function() {
     var $tab = $(this);
@@ -247,7 +355,24 @@ var app = new Vue({
         captcha_val: '',
         captcha_url: '/img/capt.gif',
         err_tip: '',
-        friends: []
+        friends: [],
+        chatTo:{
+            user:{
+                id:'12',
+                name:'开的老大',
+                status:'在线'
+            },
+            messages:[
+                {
+                    words:'我是阿萨德了啊啊',
+                    time:(new Date).toLocaleString()
+                }
+            ]
+        },
+        chatTo:null,
+        styles:{
+            left:'346px'
+        }
     },
     methods: {
         focusmoving: function(ev) {
@@ -358,6 +483,7 @@ var app = new Vue({
         }
     }
 });
+
 
 
 $('body').on('mousedown', '.dm-wrapper-title', function(ev) {
