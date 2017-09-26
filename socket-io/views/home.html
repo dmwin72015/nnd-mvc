@@ -135,15 +135,13 @@
                 <a href="javascript:;">4</a>
             </nav> -->
         </footer>
-
         <div>
             <chat-popup v-if="chatTo" v-bind:data="chatTo" v-bind:style="styles"></chat-popup>
         </div>
         <div>
-            
         </div>
     </div>
-    <div class="dm-chat-wrapper dm-popup-box dm-anim hide" id="chatBox" draggable="true">
+    <div class="dm-chat-wrapper dm-popup-box dm-anim dm-bounceIn  hide" id="chatBox" draggable="true">
         <section class="dm-wrapper-title"></section>
         <section class="dm-wrapper-content">
             <ul class="dm-chat-userlist dm-user-list hide">
@@ -218,7 +216,61 @@
             </div>
         </section>
     </div>
-
+    <div class="dm-chat-wrapper dm-popup-box add-user" style="left: 340px;">
+        <section class="dm-wrapper-title"></section>
+        <section class="dm-wrapper-content">
+            <div class="form-group">
+                <input type="text" class="form-ipt">
+                <div class="dm-btn-group">
+                    <span class="dm-btn primary addon">搜索</span>
+                </div>
+            </div>
+            <div class="search-result">
+                <ul class="user-list" v-on:click="toTalk">
+                    <li class="user-item" v-for="item in friends">
+                        <a href="javascript:;" class="avatar">
+                            <img src="/images/logo2.png" alt="">
+                        </a>
+                        <div class="user-info">
+                            <p class="user-name">asdasdsad</p>
+                            <p class="user-desc">asdasdasdasdasd</p>
+                        </div>
+                        <a href="javascript:;" class="dm-btn primary">添加</a>
+                    </li>
+                    <li class="user-item" v-for="item in friends">
+                        <a href="javascript:;" class="avatar">
+                            <img src="/images/logo2.png" alt="">
+                        </a>
+                        <div class="user-info">
+                            <p class="user-name">asdasdsad</p>
+                            <p class="user-desc">asdasdasdasdasd</p>
+                        </div>
+                        <a href="javascript:;" class="dm-btn primary">添加</a>
+                    </li>
+                    <li class="user-item" v-for="item in friends">
+                        <a href="javascript:;" class="avatar">
+                            <img src="/images/logo2.png" alt="">
+                        </a>
+                        <div class="user-info">
+                            <p class="user-name">asdasdsad</p>
+                            <p class="user-desc">asdasdasdasdasd</p>
+                        </div>
+                        <a href="javascript:;" class="dm-btn primary">添加</a>
+                    </li>
+                    <li class="user-item" v-for="item in friends">
+                        <a href="javascript:;" class="avatar">
+                            <img src="/images/logo2.png" alt="">
+                        </a>
+                        <div class="user-info">
+                            <p class="user-name">asdasdsad</p>
+                            <p class="user-desc">asdasdasdasdasd</p>
+                        </div>
+                        <a href="javascript:;" class="dm-btn primary">添加</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
 </body>
 <script src="/js/lib/particles.js"></script>
 <script src="http://cdnjs.gtimg.com/cdnjs/libs/zepto/1.1.4/zepto.min.js"></script>
@@ -262,7 +314,7 @@
                                 </span>
                                 </div>
                                 <div class="chat-text">
-                                {{item.words}}
+                                    {{item.words}}
                                 </div>
                             </li>
                         </ul>
@@ -303,7 +355,6 @@
     </div>
 </script>
 <script type="html/tmpl" id="addFriend">
-    
 </script>
 <script>
 // function $(selector) {
@@ -317,16 +368,16 @@ particlesJS.load('page_bg', '/js/lib/particles.json', function() {
 Vue.component('chat-popup', {
     template: document.querySelector('#chat-popup-box').innerHTML.trim(),
     props: ['chatTo'],
-    data: function(){
+    data: function() {
         console.log(this);
         return {
-            user : {
-                id:'12321',
-                name:"Sdadas",
-                time:'12312312',
-                status:"online"
+            user: {
+                id: '12321',
+                name: "Sdadas",
+                time: '12312312',
+                status: "online"
             },
-            messages:[]
+            messages: []
         }
     }
 });
@@ -356,22 +407,20 @@ var app = new Vue({
         captcha_url: '/img/capt.gif',
         err_tip: '',
         friends: [],
-        chatTo:{
-            user:{
-                id:'12',
-                name:'开的老大',
-                status:'在线'
+        chatTo: {
+            user: {
+                id: '12',
+                name: '开的老大',
+                status: '在线'
             },
-            messages:[
-                {
-                    words:'我是阿萨德了啊啊',
-                    time:(new Date).toLocaleString()
-                }
-            ]
+            messages: [{
+                words: '我是阿萨德了啊啊',
+                time: (new Date).toLocaleString()
+            }]
         },
-        chatTo:null,
-        styles:{
-            left:'346px'
+        chatTo: null,
+        styles: {
+            left: '346px'
         }
     },
     methods: {
