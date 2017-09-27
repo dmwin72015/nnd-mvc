@@ -52,7 +52,7 @@
                             <ul class="user-list" v-on:click="toTalk">
                                 <li class="user-item" v-for="item in friends">
                                     <a href="javascript:;" class="avatar">
-                                            <img src="/images/logo2.png" alt="">
+                                            <img src="/images/logo3.png" alt="">
                                         </a>
                                     <div class="user-info">
                                         <p class="user-name">{{item.name}}</p>
@@ -139,6 +139,7 @@
             <chat-popup v-if="chatTo" v-bind:data="chatTo" v-bind:style="styles"></chat-popup>
         </div>
         <div>
+            <chat-adduser v-bind:currentuser="userinfo" v-on:addfriend="addfriend"></chat-adduser>
         </div>
     </div>
     <div class="dm-chat-wrapper dm-popup-box dm-anim dm-bounceIn  hide" id="chatBox" draggable="true">
@@ -216,11 +217,11 @@
             </div>
         </section>
     </div>
-    <div class="dm-chat-wrapper dm-popup-box add-user" style="left: 340px;">
+    <!--     <div class="dm-chat-wrapper dm-popup-box add-user" style="left: 340px;">
         <section class="dm-wrapper-title"></section>
         <section class="dm-wrapper-content">
             <div class="form-group">
-                <input type="text" class="form-ipt">
+                <input type="text" class="form-ipt" placeholder="请输入用户名">
                 <div class="dm-btn-group">
                     <span class="dm-btn primary addon">搜索</span>
                 </div>
@@ -229,7 +230,7 @@
                 <ul class="user-list" v-on:click="toTalk">
                     <li class="user-item" v-for="item in friends">
                         <a href="javascript:;" class="avatar">
-                            <img src="/images/logo2.png" alt="">
+                            <img src="/images/logo3.png" alt="">
                         </a>
                         <div class="user-info">
                             <p class="user-name">asdasdsad</p>
@@ -239,7 +240,7 @@
                     </li>
                     <li class="user-item" v-for="item in friends">
                         <a href="javascript:;" class="avatar">
-                            <img src="/images/logo2.png" alt="">
+                            <img src="/images/logo3.png" alt="">
                         </a>
                         <div class="user-info">
                             <p class="user-name">asdasdsad</p>
@@ -249,7 +250,7 @@
                     </li>
                     <li class="user-item" v-for="item in friends">
                         <a href="javascript:;" class="avatar">
-                            <img src="/images/logo2.png" alt="">
+                            <img src="/images/logo3.png" alt="">
                         </a>
                         <div class="user-info">
                             <p class="user-name">asdasdsad</p>
@@ -259,7 +260,7 @@
                     </li>
                     <li class="user-item" v-for="item in friends">
                         <a href="javascript:;" class="avatar">
-                            <img src="/images/logo2.png" alt="">
+                            <img src="/images/logo3.png" alt="">
                         </a>
                         <div class="user-info">
                             <p class="user-name">asdasdsad</p>
@@ -270,7 +271,7 @@
                 </ul>
             </div>
         </section>
-    </div>
+    </div> -->
 </body>
 <script src="/js/lib/particles.js"></script>
 <script src="http://cdnjs.gtimg.com/cdnjs/libs/zepto/1.1.4/zepto.min.js"></script>
@@ -304,7 +305,8 @@
                         </div>
                     </div>
                     <div class="dm-chat-main">
-                        <ul id="messages_list">
+                        <transition name="fade"> 
+                        <ul id="messages_list" v-if="messages.length>0">
                             <li v-for="item in messages">
                                 <div class="chat-user">
                                     <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="dm-avatar" alt="">
@@ -318,6 +320,7 @@
                                 </div>
                             </li>
                         </ul>
+                        </transition> 
                     </div>
                     <div class="dm-chat-foot">
                         <div class="dm-chat-tool">
@@ -354,14 +357,39 @@
         </section>
     </div>
 </script>
-<script type="html/tmpl" id="addFriend">
+<script type="html/tmpl" id="add-user-popup">
+    <div class="dm-chat-wrapper dm-popup-box add-user" style="left: 340px;">
+        <section class="dm-wrapper-title"></section>
+        <section class="dm-wrapper-content">
+            <div class="form-group">
+                <input type="text" class="form-ipt" placeholder="请输入用户名" v-model="username">
+                <div class="dm-btn-group">
+                    <span class="dm-btn primary addon" v-on:click="searchUser">搜索</span>
+                </div>
+            </div>
+            <div class="search-result">
+                <ul class="user-list">
+                    <li class="user-item" v-for="item in users">
+                        <a href="javascript:;" class="avatar">
+                            <img src="/images/logo3.png" alt="">
+                        </a>
+                        <div class="user-info">
+                            <p class="user-name">{{item.uname}}</p>
+                            <p class="user-desc">{{item.desc}}</p>
+                        </div>
+                        <a href="javascript:;" class="dm-btn primary" v-on:click="addFriend(item._id)">添加</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
 </script>
 <script>
 // function $(selector) {
 //     return document.querySelectorAll(selector);
 // }
 particlesJS.load('page_bg', '/js/lib/particles.json', function() {
-    console.log('callback - particles.js config loaded');
+    console.log('particles加载完成 .............');
     // particlesJS();
 });
 // 聊天窗口
@@ -382,7 +410,69 @@ Vue.component('chat-popup', {
     }
 });
 // 添加好友
-
+var data = [{
+    id: '1',
+    name: '张三123',
+    desc: '武侠打下123'
+}, {
+    id: '2',
+    name: '张三212',
+    desc: '武侠打下123'
+}, {
+    id: '3',
+    name: '张三sad',
+    desc: '武侠打下123'
+}]
+Vue.component('chat-adduser', {
+    template: document.querySelector('#add-user-popup').innerHTML.trim(),
+    props: ['currentuser'],
+    data: function() {
+        console.log(this);
+        return {
+            users: [],
+            username: '',
+            uri: '/user/getuser',
+            curuser : this.currentuser
+        }
+    },
+    methods: {
+        addFriend: function(id) {
+            console.log(this);
+            console.log(this.curuser);
+            console.log(this.currentuser);
+            this.$emit('addfriend',{name:'123123'});
+        },
+        searchUser: function() {
+            var that = this;
+            var name = this.username;
+            if (!name) {
+                // return;
+            }
+            var options = {
+                method: "POST",
+                body: JSON.stringify({ name: name }),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }
+            fetch(this.uri, options)
+                .then(function(resp) {
+                    if(resp.status == '200'){
+                        return resp.json();
+                    }else{
+                        return [];
+                    }
+                })
+                .then(function(data){
+                    console.log(data);
+                    that.users = data;
+                })
+                .catch(function(err) {
+                    console.log(err);
+                })
+        }
+    }
+});
 $('body').on('click', '.tab-nav-item', function() {
     var $tab = $(this);
     var index = $tab.index();
@@ -421,7 +511,8 @@ var app = new Vue({
         chatTo: null,
         styles: {
             left: '346px'
-        }
+        },
+        userinfo:null
     },
     methods: {
         focusmoving: function(ev) {
@@ -506,6 +597,7 @@ var app = new Vue({
                 success: function(data) {
                     if (data && data.status == '200') {
                         that.hasLogin = true;
+                        that.userinfo = data;
                         that.err_tip = '';
                     } else {
                         that.err_tip = data.err_msg;
@@ -521,6 +613,10 @@ var app = new Vue({
             if (type == 'f') {
 
             }
+        },
+        addfriend:function(data){
+            console.log(data)
+            console.log('friends')
         }
     },
 
@@ -547,7 +643,6 @@ $('body').on('mousedown', '.dm-wrapper-title', function(ev) {
     var relativeY = pageY - $parent[0].offsetTop;
     var x = pageX - relativeX;
     var y = pageY - relativeY;
-    console.log($parent[0].offsetLeft, $parent[0].offsetTop)
 
     $parent
         .on('selectstart', function() {

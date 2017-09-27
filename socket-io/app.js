@@ -13,16 +13,38 @@ var users = require('./routes/users');
 
 var app = express();
 
+var redis = require('redis');
+
+
+
 // session save
 // -h 66.112.217.251 -p 16379 -a redis_dm2017
 const redis_config = utils.readConfigFile('redis.json');
+// TODO：【Debug】经过测试连接正常，但是redis里面却没有session信息
+// var redisClient = redis.createClient({
+//     host    :  redis_config.host,
+//     port    :  redis_config.port,
+//     password:  redis_config.pass,
+//     db      :  '3',
+//     prefix  :  'dm_chat:'
+// }); // replace with your config
+
+// redisClient.on('error', function(err) {
+//      console.log('Redis error: ' + err);
+// }); 
+
+// redisClient.set('test_redis',Date.now());
+
 app.use(session({
     store: new RedisStore({
-        'host': redis_config.host,
-        'port': redis_config.port,
-        'pass': redis_config.pass,
-        'db': redis_config.db
+             'host':   redis_config.host,
+             'port':   redis_config.port,
+             'pass':   redis_config.pass,
+               'db':   redis_config.db,
+           'prefix':   'dm2017',
+        'logErrors':   true
     }),
+
     resave: false,
     saveUninitialized:false,
     cookie: {

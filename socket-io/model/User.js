@@ -43,8 +43,9 @@ let userField = {
         default: '-1',
     },
     friends: {
-        type: [{ fid: ObjectId, appendTime: { type: Date, default: Date.now } }]
+        type: [{ uid: ObjectId, appendTime: { type: Date, default: Date.now } }]
     },
+    desc:String,
     created: {
         type: Date,
         default: Date.now

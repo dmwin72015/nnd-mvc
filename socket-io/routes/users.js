@@ -5,8 +5,8 @@ var User = require('../model').User;
 
 
 const ERR_SUCCESS = {
-    status : '200',
-    err_msg :'success'
+    status: '200',
+    err_msg: 'success'
 }
 
 const ERR_WRONG_PASS = {
@@ -71,18 +71,44 @@ router.get('/', function(req, res, next) {
     let uid = req.body.name;
     let pass = req.body.pass;
 
-    var _user = await User.findOne({
+    let _user = await User.findOne({
         uid: uid
     });
     if (!_user) {
         res.json(ERR_404_USER);
         return;
     }
-    if(_user.uid !== uid || _user.upwd !== pass){
+    if (_user.uid !== uid || _user.upwd !== pass) {
         res.json(ERR_WRONG_PASS);
         return;
     }
-    res.json(ERR_SUCCESS);
+    req.session.loginUser = _user;
+    res.json(Object.assign({},ERR_SUCCESS , {data:_user}));
+}).post('/getuser', async function(req, res, next) {
+    console.log(req.session);
+    let name = req.body.name || '';
+    let users;
+    if (name) {
+        users = await User.find({ uname: new RegExp(name, 'i') }, 'uid uname desc friends', { 'limit': 10 }).exec();
+    } else {
+        users = await User.find({}, 'uid uname desc friends', { 'limit': 10 }).exec();
+    }
+    if (users) {
+        res.json(users);
+    } else {
+        res.json({
+            status: 500,
+            err_msg: err
+        })
+    }
+}).post('/addfriend', async function(req, res, next) {
+    if(req.session){
+
+    }
+
+    var _id = req.session.userinfo ; 
+
+
 });
 
 

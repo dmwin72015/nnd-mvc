@@ -19,21 +19,21 @@ let pass = config.pass || '';
 // 默认test
 let database = config.database || 'test';
 
-if (user && pass) {
-    uri += user + ':' + pass + '@';
-}
+// 端口
 uri += host + ':' + port;
-// 如果db里面有配置，则使用db的，默认test
-if (!config.db || !config.db.databaseName) {
-    uri += '/' + database
-}
-console.log(uri);
+
+// 数据库名字
+uri += '/' + database
+
+// console.log(uri);
 // mongoose.connect('mongodb://username:password@host:port/database?options...');
+
+mongoose.Promise = global.Promise;
 mongoose.connect(uri, config.conf)
     .then(() => {
-        console.log('connect successed......');
+        console.log( (new Date).toLocaleString() + ' >>>>> MongoDB 连接成功 <<<<<');
     }, (err) => {
-        console.log('connect error......', err);
+        console.error((new Date).toLocaleString() + '>>>>> MongoDB 连接失败 <<<<<', err);
     });
 
 require('./Room');
