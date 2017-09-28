@@ -20,8 +20,8 @@ const ERR_404_USER = {
 };
 
 const ERR_AUTH_REQUIRED = {
-    status : '105',
-    err_msg : '请登录后操作'
+    status: '105',
+    err_msg: '请登录后操作'
 }
 
 
@@ -114,23 +114,36 @@ router.get('/', function(req, res, next) {
 }).post('/addfriend', async function(req, res, next) {
     let loginUser = req.session && req.session.loginUser;
     let toaddId = req.body.id;
-    console.log(toaddId , typeof toaddId);
-    if(loginUser){
-        var user = await User.findOne({_id:loginUser._id});
+    console.log(toaddId, typeof toaddId);
+    // if(loginUser){
+    //     var user = await User.findOne({_id:loginUser._id});
 
-        console.log(user);
+    //     console.log(user);
+    //     var friends = user.friends || {};
+    //     friends[toaddId] = {
+    //         created: new Date()
+    //     };
+    //     user.update({friends : friends } , function(err, doc){
+    //         console.log(err);
+    //         res.json(doc);
+    //     })
+    // }else{
+    //     res.json(ERR_AUTH_REQUIRED);
+    // }
 
-        user.friends = user.friends || {};
-        user.friends[toaddId] = {
+    User.findById(loginUser._id, function(err, doc) {
+        if(err){
+            res.json(ERR_AUTH_REQUIRED);
+            return;
+        }
+        var friends = user.friends || {};
+        friends[toaddId] = {
             created: new Date()
         };
-        user.update(function(err, doc){
-            console.log(err);
-            res.json(doc);
-        })
-    }else{
-        res.json(ERR_AUTH_REQUIRED);
-    }
+        doc.save(function(err, doc){
+            res.json(doc)
+        });
+    })
 });
 
 
