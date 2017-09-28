@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/home', function(req, res, next) {
+	req.session.visitTime = Date.now();
     res.render('home', { title: 'Home' });
 });
 

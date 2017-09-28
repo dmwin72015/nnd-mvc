@@ -16,44 +16,6 @@ var app = express();
 var redis = require('redis');
 
 
-
-// session save
-// -h 66.112.217.251 -p 16379 -a redis_dm2017
-const redis_config = utils.readConfigFile('redis.json');
-// TODO：【Debug】经过测试连接正常，但是redis里面却没有session信息
-// var redisClient = redis.createClient({
-//     host    :  redis_config.host,
-//     port    :  redis_config.port,
-//     password:  redis_config.pass,
-//     db      :  '3',
-//     prefix  :  'dm_chat:'
-// }); // replace with your config
-
-// redisClient.on('error', function(err) {
-//      console.log('Redis error: ' + err);
-// }); 
-
-// redisClient.set('test_redis',Date.now());
-
-app.use(session({
-    store: new RedisStore({
-             'host':   redis_config.host,
-             'port':   redis_config.port,
-             'pass':   redis_config.pass,
-               'db':   redis_config.db,
-           'prefix':   'dm2017',
-        'logErrors':   true
-    }),
-
-    resave: false,
-    saveUninitialized:false,
-    cookie: {
-        secure: true,
-        maxAge: 1000 * 60 * 30
-    },
-    secret: redis_config.secret
-}));
-
 // view engine setup
 let artTmpl = require('express-art-template');
 app.engine('html', artTmpl);
@@ -76,8 +38,47 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+// session save
+// -h 66.112.217.251 -p 16379 -a redis_dm2017
+const redis_config = utils.readConfigFile('redis.json');
+// TODO：【DONE】经过测试连接正常，但是redis里面却没有session信息
+// 经过测试是参数设置问题
+// var redisClient = redis.createClient({
+//     host    :  redis_config.host,
+//     port    :  redis_config.port,
+//     password:  redis_config.pass,
+//     db      :  '3',
+//     prefix  :  'dm_chat:'
+// }); // replace with your config
+
+// redisClient.on('error', function(err) {
+//      console.log('Redis error: ' + err);
+// }); 
+
+// redisClient.set('test_redis',Date.now());
+
+app.use(session({
+    store: new RedisStore({
+             'host':   redis_config.host,
+             'port':   redis_config.port,
+             'pass':   redis_config.pass,
+               'db':   redis_config.db,
+           'prefix':   'dm2017::',
+        'logErrors':   true
+    }),
+    resave: false,
+    saveUninitialized:true,
+    cookie: {
+        // secure: true,//https协议才会使用，人家文档有说明 Note be careful when setting this to true, as compliant clients will not send the cookie back to the server in the future if the browser does not have an HTTPS connection.
+        maxAge: 1000 * 60 * 30
+    },
+    secret: redis_config.secret
+}));
+
+// sstatic source
 app.use(express.static(path.join(__dirname, 'public')));
 
+// routes
 app.use('/', index);
 app.use('/user', users);
 

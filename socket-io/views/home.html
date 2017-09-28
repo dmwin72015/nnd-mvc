@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>{%title%} - 首页</title>
     <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet/less" type="text/css" href="/less/talk.less" />
+    <link rel="stylesheet/less" type="text/css" href="/less/talk.less?a=12" />
     <script>
     less = {
         env: "development",
@@ -15,6 +15,7 @@
         functions: {},
         dumpLineNumbers: "comments",
         relativeUrls: false,
+        useFileCache: true,
         rootpath: "/less/source/"
     };
     </script>
@@ -35,112 +36,110 @@
 <body>
     <div id="page_bg">
     </div>
-    <div class="panel-box" id="main-panel" draggable="true">
-        <header class="panel-header">
-            <h3 class="">登录{%title%}</h3>
-        </header>
-        <div class="panel-body">
-            <template v-if="hasLogin">
-                <nav class="tab-nav clearfix">
-                    <a href="javascript:;" class="tab-nav-item user active"><img src="/images/user.png" alt=""> </a>
-                    <a href="javascript:;" class="tab-nav-item users"> <img src="/images/users.png" alt=""> </a>
-                    <a href="javascript:;" class="tab-nav-item talking"> <img src="/images/bubble.png" alt=""> </a>
-                </nav>
-                <ul class="tab-body-wraper">
-                    <li class="tab-body">
-                        <section class="user-wraper">
-                            <ul class="user-list" v-on:click="toTalk">
-                                <li class="user-item" v-for="item in friends">
-                                    <a href="javascript:;" class="avatar">
+    <div id="app">
+        <div class="panel-box" id="main-panel" draggable="true">
+            <header class="panel-header">
+                <h3 class="">登录{%title%}</h3>
+            </header>
+            <div class="panel-body">
+                <template v-if="hasLogin">
+                    <nav class="tab-nav clearfix">
+                        <a href="javascript:;" class="tab-nav-item user active"><img src="/images/user.png" alt=""> </a>
+                        <a href="javascript:;" class="tab-nav-item users"> <img src="/images/users.png" alt=""> </a>
+                        <a href="javascript:;" class="tab-nav-item talking"> <img src="/images/bubble.png" alt=""> </a>
+                    </nav>
+                    <ul class="tab-body-wraper">
+                        <li class="tab-body">
+                            <section class="user-wraper">
+                                <ul class="user-list" v-on:click="toTalk">
+                                    <li class="user-item" v-for="item in friends">
+                                        <a href="javascript:;" class="avatar">
                                             <img src="/images/logo3.png" alt="">
                                         </a>
-                                    <div class="user-info">
-                                        <p class="user-name">{{item.name}}</p>
-                                        <p class="user-desc">{{item.desc}}</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </section>
-                    </li>
-                    <li class="tab-body hide">
-                        <section class="group-wraper">
-                            tab2222222
-                        </section>
-                    </li>
-                    <li class="tab-body hide">
-                        <section class="">
-                            tab33333333
-                        </section>
-                    </li>
-                </ul>
-            </template>
-            <template v-else>
-                <div class="login-wraper" v-on:click="clickmoveing" v-on:focusin="focusmoving" v-on:focusout="blurmoving">
-                    <form action="javascript:;">
-                        <div class="form-group">
-                            <input type="text" class="form-ipt" v-model="username">
-                            <span class="ipt-label">账号</span>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-ipt" v-model="password">
-                            <span class="ipt-label">密码</span>
-                        </div>
-                        <template v-if="showModel == 'reg'">
-                            <div class="form-group">
-                                <input type="text" class="form-ipt" v-model="password_repeat">
-                                <span class="ipt-label">确认密码</span>
-                            </div>
-                            <div class="form-group captcha">
-                                <input type="text" class="form-ipt" placeholder="" v-model="captcha_val">
-                                <span class="ipt-label">图片验证码</span>
-                                <span class="capt-img">
-                                    <img v-bind:src="captcha_url" alt="" v-on:click="refresh_capt">
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <input type="button" class="dm-btn primary" value="注册" v-on:click="saveUser">
-                                <a href="javascript:;" class="reg-btn" v-on:click="showModel='login'">去登录</a>
-                            </div>
-                        </template>
-                        <template v-else>
-                            <div class="form-group">
-                                <input type="button" class="dm-btn primary" value="登录" v-on:click="loginUser">
-                                <a href="javascript:;" class="reg-btn" v-on:click="showModel='reg'">去注册</a>
-                            </div>
-                        </template>
-                    </form>
-                </div>
-            </template>
-        </div>
-        <footer class="panel-footer">
-            <div class="footer-inner">
-                <template v-if="!hasLogin">
-                    <div class="err-tip" v-html="err_tip"></div>
+                                        <div class="user-info">
+                                            <p class="user-name">{{item.name}}</p>
+                                            <p class="user-desc">{{item.desc}}</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </section>
+                        </li>
+                        <li class="tab-body hide">
+                            <section class="group-wraper">
+                                tab2222222
+                            </section>
+                        </li>
+                        <li class="tab-body hide">
+                            <section class="">
+                                tab33333333
+                            </section>
+                        </li>
+                    </ul>
                 </template>
                 <template v-else>
-                    <div class="user-tools">
-                        <a href="javascript:;" v-on:click="popupBox(f)">
-                            添加好友
-                        </a>
-                        <a href="javascript:;" v-on:click="popupBox(g)">
-                            创建群
-                        </a>
+                    <div class="login-wraper" v-on:click="clickmoveing" v-on:focusin="focusmoving" v-on:focusout="blurmoving">
+                        <form action="javascript:;">
+                            <div class="form-group">
+                                <input type="text" class="form-ipt" v-model="username">
+                                <span class="ipt-label">账号</span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-ipt" v-model="password">
+                                <span class="ipt-label">密码</span>
+                            </div>
+                            <template v-if="showModel == 'reg'">
+                                <div class="form-group">
+                                    <input type="text" class="form-ipt" v-model="password_repeat">
+                                    <span class="ipt-label">确认密码</span>
+                                </div>
+                                <div class="form-group captcha">
+                                    <input type="text" class="form-ipt" placeholder="" v-model="captcha_val">
+                                    <span class="ipt-label">图片验证码</span>
+                                    <span class="capt-img">
+                                    <img v-bind:src="captcha_url" alt="" v-on:click="refresh_capt">
+                                </span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="button" class="dm-btn primary" value="注册" v-on:click="saveUser">
+                                    <a href="javascript:;" class="reg-btn" v-on:click="showModel='login'">去登录</a>
+                                </div>
+                            </template>
+                            <template v-else>
+                                <div class="form-group">
+                                    <input type="button" class="dm-btn primary" value="登录" v-on:click="loginUser">
+                                    <a href="javascript:;" class="reg-btn" v-on:click="showModel='reg'">去注册</a>
+                                </div>
+                            </template>
+                        </form>
                     </div>
                 </template>
             </div>
-            <!-- <nav class="menu-nav">
+            <footer class="panel-footer">
+                <div class="footer-inner">
+                    <template v-if="!hasLogin">
+                        <div class="err-tip" v-html="err_tip"></div>
+                    </template>
+                    <template v-else>
+                        <div class="user-tools">
+                            <a href="javascript:;" v-on:click="popupBox(f)">
+                            添加好友
+                        </a>
+                            <a href="javascript:;" v-on:click="popupBox(g)">
+                            创建群
+                        </a>
+                        </div>
+                    </template>
+                </div>
+                <!-- <nav class="menu-nav">
                 <a href="javascript:;">1</a>
                 <a href="javascript:;">2</a>
                 <a href="javascript:;">3</a>
                 <a href="javascript:;">4</a>
             </nav> -->
-        </footer>
-        <div>
-            <chat-popup v-if="chatTo" v-bind:data="chatTo" v-bind:style="styles"></chat-popup>
+            </footer>
         </div>
-        <div>
-            <chat-adduser v-bind:currentuser="userinfo" v-on:addfriend="addfriend"></chat-adduser>
-        </div>
+        <chat-popup v-if="chatTo" v-bind:data="chatTo" v-bind:style="styles"></chat-popup>
+        <chat-adduser v-bind:currentuser="userinfo" v-on:addfriend="addfriend"></chat-adduser>
     </div>
     <div class="dm-chat-wrapper dm-popup-box dm-anim dm-bounceIn  hide" id="chatBox" draggable="true">
         <section class="dm-wrapper-title"></section>
@@ -217,6 +216,7 @@
             </div>
         </section>
     </div>
+    </div>
     <!--     <div class="dm-chat-wrapper dm-popup-box add-user" style="left: 340px;">
         <section class="dm-wrapper-title"></section>
         <section class="dm-wrapper-content">
@@ -270,7 +270,7 @@
                     </li>
                 </ul>
             </div>
-        </section>
+        </section>  
     </div> -->
 </body>
 <script src="/js/lib/particles.js"></script>
@@ -305,22 +305,22 @@
                         </div>
                     </div>
                     <div class="dm-chat-main">
-                        <transition name="fade"> 
-                        <ul id="messages_list" v-if="messages.length>0">
-                            <li v-for="item in messages">
-                                <div class="chat-user">
-                                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="dm-avatar" alt="">
-                                    <span class="user-name no-break">
+                        <transition name="fade">
+                            <ul id="messages_list" v-if="messages.length>0">
+                                <li v-for="item in messages">
+                                    <div class="chat-user">
+                                        <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="dm-avatar" alt="">
+                                        <span class="user-name no-break">
                                     {{item.name}}
                                     <i class="time">{{item.time}}</i>
                                 </span>
-                                </div>
-                                <div class="chat-text">
-                                    {{item.words}}
-                                </div>
-                            </li>
-                        </ul>
-                        </transition> 
+                                    </div>
+                                    <div class="chat-text">
+                                        {{item.words}}
+                                    </div>
+                                </li>
+                            </ul>
+                        </transition>
                     </div>
                     <div class="dm-chat-foot">
                         <div class="dm-chat-tool">
@@ -358,7 +358,7 @@
     </div>
 </script>
 <script type="html/tmpl" id="add-user-popup">
-    <div class="dm-chat-wrapper dm-popup-box add-user" style="left: 340px;">
+    <div class="dm-chat-wrapper dm-popup-box add-user" style="left: 340px;" draggable="true">
         <section class="dm-wrapper-title"></section>
         <section class="dm-wrapper-content">
             <div class="form-group">
@@ -368,7 +368,7 @@
                 </div>
             </div>
             <div class="search-result">
-                <ul class="user-list">
+                <ul class="user-list" v-if="users.length">
                     <li class="user-item" v-for="item in users">
                         <a href="javascript:;" class="avatar">
                             <img src="/images/logo3.png" alt="">
@@ -377,9 +377,12 @@
                             <p class="user-name">{{item.uname}}</p>
                             <p class="user-desc">{{item.desc}}</p>
                         </div>
-                        <a href="javascript:;" class="dm-btn primary" v-on:click="addFriend(item._id)">添加</a>
+                        <a v-if="item.status == 1" href="javascript:;" class="dm-btn primary" v-on:click="addFriend(item._id)">添加</a>
+                        <span v-else="item.status == -1" >已经是好友</span>
                     </li>
                 </ul>
+                <p v-else v-html="tip_msg" class="tips">
+                </p>
             </div>
         </section>
     </div>
@@ -432,15 +435,13 @@ Vue.component('chat-adduser', {
             users: [],
             username: '',
             uri: '/user/getuser',
-            curuser : this.currentuser
+            curuser: this.currentuser,
+            tip_msg: ''
         }
     },
     methods: {
         addFriend: function(id) {
-            console.log(this);
-            console.log(this.curuser);
-            console.log(this.currentuser);
-            this.$emit('addfriend',{name:'123123'});
+            this.$emit('addfriend', { id:id});
         },
         searchUser: function() {
             var that = this;
@@ -454,18 +455,24 @@ Vue.component('chat-adduser', {
                 headers: {
                     "Content-Type": "application/json"
                 },
+                credentials: 'include'
             }
             fetch(this.uri, options)
                 .then(function(resp) {
-                    if(resp.status == '200'){
+                    if (resp.status == '200') {
                         return resp.json();
-                    }else{
+                    } else {
+                        that.tip_msg = '未查询到好友信息'
                         return [];
                     }
                 })
-                .then(function(data){
-                    console.log(data);
-                    that.users = data;
+                .then(function(data) {
+                    if (data.length) {
+                        that.users = data;
+                    } else {
+                        that.tip_msg = '未查询到<em>' + name + '</em>相关的信息';
+                    }
+
                 })
                 .catch(function(err) {
                     console.log(err);
@@ -486,7 +493,7 @@ $('body').on('click', '.tab-nav-item', function() {
 });
 
 var app = new Vue({
-    el: '#main-panel',
+    el: '#app',
     data: {
         hasLogin: false,
         showModel: 'login',
@@ -512,7 +519,7 @@ var app = new Vue({
         styles: {
             left: '346px'
         },
-        userinfo:null
+        userinfo: null
     },
     methods: {
         focusmoving: function(ev) {
@@ -563,6 +570,7 @@ var app = new Vue({
                 data: {
                     name: that.username,
                     pass: that.password_repeat,
+                    captcha: that.captcha_val,
                 },
                 success: function(data) {
                     if (data && data.status == '200') {
@@ -614,9 +622,17 @@ var app = new Vue({
 
             }
         },
-        addfriend:function(data){
-            console.log(data)
-            console.log('friends')
+        addfriend: function(data) {
+            $.ajax({
+                url: '/user/addfriend',
+                type: 'post',
+                data: {
+                    id:data.id
+                },
+                success: function(data) {
+                   console.log(data);
+                }
+            })
         }
     },
 

@@ -179,6 +179,14 @@ img {
 
 // 图标END***************//
 // 按钮
+.btn-disable() {
+    &:hover,
+    &:focus {
+        background-color: #fff;
+        border-color: #ccc;
+    }
+}
+
 .dm-btn {
     display: inline-block;
     padding: 6px 12px;
@@ -224,7 +232,9 @@ img {
         padding-left: 10px;
     }
 
-    &.info {}
+    &.disabled {
+        .btn-disable();
+    }
 }
 
 .dm-btn-group {
@@ -308,16 +318,17 @@ input {
 
 .form-group {
     margin-bottom: 20px;
-    display:table;
-    width:100%;
+    display: table;
+    width: 100%;
     .dm-btn-group,
-    .form-ipt,.addon{
-        display:table-cell;
+    .form-ipt,
+    .addon {
+        display: table-cell;
     }
 
-    .dm-btn-group{
-        width:1%;
-        padding-left:10px;
+    .dm-btn-group {
+        width: 1%;
+        padding-left: 10px;
     }
 }
 
@@ -725,7 +736,7 @@ body {
         align-items: center;
         width: 100%; // flex-flow:row;
         flex-wrap: wrap;
-        .pre(user-select,none);
+        .pre(user-select, none);
     }
     .user-item:first-child {
         border-top-color: transparent;
@@ -834,29 +845,30 @@ body {
     }
 }
 
-.footer-inner{
+.footer-inner {
     .bottom-radius();
     overflow: hidden;
-    border-width: 0 1px 1px 1px ;
+    border-width: 0 1px 1px 1px;
     border-style: solid;
     border-color: #bbb;
     background: #e2e2e2;
 }
-.err-tip{
+
+.err-tip {
     display: block;
     text-align: center;
     font-size: 14px;
-    color:red;
+    color: red;
     height: 45px;
     line-height: 45px;
 }
 
-.user-tools > a {
+.user-tools>a {
     display: inline-block;
     line-height: 40px;
     padding: 0 10px;
-    color:999;
-    &:hover{
+    color: 999;
+    &:hover {
         background: #c0c0c0;
         color: #333;
         font-weight: bold;
@@ -865,20 +877,21 @@ body {
 }
 
 
-.add-user{
-    .dm-wrapper-content{
-        padding:10px;
+.add-user {
+    .dm-wrapper-content {
+        padding: 10px;
     }
 
 
-    .user-item{
-        border-top:0;
-        border-bottom:0;
-        &:hover{
-           background-color:#dcdcdc;
+    .user-item {
+        border-top: 0;
+        border-bottom: 0;
+        &:hover {
+            background-color: #dcdcdc;
         }
     }
 }
+
 @media (min-width: 340px) {
     #main-panel {
         width: @base-width; // height: @base-height;

@@ -19,7 +19,10 @@ const ERR_404_USER = {
     err_msg: '账号不存在'
 };
 
-
+const ERR_AUTH_REQUIRED = {
+    status : '105',
+    err_msg : '请登录后操作'
+}
 
 
 /* GET users listing. */
@@ -41,7 +44,6 @@ router.get('/', function(req, res, next) {
     var _user = await User.findOne({
         uid: name
     });
-    console.log(_user);
     if (_user && _user.uid === name) {
         res.json({
             status: '103',
@@ -83,17 +85,25 @@ router.get('/', function(req, res, next) {
         return;
     }
     req.session.loginUser = _user;
-    res.json(Object.assign({},ERR_SUCCESS , {data:_user}));
+    res.json(Object.assign({}, ERR_SUCCESS, { data: _user }));
 }).post('/getuser', async function(req, res, next) {
-    console.log(req.session);
     let name = req.body.name || '';
     let users;
     if (name) {
-        users = await User.find({ uname: new RegExp(name, 'i') }, 'uid uname desc friends', { 'limit': 10 }).exec();
+        users = await User.find({ uname: new RegExp(name, 'i') }, 'uid uname desc friends', { 'limit': 10 }).lean().exec();
     } else {
-        users = await User.find({}, 'uid uname desc friends', { 'limit': 10 }).exec();
+        users = await User.find({}, 'uid uname desc friends', { 'limit': 10 }).lean().exec();
     }
+    let loginUser = req.session && req.session.loginUser;
     if (users) {
+        let friends = loginUser && loginUser.friends;
+        for (let i = 0; i < users.length; i++) {
+            if (friends && friends[users[i]._id]) {
+                users[i].status = -1
+            } else {
+                users[i].status = 1
+            }
+        }
         res.json(users);
     } else {
         res.json({
@@ -102,13 +112,25 @@ router.get('/', function(req, res, next) {
         })
     }
 }).post('/addfriend', async function(req, res, next) {
-    if(req.session){
+    let loginUser = req.session && req.session.loginUser;
+    let toaddId = req.body.id;
+    console.log(toaddId , typeof toaddId);
+    if(loginUser){
+        var user = await User.findOne({_id:loginUser._id});
 
+        console.log(user);
+
+        user.friends = user.friends || {};
+        user.friends[toaddId] = {
+            created: new Date()
+        };
+        user.update(function(err, doc){
+            console.log(err);
+            res.json(doc);
+        })
+    }else{
+        res.json(ERR_AUTH_REQUIRED);
     }
-
-    var _id = req.session.userinfo ; 
-
-
 });
 
 
