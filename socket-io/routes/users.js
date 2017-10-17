@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var User = require('../model').User;
-
+var async = require('async');
 
 const ERR_SUCCESS = {
     status: '200',
@@ -76,6 +76,7 @@ router.get('/', function(req, res, next) {
     let _user = await User.findOne({
         uid: uid
     });
+
     if (!_user) {
         res.json(ERR_404_USER);
         return;
@@ -86,6 +87,7 @@ router.get('/', function(req, res, next) {
     }
     req.session.loginUser = _user;
     res.json(Object.assign({}, ERR_SUCCESS, { data: _user }));
+
 }).post('/getuser', async function(req, res, next) {
     let name = req.body.name || '';
     let users;
@@ -94,9 +96,15 @@ router.get('/', function(req, res, next) {
     } else {
         users = await User.find({}, 'uid uname desc friends', { 'limit': 10 }).lean().exec();
     }
-    let loginUser = req.session && req.session.loginUser;
+    let user_id = req.session && req.session.loginUser && req.session.loginUser._id;
+    if (!user_id) {
+        res.json(ERR_AUTH_REQUIRED);
+        return;
+    }
+    let loginUser = await User.findById(user_id).exec();
     if (users) {
         let friends = loginUser && loginUser.friends;
+
         for (let i = 0; i < users.length; i++) {
             if (friends && friends[users[i]._id]) {
                 users[i].status = -1
@@ -114,37 +122,84 @@ router.get('/', function(req, res, next) {
 }).post('/addfriend', async function(req, res, next) {
     let loginUser = req.session && req.session.loginUser;
     let toaddId = req.body.id;
-    console.log(toaddId, typeof toaddId);
-    // if(loginUser){
-    //     var user = await User.findOne({_id:loginUser._id});
 
-    //     console.log(user);
-    //     var friends = user.friends || {};
-    //     friends[toaddId] = {
-    //         created: new Date()
-    //     };
-    //     user.update({friends : friends } , function(err, doc){
-    //         console.log(err);
-    //         res.json(doc);
-    //     })
-    // }else{
-    //     res.json(ERR_AUTH_REQUIRED);
-    // }
+    if (!loginUser) {
+        res.json(ERR_AUTH_REQUIRED);
+        return;
+    }
+    let queryDbAction = [
+        function(callback) {
+            User.findById(loginUser._id, function(err, doc) {
+                if (err) {
+                    callback(err)
+                    return;
+                }
+                callback(null, doc);
 
-    User.findById(loginUser._id, function(err, doc) {
-        if(err){
-            res.json(ERR_AUTH_REQUIRED);
+            })
+        },
+        function(callback) {
+            User.findById(toaddId, function(err, doc) {
+                if (err) {
+                    callback(err)
+                    return;
+                }
+                callback(null, doc);
+            })
+        }
+    ]
+    async.parallel(queryDbAction, function(err, result) {
+        if (err) {
+            res.json(err);
             return;
         }
-        var friends = user.friends || {};
-        friends[toaddId] = {
-            created: new Date()
+        let _loginUser = result[0];
+        let _toaddUSer = result[1];
+        var _loginUser_friends = Object.assign({}, _loginUser.friends);
+        var _toaddUSer_frineds = Object.assign({}, _toaddUSer.friends);
+        _loginUser_friends[_toaddUSer._id] = {
+            created: new Date(),
+            name: _toaddUSer.uname,
+            alias: _toaddUSer.alias,
+            desc: _toaddUSer.desc
         };
-        doc.save(function(err, doc){
-            res.json(doc)
-        });
-    })
+        _toaddUSer_frineds[_loginUser._id] = {
+            created: new Date(),
+            name: _loginUser.uname,
+            alias: _loginUser.alias,
+            desc: _loginUser.desc
+        }
+        _loginUser.friends = _loginUser_friends;
+        _toaddUSer.friends = _toaddUSer_frineds;
+
+        async.parallel([function(callback) {
+            _loginUser.save(callback);
+        }, function(callback) {
+            _toaddUSer.save(callback);
+        }], function(err, result) {
+            if (err) {
+                result.json({ status: 106, err_msg: 'unkown', data: err })
+                return;
+            }
+            res.json(ERR_SUCCESS)
+        })
+    });
+}).get('/getStatus', async function(req, res, next) {
+    let flag = req.session.flag;
+    if (req.session.loginUser) {
+        var _id = req.session.loginUser._id;
+        if (flag != '1') {
+            let _user = await User.findOne({
+                _id: _id
+            });
+            req.session.loginUser = _user;
+        }
+        res.json(Object.assign({}, ERR_SUCCESS, { data: req.session.loginUser }));
+    } else {
+        res.json(ERR_AUTH_REQUIRED);
+    }
 });
+
 
 
 

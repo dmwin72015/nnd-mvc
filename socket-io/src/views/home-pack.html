@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{%title%} - 首页</title>
+<!--     <link rel="stylesheet" href="http://skt.me/css/common.css">
+    <link rel="stylesheet/less" type="text/css" href="http://skt.me/less/talk.less?a=12" /> -->
+    <script>
+    less = {
+        env: "development",
+        async: false,
+        fileAsync: false,
+        poll: 1000,
+        functions: {},
+        dumpLineNumbers: "comments",
+        relativeUrls: false,
+        useFileCache: true,
+        rootpath: "/less/source/"
+    };
+    </script>
+    <!-- <script src="http://skt.me/js/lib/less/less.js"></script> -->
+    <style>
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity .3s
+    }
+    .fade-enter,
+    .fade-leave-to {
+        opacity: 0
+    }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <div id="page_bg"></div>
+
+    <div id="app"></div>
+</body>
+
+<script src="http://cdn.me/js/lib/particles/particles.json"></script>
+<script src="http://cdn.me/js/lib/particles/particles.js"></script>
+<script src="http://cdnjs.gtimg.com/cdnjs/libs/zepto/1.1.4/zepto.min.js"></script>
+<script>
+// function $(selector) {
+//     return document.querySelectorAll(selector);
+// }
+// var socket = io('http://localhost:9700');
+particlesJS('page_bg',particles_conf);
+
+$('body').on('click', '.tab-nav-item', function() {
+    var $tab = $(this);
+    var index = $tab.index();
+    var $tbody = $('.tab-body').eq(index);
+    var width = $tbody.width();
+    $tbody.removeClass('hidden').siblings().addClass('hidden');
+    $tab.addClass('active').siblings().removeClass('active');
+    $tbody.closest('.tab-body-wraper').css({
+        'transform': 'translate3d(-' + width * index + 'px,0,0)'
+    })
+});
+
+
+
+
+$('body').on('mousedown', '.dm-wrapper-title', function(ev) {
+    var that = this;
+    var $parent = $(that).parent();
+    var eleWidth = that.offsetWidht;
+    var eleHeight = that.offsetHeight;
+
+    var pageX = ev.pageX || ev.clientX;
+    var pageY = ev.pageY || ev.clientY
+    var relativeX = pageX - $parent[0].offsetLeft;
+    var relativeY = pageY - $parent[0].offsetTop;
+    var x = pageX - relativeX;
+    var y = pageY - relativeY;
+
+    $parent
+        .on('selectstart', function() {
+            return false;
+        })
+        .on('dragstart', function(ev) {
+            // console.log('move....');
+            var dataTransfer = ev.dataTransfer;
+            // dataTransfer.setData("text/plain","人员其内容");
+            // dataTransfer.effectAllowed = 'move';
+            // dataTransfer.setDragImage(ev.target, 0, 0); //复制出一个同样的元素，透明效果，
+            // console.log(dataTransfer.types);
+        })
+        .on('drag', function() {
+            // console.log('拖动')
+            $(this).css({
+                left: x + 'px',
+                top: y + 'px'
+            })
+        })
+        .on('drop', function() {
+            // console.log('释放')
+        })
+        .on('dragend', function(ev) {
+            ev.preventDefault()
+            // console.log('拖拽结束...');
+            // console.log(ev);
+            // $(this).css({
+            //     left: x + 'px',
+            //     top: y + 'px'
+            // })
+            $(this).off('drag').off('selectstart').off('dragstart').off('drop');
+            $('body').off('dragover').off('dragenter');
+        })
+    var maxLeft = $('body').width() - eleWidth;
+    var maxTop = $('body').height() - eleHeight;
+    $('body').on('dragover', function(ev) {
+        ev.preventDefault(); //阻止了一些动画效果，目前在chrome下测试，阻止，一个阴影淡出的一个效果
+        x = (ev.pageX || ev.clientX) - relativeX;
+        y = (ev.pageY || ev.clientY) - relativeY;
+        if (x <= 0) {
+            x = 0;
+        }
+        if (y <= 0) {
+            y = 0;
+        }
+        if (x >= maxLeft) {
+            x = maxLeft;
+        }
+        if (y >= maxTop) {
+            y = maxTop;
+        }
+    }).on('dragenter', function(ev) {
+        ev.preventDefault();
+    })
+});
+</script>
+
+</html>

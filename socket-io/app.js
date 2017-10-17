@@ -12,9 +12,18 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
 var redis = require('redis');
 
+
+// 允许跨域
+// app.use('*', function(req, res, next) {
+//     res.header('Access-Control-Allow-Origin', 'http://localhost:9090');
+//     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+//     res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type');
+//     res.header("Access-Control-Allow-Credentials","true"); 
+//     next();
+// });
 
 // view engine setup
 let artTmpl = require('express-art-template');
@@ -22,16 +31,29 @@ app.engine('html', artTmpl);
 app.set('view engine', 'html');
 app.set('view options', {
     debug: process.env.NODE_ENV !== 'production',
-    rules:[
-        {
-            'test':/<%(#?)((?:==|=#|[=-])?)[ \t]*([\w\W]*?)[ \t]*(-?)%>/
+    rules: [{
+            'test': /<%(#?)((?:==|=#|[=-])?)[ \t]*([\w\W]*?)[ \t]*(-?)%>/
         },
         {
-            'test':/{%([@#]?)[ \t]*(\/?)([\w\W]*?)[ \t]*%}/
+            'test': /{%([@#]?)[ \t]*(\/?)([\w\W]*?)[ \t]*%}/
         }
     ]
 });
 
+// webpack 配置
+const webpack = require('webpack');
+const config = require('./webpack.config.js');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const compiler = webpack(config);
+app.use(webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    noInfo: true,
+    stats: {
+        colors: true
+    }
+}));
+app.use(webpackHotMiddleware(compiler));
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -59,17 +81,19 @@ const redis_config = utils.readConfigFile('redis.json');
 
 app.use(session({
     store: new RedisStore({
-             'host':   redis_config.host,
-             'port':   redis_config.port,
-             'pass':   redis_config.pass,
-               'db':   redis_config.db,
-           'prefix':   'dm2017::',
-        'logErrors':   true
+        'host': redis_config.host,
+        'port': redis_config.port,
+        'pass': redis_config.pass,
+        'db': redis_config.db,
+        'prefix': 'dm2017::',
+        'logErrors': true
     }),
     resave: false,
-    saveUninitialized:true,
+    saveUninitialized: true,
     cookie: {
-        // secure: true,//https协议才会使用，人家文档有说明 Note be careful when setting this to true, as compliant clients will not send the cookie back to the server in the future if the browser does not have an HTTPS connection.
+        // secure: true,//https协议才会使用，
+        // 人家文档有说明 Note be careful when setting this to true, 
+        // as compliant clients will not send the cookie back to the server in the future if the browser does not have an HTTPS connection.
         maxAge: 1000 * 60 * 30
     },
     secret: redis_config.secret
@@ -99,5 +123,8 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+
+
 
 module.exports = app;

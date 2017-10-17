@@ -1,17 +1,20 @@
 var express = require('express');
 var router = express.Router();
 var capt = require('../utils/captcha.js')
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
     // res.render('home', { title: 'Express' });
-    res.redirect('/home');
+    // res.redirect('/home');
+    next();
 });
 
 
 
 router.get('/home', function(req, res, next) {
 	req.session.visitTime = Date.now();
-    res.render('home', { title: 'Home' });
+    res.render('main', { title: 'Home' });
 });
 
 

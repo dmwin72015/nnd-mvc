@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script>
+	function aa(){
+		console.dir(arguments);
+		function bb(){
+			// arguments.callee -> 指向执行函数本身
+			console.log(arguments)
+		}
+		bb();
+	}
+	var a = {};
+	a.fn = aa;
+	a.fn();
+
+</script>
+</html>	

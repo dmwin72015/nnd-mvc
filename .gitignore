@@ -7,3 +7,4 @@ public-src
 .editorconfig
 tmp
 socket-io/node_modules
+socket-io/public/test

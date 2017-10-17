@@ -37,7 +37,7 @@
     <div id="page_bg">
     </div>
     <div id="app">
-        <div class="panel-box" id="main-panel" draggable="true">
+        <div class="panel-box" id="main-panel">
             <header class="panel-header">
                 <h3 class="">登录{%title%}</h3>
             </header>
@@ -52,13 +52,13 @@
                         <li class="tab-body">
                             <section class="user-wraper">
                                 <ul class="user-list" v-on:click="toTalk">
-                                    <li class="user-item" v-for="item in friends">
+                                    <li class="user-item" v-for="(item, key) in friends" v-on:click="popupBox(key)" :id="key">
                                         <a href="javascript:;" class="avatar">
                                             <img src="/images/logo3.png" alt="">
                                         </a>
-                                        <div class="user-info">
+                                        <div class="user-info" :id="key">
                                             <p class="user-name">{{item.name}}</p>
-                                            <p class="user-desc">{{item.desc}}</p>
+                                            <p class="user-desc">{{item.desc || '暂时无任何描述'}}</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -130,154 +130,20 @@
                         </div>
                     </template>
                 </div>
-                <!-- <nav class="menu-nav">
-                <a href="javascript:;">1</a>
-                <a href="javascript:;">2</a>
-                <a href="javascript:;">3</a>
-                <a href="javascript:;">4</a>
-            </nav> -->
             </footer>
         </div>
-        <chat-popup v-if="chatTo" v-bind:data="chatTo" v-bind:style="styles"></chat-popup>
-        <chat-adduser v-bind:currentuser="userinfo" v-on:addfriend="addfriend"></chat-adduser>
-    </div>
-    <div class="dm-chat-wrapper dm-popup-box dm-anim dm-bounceIn  hide" id="chatBox" draggable="true">
-        <section class="dm-wrapper-title"></section>
-        <section class="dm-wrapper-content">
-            <ul class="dm-chat-userlist dm-user-list hide">
-                <li>aaaaa</li>
-                <li>aaaaa</li>
-                <li>aaaaa</li>
-                <li>aaaaa</li>
-                <li>aaaaa</li>
-                <li>aaaaa</li>
-            </ul>
-            <div class="dm-chat-box">
-                <div class="dm-chat-inner">
-                    <div class="dm-chat-title">
-                        <div class="dm-chat-info">
-                            <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="" class="dm-avatar">
-                            <a class="dm-chat-name no-break" title="主机主机主机主机主机主机主机主机主机主机主机主机主机主机主机">红衣主教
-                                <br/>
-                                <span class="dm-chat-userStatus online">(在线)</span>
-                            </a>
-                        </div>
-                        <div class="dm-wrapper-tool">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-                    <div class="dm-chat-main">
-                        <ul id="messages_list">
-                        </ul>
-                    </div>
-                    <div class="dm-chat-foot">
-                        <div class="dm-chat-tool">
-                            <span class="dm-icon emoji-icon">
-                                
-                            </span>
-                            <span class="dm-icon file-icon">
-                                
-                            </span>
-                            <span class="dm-icon audio-icon">
-                                
-                            </span>
-                            <span class="dm-icon video-icon">
-                                
-                            </span>
-                            <span class="dm-icon setting-icon">
-                                
-                            </span>
-                            <span class="dm-icon history-icon pull-right">
-                                <em>聊天记录</em>
-                            </span>
-                        </div>
-                        <div class="dm-chat-sendText">
-                            <textarea id="sendText" autofocus="true"></textarea>
-                        </div>
-                        <div class="dm-chat-sendBtns">
-                            <a href="javascript:;" class="dm-btn danger">关闭</a>
-                            <a href="javascript:;" class="dm-btn-group">
-                                <span class="dm-btn send">发送</span>
-                                <span class="dm-btn send dropdown" id="sendOpt"><i class="caret"></i></span>
-                                <ul class="dropdown-menu" data-toggle="sendOpt">
-                                    <li>
-                                        <i>√</i>i按Enter键发送消息
-                                    </li>
-                                    <li>
-                                        <i></i>按Ctrl+Enter键发送消息
-                                    </li>
-                                </ul>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <template v-for="user in chatlist">
+            <chat-popup v-bind:chat="user" v-bind:style="styles" v-on:closepopup="close"></chat-popup>
+        </template>
+        <chat-adduser v-if="addingUser" v-bind:currentuser="userinfo" v-on:addfriend="addfriend"></chat-adduser>
     </div>
     </div>
-    <!--     <div class="dm-chat-wrapper dm-popup-box add-user" style="left: 340px;">
-        <section class="dm-wrapper-title"></section>
-        <section class="dm-wrapper-content">
-            <div class="form-group">
-                <input type="text" class="form-ipt" placeholder="请输入用户名">
-                <div class="dm-btn-group">
-                    <span class="dm-btn primary addon">搜索</span>
-                </div>
-            </div>
-            <div class="search-result">
-                <ul class="user-list" v-on:click="toTalk">
-                    <li class="user-item" v-for="item in friends">
-                        <a href="javascript:;" class="avatar">
-                            <img src="/images/logo3.png" alt="">
-                        </a>
-                        <div class="user-info">
-                            <p class="user-name">asdasdsad</p>
-                            <p class="user-desc">asdasdasdasdasd</p>
-                        </div>
-                        <a href="javascript:;" class="dm-btn primary">添加</a>
-                    </li>
-                    <li class="user-item" v-for="item in friends">
-                        <a href="javascript:;" class="avatar">
-                            <img src="/images/logo3.png" alt="">
-                        </a>
-                        <div class="user-info">
-                            <p class="user-name">asdasdsad</p>
-                            <p class="user-desc">asdasdasdasdasd</p>
-                        </div>
-                        <a href="javascript:;" class="dm-btn primary">添加</a>
-                    </li>
-                    <li class="user-item" v-for="item in friends">
-                        <a href="javascript:;" class="avatar">
-                            <img src="/images/logo3.png" alt="">
-                        </a>
-                        <div class="user-info">
-                            <p class="user-name">asdasdsad</p>
-                            <p class="user-desc">asdasdasdasdasd</p>
-                        </div>
-                        <a href="javascript:;" class="dm-btn primary">添加</a>
-                    </li>
-                    <li class="user-item" v-for="item in friends">
-                        <a href="javascript:;" class="avatar">
-                            <img src="/images/logo3.png" alt="">
-                        </a>
-                        <div class="user-info">
-                            <p class="user-name">asdasdsad</p>
-                            <p class="user-desc">asdasdasdasdasd</p>
-                        </div>
-                        <a href="javascript:;" class="dm-btn primary">添加</a>
-                    </li>
-                </ul>
-            </div>
-        </section>  
-    </div> -->
 </body>
 <script src="/js/lib/particles.js"></script>
 <script src="http://cdnjs.gtimg.com/cdnjs/libs/zepto/1.1.4/zepto.min.js"></script>
 <script src="/js/vue/vue.js"></script>
 <script type="html/tmpl" id="chat-popup-box">
-    <div class="dm-chat-wrapper dm-popup-box dm-anim" id="chatBox" draggable="true">
+    <div class="dm-chat-wrapper dm-popup-box dm-anim dm-bounceIn" id="chatBox" draggable="true">
         <section class="dm-wrapper-title"></section>
         <section class="dm-wrapper-content">
             <ul class="dm-chat-userlist dm-user-list hide">
@@ -337,9 +203,9 @@
                             <textarea id="sendText" autofocus="true"></textarea>
                         </div>
                         <div class="dm-chat-sendBtns">
-                            <a href="javascript:;" class="dm-btn danger">关闭</a>
+                            <a href="javascript:;" class="dm-btn danger" v-on:click="close">关闭</a>
                             <a href="javascript:;" class="dm-btn-group">
-                                <span class="dm-btn send">发送</span>
+                                <span class="dm-btn send" v->发送</span>
                                 <span class="dm-btn send dropdown" id="sendOpt"><i class="caret"></i></span>
                                 <ul class="dropdown-menu" data-toggle="sendOpt">
                                     <li>
@@ -378,19 +244,20 @@
                             <p class="user-desc">{{item.desc}}</p>
                         </div>
                         <a v-if="item.status == 1" href="javascript:;" class="dm-btn primary" v-on:click="addFriend(item._id)">添加</a>
-                        <span v-else="item.status == -1" >已经是好友</span>
+                        <span v-else="item.status == -1">已经是好友</span>
                     </li>
                 </ul>
-                <p v-else v-html="tip_msg" class="tips">
-                </p>
+                <p v-else v-html="tip_msg" class="tips"></p>
             </div>
         </section>
     </div>
 </script>
+<script src="/socket.io/socket.io.js"></script>
 <script>
 // function $(selector) {
 //     return document.querySelectorAll(selector);
 // }
+var socket = io('http://localhost:9700');
 particlesJS.load('page_bg', '/js/lib/particles.json', function() {
     console.log('particles加载完成 .............');
     // particlesJS();
@@ -398,17 +265,24 @@ particlesJS.load('page_bg', '/js/lib/particles.json', function() {
 // 聊天窗口
 Vue.component('chat-popup', {
     template: document.querySelector('#chat-popup-box').innerHTML.trim(),
-    props: ['chatTo'],
+    props: ['chat'],
     data: function() {
         console.log(this);
         return {
-            user: {
-                id: '12321',
-                name: "Sdadas",
-                time: '12312312',
-                status: "online"
-            },
+            user: this.chat,
             messages: []
+        }
+    },
+    methods:{
+        close:function(){
+            alert('a')
+
+        },
+        send:function(){
+
+        },
+        history:function(){
+
         }
     }
 });
@@ -441,7 +315,7 @@ Vue.component('chat-adduser', {
     },
     methods: {
         addFriend: function(id) {
-            this.$emit('addfriend', { id:id});
+            this.$emit('addfriend', { id: id });
         },
         searchUser: function() {
             var that = this;
@@ -503,23 +377,15 @@ var app = new Vue({
         captcha_val: '',
         captcha_url: '/img/capt.gif',
         err_tip: '',
-        friends: [],
-        chatTo: {
-            user: {
-                id: '12',
-                name: '开的老大',
-                status: '在线'
-            },
-            messages: [{
-                words: '我是阿萨德了啊啊',
-                time: (new Date).toLocaleString()
-            }]
-        },
+        friends: null,
         chatTo: null,
         styles: {
             left: '346px'
         },
-        userinfo: null
+        chatfriend:null,
+        addingUser:false,
+        userinfo: null,
+        chatlist:[]
     },
     methods: {
         focusmoving: function(ev) {
@@ -603,10 +469,11 @@ var app = new Vue({
                     pass: pass
                 },
                 success: function(data) {
-                    if (data && data.status == '200') {
+                    if (data && data.status == '200' && (data = data.data)) {
                         that.hasLogin = true;
                         that.userinfo = data;
                         that.err_tip = '';
+                        that.friends = data.friends;
                     } else {
                         that.err_tip = data.err_msg;
                     }
@@ -617,20 +484,35 @@ var app = new Vue({
             var target = ev.target;
 
         },
-        popupBox: function(type) {
-            if (type == 'f') {
-
+        popupBox: function(id) {
+            console.log(id)
+            console.log(this.friends[id]);
+            if(this.chatlist.length>10){
+                alert('窗口已经超过10个，请适当关闭不用的窗口');
             }
+            this.chatfriend = {
+                id: id,
+                name: this.friends[id].name,
+                status: '在线',
+                messages: [{
+                    words: '我是阿萨德了啊啊',
+                    time: (new Date).toLocaleString()
+                }]
+            }
+            this.chatlist.push(this.chatfriend);
+        },
+        closePopup:function(argument) {
+            
         },
         addfriend: function(data) {
             $.ajax({
                 url: '/user/addfriend',
                 type: 'post',
                 data: {
-                    id:data.id
+                    id: data.id
                 },
                 success: function(data) {
-                   console.log(data);
+                    console.log(data);
                 }
             })
         }
@@ -665,27 +547,27 @@ $('body').on('mousedown', '.dm-wrapper-title', function(ev) {
             return false;
         })
         .on('dragstart', function(ev) {
-            console.log('move....');
+            // console.log('move....');
             var dataTransfer = ev.dataTransfer;
             // dataTransfer.setData("text/plain","人员其内容");
             // dataTransfer.effectAllowed = 'move';
             // dataTransfer.setDragImage(ev.target, 0, 0); //复制出一个同样的元素，透明效果，
-            console.log(dataTransfer.types);
+            // console.log(dataTransfer.types);
         })
         .on('drag', function() {
-            console.log('拖动')
+            // console.log('拖动')
             $(this).css({
                 left: x + 'px',
                 top: y + 'px'
             })
         })
         .on('drop', function() {
-            console.log('释放')
+            // console.log('释放')
         })
         .on('dragend', function(ev) {
             ev.preventDefault()
-            console.log('拖拽结束...');
-            console.log(ev);
+            // console.log('拖拽结束...');
+            // console.log(ev);
             // $(this).css({
             //     left: x + 'px',
             //     top: y + 'px'
