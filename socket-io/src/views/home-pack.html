@@ -71,11 +71,13 @@ $('body').on('mousedown', '.dm-wrapper-title', function(ev) {
     var eleHeight = that.offsetHeight;
 
     var pageX = ev.pageX || ev.clientX;
-    var pageY = ev.pageY || ev.clientY
+    var pageY = ev.pageY || ev.clientY;
+    
+    var x = $parent[0].offsetLeft;
+    var y = $parent[0].offsetTop;
+
     var relativeX = pageX - $parent[0].offsetLeft;
     var relativeY = pageY - $parent[0].offsetTop;
-    var x = pageX - relativeX;
-    var y = pageY - relativeY;
 
     $parent
         .on('selectstart', function() {

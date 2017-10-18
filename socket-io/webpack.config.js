@@ -66,7 +66,6 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common' // Specify the common bundle's name.
         }),
-
         new HtmlWebpackPlugin({
             template: __dirname + "/src/views/home-pack.html", //new 一个这个插件的实例，并传入相关的参数
             // filename: __dirname + '/views/main.html'

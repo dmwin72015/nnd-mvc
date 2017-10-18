@@ -1,5 +1,5 @@
 <template>
-    <div class="dm-chat-wrapper dm-popup-box dm-anim dm-bounceIn" v-bind:style="{ width:(600+multiStyle.width)+'px'}">
+    <div class="dm-chat-wrapper dm-popup-box dm-anim dm-bottomIn" v-bind:style="{ width:(600+multiStyle.width)+'px'}">
         <section class="dm-wrapper-title"></section>
         <section class="dm-wrapper-content">
             <ul class="dm-chat-userlist dm-user-list" v-if="chat.length>1" v-bind:style="{width:multiStyle.width+'px',height:'100%'}">

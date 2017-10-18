@@ -55,7 +55,9 @@ router.get('/', function(req, res, next) {
     var user = new User({
         uid: name,
         uname: name,
-        upwd: pass
+        upwd: pass,
+        alias: name,
+        desc:'暂无'
     });
     user.save(function(err, doc) {
         if (err) {

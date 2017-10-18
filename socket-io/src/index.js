@@ -4,7 +4,7 @@ import App from './components/main.vue'
 require('./css/common.css');
 require('./css/style.css');
 require('./css/talk.less');
-
+require('./css/lib.less');
 
 new Vue({
     el: '#app',

@@ -46,7 +46,10 @@ let userField = {
         type: {},
         default:{}
     },
-    desc:String,
+    desc:{
+        type:String,
+        default:''
+    },
     created: {
         type: Date,
         default: Date.now

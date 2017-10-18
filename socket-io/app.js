@@ -46,14 +46,16 @@ const config = require('./webpack.config.js');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const compiler = webpack(config);
+
 app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
-    noInfo: true,
+    noInfo: false,
     stats: {
         colors: true
     }
 }));
 app.use(webpackHotMiddleware(compiler));
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));

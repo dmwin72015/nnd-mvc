@@ -1,13 +1,13 @@
 <template>
-    <div class="login-wraper">
+    <div class="login-wraper" @click="focusIpt" @focusout="blurIpt" @focusin="focusIpt">
         <form action="javascript:;">
             <div class="form-group">
-                <input type="text" class="form-ipt" v-model="username" @focus="focusIpt(1)" @blur="blurIpt(1)">
-                <span class="ipt-label" v-bind:class="{sup:namefocus}">账号</span>
+                <input type="text" class="form-ipt" v-model="username" >
+                <span class="ipt-label">账号</span>
             </div>
             <div class="form-group">
-                <input type="text" class="form-ipt" v-model="password" @focus="focusIpt(2)" @blur="blurIpt(2)">
-                <span class="ipt-label" v-bind:class="{sup:pwdfocus}">密码</span>
+                <input type="text" class="form-ipt" v-model="password" >
+                <span class="ipt-label">密码</span>
             </div>
             <div class="form-group">
                 <input type="button" class="dm-btn primary" value="登录" @click="loginUser">
@@ -22,8 +22,6 @@ export default {
     name: 'login',
     data() {
         return {
-            namefocus: false,
-            pwdfocus: false,
             username: '',
             password: '',
             uri: '/user/login'
@@ -66,7 +64,7 @@ export default {
                 //     pass: this.password
                 // })
                 'credentials': "include",
-                'body':JSON.stringify(loginData)
+                'body': JSON.stringify(loginData)
             };
             let that = this;
             fetch(this.uri, options)
@@ -77,22 +75,23 @@ export default {
                     that.$emit('login', data);
                 })
         },
-        focusIpt(type) {
-            if (type == 1) {
-                this.namefocus = true;
-            } else {
-                this.pwdfocus = true;
+        focusIpt(ev) {
+            var target = ev.target;
+            if (target.tagName == 'INPUT') {
+                target.nextElementSibling.classList.add('sup');
+            } else if (target.classList.contains('ipt-label')) {
+                target.classList.add('sup');
+                target.previousElementSibling.focus();
             }
         },
-        blurIpt(type) {
-            if (type == 1) {
-                !this.username && (this.namefocus = false);
-            } else {
-                !this.password && (this.pwdfocus = false);
+        blurIpt(ev) {
+            var target = ev.target;
+            if (target.tagName == 'INPUT') {
+                !target.value && target.nextElementSibling.classList.remove('sup');
             }
         },
         change() {
-            alert('切换');
+            this.$emit('switch', 2);
         },
     }
 }
