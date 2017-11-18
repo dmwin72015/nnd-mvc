@@ -24,6 +24,11 @@ const ERR_AUTH_REQUIRED = {
     err_msg: '请登录后操作'
 }
 
+const ERR_SESSION_DESTORY = {
+    status: '106',
+    err_msg: '退出登录失败'
+}
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -57,7 +62,7 @@ router.get('/', function(req, res, next) {
         uname: name,
         upwd: pass,
         alias: name,
-        desc:'暂无'
+        desc: '暂无'
     });
     user.save(function(err, doc) {
         if (err) {
@@ -91,18 +96,20 @@ router.get('/', function(req, res, next) {
     res.json(Object.assign({}, ERR_SUCCESS, { data: _user }));
 
 }).post('/getuser', async function(req, res, next) {
-    let name = req.body.name || '';
-    let users;
-    if (name) {
-        users = await User.find({ uname: new RegExp(name, 'i') }, 'uid uname desc friends', { 'limit': 10 }).lean().exec();
-    } else {
-        users = await User.find({}, 'uid uname desc friends', { 'limit': 10 }).lean().exec();
-    }
     let user_id = req.session && req.session.loginUser && req.session.loginUser._id;
     if (!user_id) {
         res.json(ERR_AUTH_REQUIRED);
         return;
     }
+    let name = req.body.name || '';
+    let id = req.body.id || '';
+    let users;
+    if (name) {
+        users = await User.find({ uname: new RegExp(name, 'i'), _id: { '$ne': user_id } }, 'uid uname desc friends', { 'limit': 10 }).lean().exec();
+    } else {
+        users = await User.find({}, 'uid uname desc friends', { 'limit': 10 }).lean().exec();
+    }
+
     let loginUser = await User.findById(user_id).exec();
     if (users) {
         let friends = loginUser && loginUser.friends;
@@ -200,6 +207,14 @@ router.get('/', function(req, res, next) {
     } else {
         res.json(ERR_AUTH_REQUIRED);
     }
+}).post('/logout', function(req, res, next) {
+    req.session.destroy(function(err) {
+        if (err) {
+            res.json(ERR_SESSION_DESTORY);
+        } else {
+            res.json(ERR_SUCCESS)
+        }
+    })
 });
 
 

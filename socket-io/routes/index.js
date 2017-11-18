@@ -26,6 +26,10 @@ router.get('/img/capt.gif', function(req, res, next) {
 });
 
 
+router.get('/server', function(req, res, next) {
+    req.session.visitTime = Date.now();
+    res.render('server', { title: '服务器' });
+});
 
 
 module.exports = router;

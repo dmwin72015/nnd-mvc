@@ -64,7 +64,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 // session save
 // -h 66.112.217.251 -p 16379 -a redis_dm2017
-const redis_config = utils.readConfigFile('redis.json');
+
+const redis_file = (process.env.NODE_ENV === 'production') ? 'redis.json' : 'redis.local.json';
+const redis_config = utils.readConfigFile(redis_file);
 // TODO：【DONE】经过测试连接正常，但是redis里面却没有session信息
 // 经过测试是参数设置问题
 // var redisClient = redis.createClient({
@@ -83,10 +85,10 @@ const redis_config = utils.readConfigFile('redis.json');
 
 app.use(session({
     store: new RedisStore({
-        'host': redis_config.host,
-        'port': redis_config.port,
-        'pass': redis_config.pass,
-        'db': redis_config.db,
+        'host': redis_config.host || 'localhost',
+        'port': redis_config.port || '6379',
+        'pass': redis_config.pass || '',
+        'db': redis_config.db || 0,
         'prefix': 'dm2017::',
         'logErrors': true
     }),

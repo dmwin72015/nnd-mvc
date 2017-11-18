@@ -15,7 +15,9 @@
                     </template>
                     <template v-else>
                         <div class="user-tools">
-                            <a href="javascript:;" @click="addPopup(1)">添加好友</a>
+                            <router-link to="/addfriend">添加好友</router-link>
+                            <!-- <a href="#addfriend">添加好友</a> -->
+                            <!-- <a href="javascript:;" @click="addPopup(1)">添加好友</a> -->
                             <a href="javascript:;" @click="addPopup(2)">创建群</a>
                             <a href="javascript:;" @click="loginout">退出</a>
                         </div>
@@ -25,8 +27,9 @@
         </div>
         <chat-popup v-bind:chat="chatlist" v-bind:chatIndex="chatIndex" v-on:removeChat="remove" v-on:changeChat="changeChatUser" v-if="chatlist.length"></chat-popup>
         <keep-alive>
-        <confirm-popup v-if="confirm"  title="提示信息" content="是否确认退出？" v-on:closeConfim="closeConfim"></confirm-popup>
+            <confirm-popup v-if="confirm" title="提示信息" content="是否确认退出？" v-on:closeConfim="closeConfim" v-on:loginSucc="closeConfim"></confirm-popup>
         </keep-alive>
+        <router-view @addfriend="addFrined" @searchfrined="searchFrined"></router-view>
     </div>
 </template>
 <script>
@@ -36,6 +39,8 @@ import login from './login.vue';
 import register from './register.vue';
 import friends from './friends.vue';
 import confirm from './confirm.vue';
+import addfriend from './addfriend_popup.vue';
+
 
 export default {
     data() {
@@ -51,7 +56,7 @@ export default {
             chatIndex: -1,
             chatIds: [],
             friendslist: null,
-            confirm:false
+            confirm: false
         }
     },
     computed: {
@@ -59,7 +64,7 @@ export default {
             return this.status == 3;
         },
         currentView: function() {
-            switch (''+this.status) {
+            switch ('' + this.status) {
                 case '1':
                     return 'login'
                     break;
@@ -79,7 +84,8 @@ export default {
         login: login,
         register: register,
         friendsList: friends,
-        confirmPopup:confirm
+        confirmPopup: confirm,
+        addFriend: addfriend
     },
     methods: {
         toTalk: function(index) {
@@ -143,7 +149,7 @@ export default {
                 }, 3000);
             }
         },
-        loginout(){
+        loginout() {
             this.confirm = true;
         },
         remove(id) {
@@ -167,11 +173,20 @@ export default {
             // this.status = status;
             this.status = status;
         },
-        addPopup(type){
+        addPopup(type) {
 
         },
-        closeConfim:function(){
+        closeConfim: function(data) {
+            if(data == 1){
+                
+            }
             this.confirm = false;
+        },
+        addFrined(id) {
+            alert(id);
+        },
+        searchFrined(text) {
+            alert(text)
         }
     },
     mounted: function() {

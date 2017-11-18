@@ -6,7 +6,7 @@
                 <span class="ipt-label">账号</span>
             </div>
             <div class="form-group">
-                <input type="text" class="form-ipt" v-model="password" >
+                <input type="password" class="form-ipt" v-model="password" >
                 <span class="ipt-label">密码</span>
             </div>
             <div class="form-group">

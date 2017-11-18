@@ -6,11 +6,11 @@
                 <span class="ipt-label" v-bind:class="{sup:namefocus}">账号</span>
             </div>
             <div class="form-group">
-                <input type="text" class="form-ipt" v-model="password">
+                <input type="password" class="form-ipt" v-model="password">
                 <span class="ipt-label" v-bind:class="{sup:passfocus}">密码</span>
             </div>
             <div class="form-group">
-                <input type="text" class="form-ipt" v-model="password_repeat">
+                <input type="password" class="form-ipt" v-model="password_repeat">
                 <span class="ipt-label" v-bind:class="{sup:pass2focus}">确认密码</span>
             </div>
             <div class="form-group captcha">

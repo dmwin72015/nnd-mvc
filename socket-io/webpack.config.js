@@ -3,19 +3,24 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+const publicPath = '/';
+const hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
+
 module.exports = {
     entry: {
-        index: './src/index.js',
+        index: ['./src/index.js']
+        // vendor: ['reqwest']
     },
     output: {
         path: path.resolve(__dirname, './public'),
-        publicPath: '/',
+        publicPath: publicPath,
         filename: '[name].[hash:6].js'
     },
     module: {
         rules: [{
                 test: /\.vue$/,
-                loader: 'vue-loader',
+                loader: 'vue-loader'
             },
             {
                 test: /\.js$/,
@@ -30,7 +35,7 @@ module.exports = {
             {
                 test: /\.less$/,
                 // use: ['css-loader', 'less-loader']
-                use:ExtractTextPlugin.extract([ 'css-loader', 'less-loader' ])
+                use: ExtractTextPlugin.extract(['css-loader', 'less-loader'])
             },
             {
                 test: /\.(png|jpg|gif|svg)$/,
@@ -41,6 +46,11 @@ module.exports = {
             }
         ]
     },
+    // vue: {
+    //     loaders: {
+    //         css: ExtractTextPlugin.extract('vue-style-loader', 'css-loader', 'less-loader')
+    //     }
+    // },
     devServer: { //webpack-dev-server配置
         contentBase: path.join(__dirname, "dist"),
         historyApiFallback: true, //不跳转
@@ -59,16 +69,27 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin({
-            filename:'css/[name].[chunkhash:5].css',
-            allChunks:true
+            filename: 'css/[name].[chunkhash:5].css',
+            allChunks: true
         }),
         // new CleanWebpackPlugin(['./dist']),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'common' // Specify the common bundle's name.
+            name: 'common', // Specify the common bundle's name.
+            filename:'[name].[hash:5].js',
+            minChunks:2
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['reqwest'], // Specify the common bundle's name.
+            filename:'[name].[hash:5].js'
+        }),
+        new HtmlWebpackPlugin({//new 一个这个插件的实例，并传入相关的参数,
+            template: __dirname + "/src/views/home-pack.html",
+            // filename: __dirname + '/views/main.html'
         }),
         new HtmlWebpackPlugin({
-            template: __dirname + "/src/views/home-pack.html", //new 一个这个插件的实例，并传入相关的参数
-            // filename: __dirname + '/views/main.html'
+            template: __dirname + "/src/views/server.html", //new 一个这个插件的实例，并传入相关的参数
+            filename: __dirname + '/views/server.html',
+            chunks:['common']
         }),
         new webpack.HotModuleReplacementPlugin()
     ],
