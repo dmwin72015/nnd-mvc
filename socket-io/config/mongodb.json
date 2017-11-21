@@ -1,7 +1,7 @@
 {
-    "host": "66.112.217.251",
-    "port": "27017",
-    "database": "chat",
+    "host": "0.0.0.0",
+    "port": "0",
+    "database": "0",
     "conf":
     {
         "native_parser": true,
